@@ -16,7 +16,7 @@ const Review = () => {
       id: 2,
       text: "Had the best time in Goa with my friends, all thanks to Desire4Travels for curating such a fun and hassle-free itinerary!",
       author: "Shikha",
-      image: "/assets/shikha.webp",
+      image: "/assets/Shikha.webp",
       rating: 4
     },
     {
