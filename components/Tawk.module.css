@@ -1,0 +1,27 @@
+.tawk-custom-container {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  z-index: 9999;
+}
+
+.tawk-custom-container iframe {
+  pointer-events: auto;
+  width: 60px; 
+  height: 60px; 
+}
+
+@media (max-width: 600px) {
+  .tawk-custom-container {
+    width: auto; 
+    right: 5vw;
+    bottom: 10px;
+    transform: scale(0.95);
+    transform-origin: bottom right;
+  }
+
+  .tawk-custom-container iframe {
+    width: 50px;
+    height: 50px;
+  }
+}
