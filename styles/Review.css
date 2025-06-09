@@ -22,7 +22,7 @@
 
 .section-title {
   position: relative;
-  font-size: 1.8rem;
+  font-size: 32px;
   margin-bottom: 30px;
   color: #fff;
   text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
@@ -37,26 +37,6 @@
   justify-content: center;
   padding: 0 10px;
 }
-
-.carousel-button {
-  position: absolute;
-  top: 43%;
-  transform: translateY(-50%);
-  background: rgba(47, 64, 212, 0.897);
-  border: none;
-  color: white;
-  font-size: 1.5rem;
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  z-index: 1;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
 
 .carousel-button:hover {
   background: rgba(255, 255, 255, 0.4);
@@ -113,11 +93,11 @@
 }
 
 .star.filled {
-  color: #2c2496;
+  color:  #FFC107;
 }
 
 .review-text {
-  font-size: 1rem;
+  font-size: 16px;
   line-height: 1.5;
   margin-bottom: 15px;
   font-style: italic;
@@ -143,7 +123,7 @@
 .author-name {
   font-weight: bold;
   color: #333;
-  font-size: 0.9rem;
+  font-size: 16px;
 }
 
 .carousel-indicators {
@@ -177,7 +157,7 @@
   }
   
   .section-title {
-    font-size: 1.5rem;
+    font-size: 20px !important;
     margin-bottom: 20px;
   }
   
@@ -207,7 +187,8 @@
   }
   
   .review-text {
-    font-size: 0.9rem;
+    font-size: 14px;
+    font-weight: 400;
   }
   
   .review-author {
@@ -231,7 +212,8 @@
   }
   
   .review-text {
-    font-size: 1rem;
+    font-size: 14px;
+    font-weight: 400;
   }
 }
 
@@ -269,12 +251,12 @@
 
 .carousel-button.outside {
   position: absolute;
-  top: 50%;
+  top: 45%;
   transform: translateY(-50%);
-  background: rgba(47, 64, 212, 0.897);
+  background: transparent;
   border: none;
   color: white;
-  font-size: 1.5rem;
+  font-size: 2.5rem;
   width: 40px;
   height: 40px;
   border-radius: 50%;
@@ -284,11 +266,11 @@
 }
 
 .carousel-button.prev.outside {
-  left: 250px;
+  left: 175px;
 }
 
 .carousel-button.next.outside {
-  right: 250px;
+  right: 175px;
 }
 
 @media (max-width: 768px) {

@@ -160,7 +160,6 @@ const PackageDetails = ({ packageData, error }) => {
         >
           <SwiperSlide>
             <div className="slider-image-container">
-              {/* external URL with plain <img> */}
               <img src={photo} alt={packageName} />
             </div>
           </SwiperSlide>
@@ -185,33 +184,31 @@ const PackageDetails = ({ packageData, error }) => {
         </Swiper>
       </div>
 
-      <div className="package-details-header-flex premium-package-header-wrapper">
-        <section className="premium-package-header-section">
-          <h1 className="premium-package-title">{packageName}</h1>
-          <h2 className="premium-package-duration">🕒 {duration}</h2>
-          <h3 className="premium-package-price">💰 ₹{price}</h3>
-        </section>
-      </div>
-
       <div className="package-details-header-flex">
-        <div className="desktop-only">
-          {/* external URL with plain <img> */}
+        <div className="desktop-only package-main-image-wrapper">
           <img
             src={photo}
             alt={packageName}
             className="package-details-main-image"
           />
+
+          <div className="premium-package-header-bottom-overlay">
+            <h1 className="premium-package-title">{packageName}</h1>
+            <h2 className="premium-package-duration">🕒 {duration}</h2>
+            <h3 className="premium-package-price">💰 ₹{price}</h3>
+          </div>
         </div>
 
+
         <div className="package-details-icons desktop-only">
-          <Image
+          <img
             src="/assets/Hotel.png"
             alt="Hotel"
             width={50}
             height={50}
             className="package-icon"
           />
-          <Image
+          <img
             src="/assets/Taxi.png"
             alt="Taxi"
             width={50}
@@ -220,14 +217,14 @@ const PackageDetails = ({ packageData, error }) => {
           />
         </div>
         <div className="package-details-icons desktop-only second-margin">
-          <Image
+          <img
             src="/assets/Passport.png"
             alt="Passport"
             width={50}
             height={50}
             className="package-icon"
           />
-          <Image
+          <img
             src="/assets/Flight.png"
             alt="Flight"
             width={50}

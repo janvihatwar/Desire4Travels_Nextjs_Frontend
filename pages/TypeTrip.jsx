@@ -1,4 +1,4 @@
-import React from 'react';
+import React from 'react'; 
 import Link from 'next/link';
 import Head from 'next/head';
 import styles from './TypeTrip.module.css';
@@ -35,7 +35,7 @@ const TypeTrip = () => {
           <Link key={type.name} href={`/triptype/${type.name.toLowerCase()}`} legacyBehavior>
             <a className={styles.typetripcard}>
               <img src={type.image.src} alt={type.name} className={styles.logo} />
-              <p>{type.name}</p>
+              <p>{type.name.toUpperCase()}</p>
             </a>
           </Link>
         ))}

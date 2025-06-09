@@ -1,4 +1,4 @@
-'use client'; // Only needed if using App Router and client-side interactivity
+'use client';
 
 import React, { useState } from 'react';
 import { useRouter } from 'next/router';
@@ -58,7 +58,7 @@ const Navbar = () => {
                 {["mountain", "beach", "religious", "treks", "offbeat", "other"].map((type) => (
                   <li key={type}>
                     <button onClick={() => handleTripTypeChange(type)}>
-                      {type.charAt(0).toUpperCase() + type.slice(1)}
+                      {type.toUpperCase()}
                     </button>
                   </li>
                 ))}
