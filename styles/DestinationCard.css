@@ -32,7 +32,9 @@
 }
 
 .destination-title {
-  font-size: 1.2rem;
+  font-size: 20px;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-weight: 400px;
   margin-bottom: 8px;
   color: #333;
   white-space: nowrap;       
@@ -46,7 +48,8 @@
 .trip-type,
 .price,
 .rating {
-  font-size: 0.9rem;
+  font-size: 16px !important;
+  font-weight: 400;
   margin-bottom: 8px;
   color: #555;
 }
@@ -93,5 +96,33 @@
     height: 150px;
     padding: 5px;
     border-radius: 15px;
+  }
+  .destination-title {
+  font-size: 16px;
+  font-weight: 450px;
+  margin-bottom: 8px;
+  color: #333;
+  white-space: nowrap;       
+  overflow: hidden;          
+  text-overflow: ellipsis;   
+  max-width: 100%;           
+  display: block;        
+}
+
+.location,
+.trip-type,
+.price,
+.rating {
+  font-size: 14px !important;
+  font-weight: 400;
+  margin-bottom: 8px;
+  color: #555;
+}
+
+.request-btn {
+    width: 100%;
+    padding: 10px;
+    font-size: 14px;
+    font-weight: 500;
   }
 }

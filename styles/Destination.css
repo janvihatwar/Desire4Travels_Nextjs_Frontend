@@ -12,8 +12,9 @@
 .destination-page h1 {
   text-align: center;
   margin-bottom: 5px;
-  font-size: 3rem;
+  font-size: 48px !important;
   color: white;
+  font-weight: 600;
 }
 
 .destination-hero {
@@ -37,8 +38,6 @@
 }
 
 .destination-title {
-  font-size: 3rem;
-  font-weight: 800;
   margin: 0;
   color: white;
 }
@@ -113,13 +112,24 @@
 
 
 
-@media (max-width: 1024px) {
+@media (max-width: 768px) {
   .cards-container {
     grid-template-columns: repeat(2, 1fr) !important;
   }
 }
 
-@media (max-width: 600px) {
+@media (max-width: 768px) {
+  .destination-page h1 {
+  text-align: center;
+  margin-bottom: 5px;
+  font-size: 32px !important;
+  color: white;
+  font-weight: 500;
+}
+
+.destination-hero {
+margin-top: -5px;
+}
   .destination-hero-content {
     position: static !important;
     text-align: center;
