@@ -1,5 +1,3 @@
-// /pages/destination/[name].js
-
 import React, { useState } from 'react';
 import PackageCard from '../../components/PackageCard';
 
@@ -25,17 +23,15 @@ function isLongDescription(desc) {
 }
 
 export async function getServerSideProps(context) {
-  const { name } = context.params; // 'Amritsar'
+  const { name } = context.params;
 
   try {
-    // Fetch destination details
     const destRes = await fetch('https://desire4travels-1.onrender.com/api/admin/destinations');
     if (!destRes.ok) {
       throw new Error('Failed to fetch destination details');
     }
     const allDestinations = await destRes.json();
 
-    // Normalize name param for comparison
     const normalizedName = normalizeDestination(name).toLowerCase();
 
     const destinationInfo = allDestinations.find(dest => {
@@ -43,14 +39,12 @@ export async function getServerSideProps(context) {
       return normalizeDestination(dest.name).toLowerCase() === normalizedName;
     }) || null;
 
-    // Fetch packages
     const pkgRes = await fetch('https://desire4travels-1.onrender.com/api/packages');
     if (!pkgRes.ok) {
       throw new Error('Failed to fetch packages');
     }
     const allPackages = await pkgRes.json();
 
-    // Filter packages related to this destination
     const packages = allPackages.filter(pkg => {
       if (!Array.isArray(pkg.destinations)) return false;
       return pkg.destinations.some(dest =>
@@ -58,7 +52,6 @@ export async function getServerSideProps(context) {
       );
     });
 
-    // If no destination info, return 404
     if (!destinationInfo) {
       return {
         notFound: true,

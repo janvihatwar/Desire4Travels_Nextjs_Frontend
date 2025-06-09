@@ -24,9 +24,11 @@ html, body {
 
 .nav-logo {
   font-family:  serif !important;
-  font-size: 28px;
+  font-size: 32px;
   font-weight: 500;
   color: #6A8DFF;
+  position: relative;
+  top: 2.5px;
 }
 
 .nav-logo span {
