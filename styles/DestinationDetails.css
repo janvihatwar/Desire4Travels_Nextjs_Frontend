@@ -53,7 +53,7 @@ body, html {
   line-height: 1.6;
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
+  align-items: center;
   width: 95%;
   margin-left: 50px;
 }
@@ -65,14 +65,15 @@ body, html {
   font-weight: 600;
   color: #1a73e8;
   margin-bottom: 0.75rem;
+  width: 100%;
 }
 
 .destination-description-text {
-  text-align: left;
+  text-align: justify;
   font-size: 16px;
   font-size: 400;
   width: 100%;
-  line-height: 1.7;
+  line-height: 1.5;
   margin-top: 0.5rem;
   display: -webkit-box;
   -webkit-box-orient: vertical;
@@ -162,7 +163,6 @@ body, html {
   }
 
   .destination-description {
-    font-size: 1.1rem;
     align-items: center;
     margin-left: 0;
   }
@@ -172,9 +172,9 @@ body, html {
   }
 
 .destination-description-text {
-  text-align: left;
-  font-size: 14px;
-  font-size: 400;
+  text-align: justify;
+  font-size: 14px !important;
+  font-weight: 400;
   width: 100%;
   line-height: 1.5;
   margin-top: -5px;
@@ -184,7 +184,7 @@ body, html {
 }
 
   .packages-heading {
-    font-size: 1.75rem;
+    font-size: 16px;
     max-width: 100%;
   }
 
@@ -194,33 +194,4 @@ body, html {
   }
 }
 
-@media (max-width: 600px) {
-  .destination-detail-page {
-    padding: 1rem 1.25rem;
-  }
 
-  .destination-info {
-    gap: 1rem;
-  }
-
-  .destination-description {
-    font-size: 1rem;
-  }
-
-  .destination-description h1 {
-    font-size: 1.6rem;
-  }
-
-  .packages-heading {
-    font-size: 1.5rem;
-  }
-
-  .package-grid {
-    grid-template-columns: 1fr;
-    gap: 1.25rem;
-  }
-
-  .package-grid p {
-    font-size: 1.1rem;
-  }
-}
