@@ -6,14 +6,7 @@ import axios from 'axios';
 import Image from 'next/image';
 import companylogo from '../public/assets/companylogo.png';
 
-import {
-  FaShareAlt,
-  FaFacebookF,
-  FaYoutube,
-  FaLinkedinIn,
-  FaInstagram,
-  FaWhatsapp
-} from 'react-icons/fa';
+import { FaShareAlt, FaFacebookF, FaYoutube, FaLinkedinIn, FaInstagram, FaWhatsapp, FaPhoneAlt, FaEnvelope } from 'react-icons/fa';
 
 const Footer = () => {
   const [email, setEmail] = useState('');
@@ -47,9 +40,10 @@ const Footer = () => {
       <div className="first-footer">
         <div className="footer-section footerleft">
           <div className="icon-heading">
+            <FaPhoneAlt className="icon blue-icon" />
             <h4>Call us</h4>
           </div>
-          <p>Chat or get a quote 24/7—we’re here to help!</p>
+          <p className='footershorttext'>Chat or get a quote 24/7—we’re here to help!</p>
           <div className="phone-links">
             <a href="tel:+91-7977022583" className="footer-link">+91-7977022583</a>
             <a href="tel:+91-7409030585" className="footer-link">+91-7409030585</a>
@@ -58,17 +52,19 @@ const Footer = () => {
 
         <div className="footer-section">
           <div className="icon-heading">
+            <FaEnvelope className="icon blue-icon" />
             <h4>Write to us</h4>
           </div>
-          <p>Enquiry, feedback, or suggestion? Write to us.</p>
+          <p className='footershorttext'>Enquiry, feedback, or suggestion? Write to us.</p>
           <a href="mailto:info@desire4travels.com" className="footer-link">info@desire4travels.com</a>
         </div>
 
         <div className="footer-section lastsection">
           <div className="icon-heading">
+            <FaWhatsapp className="icon whatsapp-green" />
             <h4>WhatsApp us</h4>
           </div>
-          <p>Chat with us for quick travel help!</p>
+          <p className='footershorttext'>Chat with us for quick travel help!</p>
           <a href="https://wa.me/917977022583" className="footer-link">+91-7977022583</a>
         </div>
       </div>

@@ -259,6 +259,22 @@
   margin-top: -8px;
 }
 
+.icon {
+  font-size: 24px;
+  margin-right: 8px;
+  vertical-align: middle;
+}
+
+.blue-icon {
+  color: #0c55a3 !important;
+}
+
+.whatsapp-green {
+  color: #25D366 !important;
+}
+
+
+
 @media (max-width: 768px) {
   .first-footer,
   .second-footer {
@@ -267,6 +283,10 @@
     padding: 10px 15px;
     gap: 10px;
   }
+
+  .footershorttext{
+  font-size: 14px;
+}
 
   .footer-links {
     display: grid;
