@@ -159,9 +159,19 @@ const PackageDetails = ({ packageData, error }) => {
           autoplay={{ delay: 3000, disableOnInteraction: false }}
         >
           <SwiperSlide>
-            <div className="slider-image-container">
-              <img src={photo} alt={packageName} />
-            </div>
+        <div className="package-main-image-wrapper">
+          <img
+            src={photo}
+            alt={packageName}
+            className="package-details-main-image"
+          />
+
+          <div className="premium-package-header-bottom-overlay">
+            <h1 className="premium-package-title">{packageName}</h1>
+            <h2 className="premium-package-duration">🕒 {duration}</h2>
+            <h3 className="premium-package-price">💰 ₹{price}</h3>
+          </div>
+        </div>
           </SwiperSlide>
           {[
             "/assets/Hotel.png",
@@ -176,7 +186,7 @@ const PackageDetails = ({ packageData, error }) => {
                   alt={`Slide ${index + 1}`}
                   width={300}
                   height={200}
-                  style={{ objectFit: "contain" }}
+                  style={{ objectFit: "cover" }}
                 />
               </div>
             </SwiperSlide>

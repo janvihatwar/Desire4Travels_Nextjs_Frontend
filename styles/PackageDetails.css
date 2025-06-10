@@ -43,24 +43,28 @@
 
 .premium-package-title {
   margin: 0 0 0.8rem 0; 
-  font-size: 24px; 
-  font-weight: 700; 
+  font-size: 20px; 
+  font-weight: 450; 
 }
 
 .premium-package-duration {
   margin: 0 0 0.5rem 0; 
-  font-size: 18px;
-  font-weight: 500;
+  font-size: 14px;
+  font-weight: 400;
   white-space: nowrap;
   color: white;
 }
 
 .premium-package-price {
   margin: 0;
-  font-size: 16px;
-  font-weight: 500;
+  font-size: 14px;
+  font-weight: 400;
   white-space: nowrap;
   color: white;
+}
+
+.package-details-destinations-title {
+  text-align: center !important;
 }
 
 .premium-package-header-wrapper {
@@ -134,32 +138,12 @@
 }
 
 .package-title {
-  font-size: 1.75rem !important;
-  font-weight: 700 !important;
+  font-size: 20px !important;
+  font-weight: 600 !important;
   color: #0b4a7b !important;
   border-bottom: 3px solid #0b4a7b !important;
   padding-bottom: 8px !important;
   margin-bottom: 15px !important;
-}
-
-.package-subtitle {
-  font-size: 1.25rem;
-  font-weight: 600;
-  color: #444;
-  margin-top: 5px;
-}
-
-.package-price {
-  font-size: 1.5rem;
-  font-weight: 600;
-  color: #0b4a7b;
-  margin-top: 10px;
-}
-
-.package-description {
-  font-size: 1rem;
-  line-height: 1.6;
-  color: #333;
 }
 
 .package-details-destinations-grid {
@@ -187,19 +171,21 @@
 
 .package-details-destination-image {
   width: 100%;
+  height: 100px;
   border-radius: 25px;
-  margin-bottom: 10px;
+  margin-bottom: 5px;
   object-fit: cover;
 }
 
 .package-details-destination-card h3 {
   display: -webkit-box;
+  text-align: center;
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
   overflow: hidden;
   text-overflow: ellipsis;
-  margin: 0 0 6px 0;
-  font-size: 1rem;
+  margin: 0 0 0px 0;
+  font-size: 14px;
   color: #0b4a7b;
 }
 
@@ -211,7 +197,7 @@
 .package-details-list {
   list-style-type: disc;
   padding-left: 20px;
-  font-size: 1rem;
+  font-size: 16px;
   color: #333;
 }
 
@@ -223,7 +209,7 @@
 .itinerary-table {
   width: 100%;
   border-collapse: collapse;
-  font-size: 1rem;
+  font-size: 16px;
   color: #222;
   box-shadow: 0 3px 12px rgba(0, 0, 0, 0.1);
   border-radius: 8px;
@@ -240,7 +226,7 @@
   background-color: #0b4a7b;
   color: #fff;
   font-weight: 700;
-  font-size: 1.15rem;
+  font-size: 18px;
   padding: 15px 18px;
 }
 
@@ -424,8 +410,6 @@
   max-height: none; 
 }
 
-
-
 .package-description.expanded {
   display: block;
   overflow: visible;
@@ -449,56 +433,58 @@
   text-align: justify;
 }
 
-/* Clean mobile layout for header overlay - with !important */
 @media (max-width: 768px) {
   
-  .package-details-main-image {
-    width: 100% !important;
-    height: auto !important;
-    display: block !important;
-    border-radius: 12px !important;
-    object-fit: cover !important;
-    aspect-ratio: 16 / 9 !important;
-  }
+.package-details-main-image {
+  width: 100% !important;
+  height: auto !important;
+  display: block !important;
+  border-radius: 12px !important;
+  object-fit: cover !important;
+  aspect-ratio: 16 / 9 !important;
+  position: relative !important;
+}
 
-  .premium-package-header-bottom-overlay {
-    position: absolute !important;
-    bottom: 0 !important;
-    left: 0 !important;
-    width: 100% !important;
-    display: flex !important;
-    flex-direction: column !important;
-    justify-content: center !important;
-    align-items: center !important;
-    background: rgba(0, 0, 0, 0.6) !important;
-    padding: 1rem 1rem !important;
-    color: white !important;
-    border-bottom-left-radius: 12px !important;
-    border-bottom-right-radius: 12px !important;
-    text-align: center !important;
-  }
+.premium-package-header-bottom-overlay {
+  position: absolute !important;
+  bottom: 0 !important;
+  left: 0 !important;
+  width: 100% !important;
+  display: flex !important;
+  flex-direction: column !important;
+  justify-content: center !important;
+  align-items: center !important;
+  background: rgba(0, 0, 0, 0.8) !important;
+  padding: 0.5rem 0.75rem !important;
+  color: white !important;
+  border-bottom-left-radius: 12px !important;
+  border-bottom-right-radius: 12px !important;
+  text-align: center !important;
+  min-height: 60px !important;
+}
 
-  .premium-package-title {
-    margin: 0 0 0.5rem 0 !important;
-    font-size: 1.5rem !important;
-    font-weight: 700 !important;
-  }
+.premium-package-title {
+  margin: 0 0 0.25rem 0 !important;
+  font-size: 14px !important;
+  font-weight: 500 !important; 
+}
 
-  .premium-package-duration {
-    margin: 0 0 0.5rem 0 !important;
-    font-size: 1.1rem !important;
-    font-weight: 500 !important;
-    white-space: nowrap !important;
-    color: white !important;
-  }
+.premium-package-duration {
+  margin: 0 0 0.25rem 0 !important;
+  font-size: 12px !important; 
+  font-weight: 400 !important;
+  white-space: nowrap !important;
+  color: white !important;
+}
 
-  .premium-package-price {
-    margin: 0 !important;
-    font-size: 1rem !important;
-    font-weight: 500 !important;
-    white-space: nowrap !important;
-    color: white !important;
-  }
+.premium-package-price {
+  margin: 0 !important;
+  font-size: 12px !important;
+  font-weight: 400 !important;
+  white-space: nowrap !important;
+  color: white !important;
+}
+
 }
 
 
@@ -560,6 +546,46 @@
   color: white;
 }
 
+.package-details-destination-card {
+  flex: 0 0 auto;
+  height: 100px;
+  width: 100px;
+  scroll-snap-align: start;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  padding: 8px;
+  overflow: hidden;
+  border-radius: 12px;
+  background: white;
+  box-shadow: 0 3px 8px rgba(0,0,0,0.05);
+}
+
+.package-details-destination-image {
+  width: 100%;
+  height: 50px;
+  object-fit: cover;
+  border-radius: 12px;
+  margin-bottom: 10px;
+}
+
+.package-details-destination-card h3 {
+  height: 20px;
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  text-overflow: ellipsis;
+  font-size: 0.9rem;
+  text-align: center;
+  color: #0b4a7b;
+  font-weight: 700;
+  margin: 0;
+}
+
+
 .package-details-destinations-grid {
   display: flex;
   flex-direction: row;
@@ -574,26 +600,17 @@
   -ms-overflow-style: none;  
 }
 
+.package-details-header-flex {
+  margin-bottom: -30px;
+}
+
+.mobile-slider{
+  margin-top: -10px !important;
+}
+
 .package-details-destinations-grid::-webkit-scrollbar {
   display: none; 
 }
-
-.package-details-destination-card {
-  flex: 0 0 auto;
-  height: 150px;
-  width: 125px;
-  scroll-snap-align: start;
-  box-sizing: border-box;
-}
-
-
-  .package-details-main-image,
-  .package-icon,
-  .package-details-destination-image {
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
-  }
 
   .package-details-main-image {
     width: 100%;
@@ -733,25 +750,9 @@
     flex-direction: column;
     padding: 0.25rem !important;
   }
-
-  .premium-package-title {
-    font-size: 1.25rem;
-  }
-
-  .premium-package-duration,
-  .premium-package-price {
-    font-size: 1rem;
-  }
 }
 
 @media (max-width: 768px) {
-  .package-details-destination-card {
-    max-width: 100%;
-    margin-bottom: 1rem;
-    overflow: hidden;
-    transition: all 0.3s ease;
-  }
-
   .destination-title {
     display: -webkit-box;
     -webkit-line-clamp: 2;
@@ -790,19 +791,10 @@
 }
 
 @media (max-width: 768px) {
-  .premium-package-title,
-  .package-title {
-    font-size: 1.25rem !important; 
-  }
-
-  .premium-package-duration,
-  .package-subtitle {
-    font-size: 0.9rem !important; 
-  }
-
-  .premium-package-price,
-  .package-price {
-    font-size: 0.85rem !important; 
+  
+  .package-title,
+  .package-details-destinations-title {
+    font-size: 16px !important;
   }
 
   .package-description,
@@ -813,12 +805,12 @@
   .itinerary-item-row td,
   .quote-form input,
   .quote-form button {
-    font-size: 0.8rem !important;
+    font-size: 12px !important;
   }
 
   .package-details-destination-card h3,
   .package-details-destination-card p {
-    font-size: 0.8rem !important;
+    font-size: 12px !important;
   }
 
   .request-package-button,
