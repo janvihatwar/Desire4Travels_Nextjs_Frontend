@@ -286,6 +286,22 @@
   margin-top: 0;
 }
 
+input::placeholder,
+textarea::placeholder {
+    font-size: 16px;     
+    font-family: Arial, sans-serif; 
+    color: #999999;      
+    opacity: 1;          
+}
+
+input[type="number"]::placeholder {
+    font-size: 16px;
+    font-family: Arial, sans-serif;
+    color: #999999;
+    opacity: 1;
+}
+
+
 .quote-form-section {
   margin-top: 2rem;
 }

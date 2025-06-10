@@ -345,6 +345,7 @@ const PackageDetails = ({ packageData, error }) => {
                 required
               />
               <input
+                
                 type="number"
                 name="travelers"
                 placeholder="Number of Travelers"
@@ -354,9 +355,9 @@ const PackageDetails = ({ packageData, error }) => {
                 required
               />
               <input
-                type="date"
+                type="text"
                 name="date"
-                placeholder="Preferred Travel Date"
+                placeholder="When to Travel"
                 value={formData.date}
                 onChange={handleChange}
                 required
