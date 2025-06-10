@@ -52,7 +52,7 @@ const Footer = () => {
 
         <div className="footer-section">
           <div className="icon-heading">
-            <FaEnvelope className="icon blue-icon" />
+            <FaEnvelope className="icon red-icon" />
             <h4>Write to us</h4>
           </div>
           <p className='footershorttext'>Enquiry, feedback, or suggestion? Write to us.</p>

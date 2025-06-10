@@ -265,6 +265,10 @@
   vertical-align: middle;
 }
 
+.red-icon {
+  color: rgb(204, 23, 23) !important;
+}
+
 .blue-icon {
   color: #0c55a3 !important;
 }

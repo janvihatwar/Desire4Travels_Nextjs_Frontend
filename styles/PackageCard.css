@@ -7,7 +7,7 @@
   transition: transform 0.3s ease, box-shadow 0.3s ease !important;
   display: flex !important;
   flex-direction: column !important;
-  margin: 10px 6px !important; /* reduced horizontal spacing */
+  margin: 10px 6px !important;
   max-width: 90vw !important;
   cursor: pointer !important;
 }
@@ -31,7 +31,7 @@
 }
 
 .package-title1 {
-  font-size: 1.2rem !important;
+  font-size: 16px !important;
   font-weight: bold !important;
   margin-bottom: 8px !important;
   color: #333 !important;
@@ -47,7 +47,7 @@
 .description,
 .price,
 .rating {
-  font-size: 0.9rem !important;
+  font-size: 14px !important;
   margin-bottom: 8px !important;
   color: #555 !important;
   white-space: nowrap !important;
@@ -140,9 +140,18 @@ form button[type="submit"]:hover {
   background-color: #e65c00 !important;
 }
 
-@media (max-width: 600px) {
+@media (max-width: 768px) {
   .package-card {
-    width: 90vw !important;
-    margin: 10px auto !important; /* center cards on small screens */
+    width: 45vw !important;
+    margin: 10px auto !important;
   }
+
+  .package-image {
+  width: 100% !important;
+  height: 50%;
+  aspect-ratio: 1 / 1 !important;
+  object-fit: cover !important;
+  border-radius: 25px !important;
+  padding: 10px !important;
+}
 }
