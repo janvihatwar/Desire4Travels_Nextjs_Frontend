@@ -280,7 +280,6 @@
 
 // export default DestinationCard;
 
-
 'use client';
 
 import React, { useState } from 'react';
@@ -315,7 +314,6 @@ const DestinationCard = ({
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
     try {
       const response = await fetch('https://desire4travels-1.onrender.com/callback-destination', {
         method: 'POST',
@@ -350,19 +348,19 @@ const DestinationCard = ({
         />
       )}
 
-     <div
-  className="destination-card bg-white rounded-xl shadow-md hover:shadow-lg transition transform hover:-translate-y-1 
-             overflow-hidden flex flex-col justify-between min-h-[400px] sm:min-h-[unset] w-full"
-  onClick={handleCardClick}
-  style={{ cursor: 'pointer' }}
->
-
+      <div
+        className="destination-card bg-white rounded-xl shadow-md hover:shadow-lg transition transform hover:-translate-y-1 
+                   overflow-hidden flex flex-col items-center justify-between min-h-[400px] sm:min-h-[unset] w-full text-center relative"
+        onClick={handleCardClick}
+        style={{ cursor: 'pointer' }}
+      >
         <img src={imgSrc} alt={title} className="w-full h-48 object-cover" />
-        <div className="p-4 space-y-2">
+
+        <div className="p-4 space-y-2 flex flex-col items-center justify-center w-full">
           <h2 className="text-xl font-semibold text-gray-800">{title}</h2>
 
           {showLocation && (
-            <p className="flex items-center text-sm text-gray-600">
+            <p className="flex items-center justify-center text-sm text-gray-600">
               <FaMapMarkerAlt className="mr-1 text-red-500" /> {location}
             </p>
           )}
@@ -375,7 +373,7 @@ const DestinationCard = ({
 
           {showExtras && (
             <>
-              <p className="flex items-center text-sm text-yellow-500">
+              <p className="flex items-center justify-center text-sm text-yellow-500">
                 <FaStar className="mr-1" /> {rating} / 5
               </p>
               <button
@@ -414,21 +412,21 @@ const DestinationCard = ({
                 </a>
               </div>
 
-<div className="flex flex-col sm:flex-row gap-2">
-  <button
-    type="submit"
-    className="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 w-full"
-  >
-    Submit
-  </button>
-  <button
-    type="button"
-    onClick={() => setShowCallbackForm(false)}
-    className="bg-gray-400 text-white px-4 py-2 rounded-lg hover:bg-gray-500 w-full"
-  >
-    Cancel
-  </button>
-</div>
+              <div className="flex flex-col sm:flex-row gap-2">
+                <button
+                  type="submit"
+                  className="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 w-full"
+                >
+                  Submit
+                </button>
+                <button
+                  type="button"
+                  onClick={() => setShowCallbackForm(false)}
+                  className="bg-gray-400 text-white px-4 py-2 rounded-lg hover:bg-gray-500 w-full"
+                >
+                  Cancel
+                </button>
+              </div>
             </form>
           </div>
         )}
