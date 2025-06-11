@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import styles from './PlanTrip.module.css';
+import SuccessPopup from '../components/SuccessPopup.jsx';
+
 
 const PlanTrip = () => {
   const [formData, setFormData] = useState({
@@ -10,6 +12,8 @@ const PlanTrip = () => {
     preference: '',
     mobileNumber: ''
   });
+
+const [showSuccessPopup, setShowSuccessPopup] = useState(false);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -29,7 +33,7 @@ const PlanTrip = () => {
       });
 
       if (response.ok) {
-        alert('Trip planned successfully!');
+        setShowSuccessPopup(true);
         setFormData({
           destination: '',
           startDate: '',
@@ -98,6 +102,12 @@ const PlanTrip = () => {
           <button type="submit">Submit</button>
         </form>
       </div>
+      {showSuccessPopup && (
+          <SuccessPopup
+            message="Thanks! Trip planned!"
+            onClose={() => setShowSuccessPopup(false)}
+          />
+        )}
     </div>
   );
 };

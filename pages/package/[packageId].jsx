@@ -4,6 +4,8 @@ import axios from "axios";
 import { Swiper, SwiperSlide } from "swiper/react";
 import Image from "next/image";
 import "swiper/css";
+import SuccessPopup from '../../components/SuccessPopup.jsx';
+
 
 const PackageDetails = ({ packageData, error }) => {
   const [showQuoteForm, setShowQuoteForm] = useState(false);
@@ -17,6 +19,8 @@ const PackageDetails = ({ packageData, error }) => {
 
   const leftRef = useRef(null);
   const rightRef = useRef(null);
+
+  const [showSuccessPopup, setShowSuccessPopup] = useState(false);
 
   if (error) return <div>{error}</div>;
   if (!packageData) return <div>Package not found</div>;
@@ -100,29 +104,32 @@ const PackageDetails = ({ packageData, error }) => {
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    if (!packageData) {
-      alert("Package data not loaded. Please try again.");
-      return;
-    }
-    try {
-      const payload = {
-        ...formData,
-        packageName: packageData.packageName,
-      };
-      await axios.post(
-        "https://desire4travels-1.onrender.com/api/custom-quotes",
-        payload
-      );
-      alert("Request submitted successfully!");
-      setShowQuoteForm(false);
-      setFormData({ name: "", mobile: "", travelers: "", date: "" });
-    } catch (err) {
-      console.error("Submission failed:", err);
-      alert("Failed to submit request.");
-    }
-  };
+const handleSubmit = async (e) => {
+  e.preventDefault();
+  if (!packageData) {
+    alert("Package data not loaded. Please try again.");
+    return;
+  }
+  try {
+    const payload = {
+      ...formData,
+      packageName: packageData.packageName,
+    };
+    await axios.post(
+      "https://desire4travels-1.onrender.com/api/custom-quotes",
+      payload
+    );
+
+    setShowQuoteForm(false);
+    setFormData({ name: "", mobile: "", travelers: "", date: "" });
+
+    setShowSuccessPopup(true);
+  } catch (err) {
+    console.error("Submission failed:", err);
+    alert("Failed to submit request.");
+  }
+};
+
 
   const DestinationsJSX = (
     <section className="package-details-section">
@@ -346,7 +353,7 @@ const PackageDetails = ({ packageData, error }) => {
               />
               <input
                 
-                type="number"
+                type="text"
                 name="travelers"
                 placeholder="Number of Travelers"
                 min={1}
@@ -373,6 +380,13 @@ const PackageDetails = ({ packageData, error }) => {
             </button>
           </div>
         </div>
+      )}
+
+    {showSuccessPopup && (
+        <SuccessPopup
+          message="Your request has been submitted successfully!"
+          onClose={() => setShowSuccessPopup(false)}
+        />
       )}
     </div>
   );

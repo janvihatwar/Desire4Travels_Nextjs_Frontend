@@ -2,6 +2,8 @@
 
 import { useEffect, useState } from 'react';
 import Background from './Background.jsx';
+import SuccessPopup from './SuccessPopup.jsx';
+
 
 const Hero = ({ heroData, setHeroCount, heroCount, planTripRef }) => {
   const [formData, setFormData] = useState({
@@ -11,6 +13,8 @@ const Hero = ({ heroData, setHeroCount, heroCount, planTripRef }) => {
     travelers: '',
     travelDate: ''
   });
+
+ const [showSuccessPopup, setShowSuccessPopup] = useState(false); 
 
   useEffect(() => {
     let touchStartX = 0;
@@ -77,27 +81,28 @@ const Hero = ({ heroData, setHeroCount, heroCount, planTripRef }) => {
     }
   };
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
+const handleSubmit = async (e) => {
+  e.preventDefault();
 
-    try {
-      const res = await fetch('https://desire4travels-1.onrender.com/enquiry', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(formData)
-      });
+  try {
+    const res = await fetch('https://desire4travels-1.onrender.com/enquiry', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(formData)
+    });
 
-      const data = await res.json();
-      if (res.ok) {
-        alert('Form submitted successfully!');
-        setFormData({ name: '', phone: '', destination: '', travelers: '', travelDate: '' });
-      } else {
-        alert(`Error: ${data.error}`);
-      }
-    } catch (err) {
-      alert('Failed to submit form');
+    const data = await res.json();
+    if (res.ok) {
+      setShowSuccessPopup(true);
+      setFormData({ name: '', phone: '', destination: '', travelers: '', travelDate: '' });
+    } else {
+      alert(`Error: ${data.error}`);
     }
-  };
+  } catch (err) {
+    alert('Failed to submit form');
+  }
+};
+
 
   return (
     <div className="hero-section">
@@ -158,6 +163,12 @@ const Hero = ({ heroData, setHeroCount, heroCount, planTripRef }) => {
           </form>
         </div>
       </div>
+      {showSuccessPopup && (
+      <SuccessPopup
+        message="Thanks! We've connected your request with a travel expert."
+        onClose={() => setShowSuccessPopup(false)}
+       />
+      )}
     </div>
   );
 };
