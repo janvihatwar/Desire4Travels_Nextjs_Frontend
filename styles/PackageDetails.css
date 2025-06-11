@@ -828,7 +828,7 @@ input[type="number"]::placeholder {
   .itinerary-item-row td,
   .quote-form input,
   .quote-form button {
-    font-size: 12px !important;
+    font-size: 14px !important;
   }
 
   .package-details-destination-card h3,
