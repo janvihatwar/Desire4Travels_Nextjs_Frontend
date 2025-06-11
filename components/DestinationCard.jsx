@@ -406,12 +406,6 @@ const DestinationCard = ({
                 className="w-full px-4 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
               />
 
-              <div className="text-center">
-                <a href="/signup" className="text-blue-600 text-sm hover:underline">
-                  Sign up for updates
-                </a>
-              </div>
-
               <div className="flex flex-col sm:flex-row gap-2">
                 <button
                   type="submit"
