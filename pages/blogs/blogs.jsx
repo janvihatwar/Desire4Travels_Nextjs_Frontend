@@ -421,7 +421,7 @@ export default function BlogList() {
 
       {/* Hero Section */}
       <header
-        className="w-full h-60 bg-cover bg-center flex items-center justify-center text-center text-white mb-8"
+        className="w-full h-80 bg-cover bg-center flex items-center justify-center text-center text-white mb-8"
         style={{
           backgroundImage: "linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('https://images.unsplash.com/photo-1506929562872-bb421503ef21?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80')"
         }}
@@ -507,23 +507,23 @@ export default function BlogList() {
             </div>
           )}
         </div> */}
-<div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-6 mt-12">
-  {currentBlogs.length > 0 ? (
-    currentBlogs.map((blog, index) => (
-      <BlogCard key={blog.id} blog={blog} index={index} />
-    ))
-  ) : (
-    <div className="col-span-full text-center py-12">
-      <img 
-        src="/images/no-results.svg" 
-        alt="No results" 
-        className="max-w-[200px] mx-auto mb-6 opacity-70" 
-      />
-      <h3 className="text-xl font-semibold text-gray-800 mb-2">No matching posts found</h3>
-      <p className="text-gray-600">Try adjusting your search or filter criteria</p>
-    </div>
-  )}
-</div>
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-6 mt-12">
+          {currentBlogs.length > 0 ? (
+            currentBlogs.map((blog, index) => (
+              <BlogCard key={blog.id} blog={blog} index={index} />
+            ))
+          ) : (
+            <div className="col-span-full text-center py-12">
+              <img
+                src="/images/no-results.svg"
+                alt="No results"
+                className="max-w-[200px] mx-auto mb-6 opacity-70"
+              />
+              <h3 className="text-xl font-semibold text-gray-800 mb-2">No matching posts found</h3>
+              <p className="text-gray-600">Try adjusting your search or filter criteria</p>
+            </div>
+          )}
+        </div>
 
 
         {/* Pagination */}
@@ -542,8 +542,8 @@ export default function BlogList() {
                 key={number}
                 onClick={() => setCurrentPage(number)}
                 className={`px-4 py-2 border rounded-md transition-all ${currentPage === number
-                    ? 'bg-red-400 border-red-400 text-white'
-                    : 'border-gray-300 bg-white text-gray-700 hover:bg-gray-50'
+                  ? 'bg-red-400 border-red-400 text-white'
+                  : 'border-gray-300 bg-white text-gray-700 hover:bg-gray-50'
                   }`}
               >
                 {number}
@@ -564,20 +564,19 @@ export default function BlogList() {
       {/* Sticky Contact Buttons */}
       <div className="fixed bottom-1/2 right-0 transform translate-y-1/2 flex flex-col gap-3 z-50">
         <a
-          href="tel:+1234567890"
+          href="tel:+91-7977022583"
           className="bg-blue-600 text-white px-4 py-2 rounded-l-lg shadow-lg flex items-center justify-center gap-1 transition-all duration-300 hover:-translate-y-1 hover:shadow-xl text-sm w-24"
         >
           <span>Call</span>
         </a>
         <a
-          href="https://wa.me/1234567890"
+          href="https://wa.me/+91-7977022583"
           className="bg-green-500 text-white px-4 py-2 rounded-l-lg shadow-lg flex items-center justify-center gap-1 transition-all duration-300 hover:-translate-y-1 hover:shadow-xl text-sm w-24"
           target="_blank"
           rel="noopener noreferrer"
         >
           <span>WhatsApp</span>
-        </a>
-      </div>
+        </a>      </div>
 
       {/* Modal */}
       {isModalOpen && (
@@ -684,10 +683,39 @@ function BlogCard({ blog, index }) {
         </div>
 
         {/* Content Section */}
-        <div className="p-4 flex flex-col flex-grow items-center text-center">
+        {/* <div className="p-4 flex flex-col flex-grow items-center text-center">
           <h3 className="text-lg font-semibold text-gray-800 mb-2 line-clamp-2">{blog.title}</h3>
           <p className="text-gray-600 text-sm mb-4 line-clamp-3 flex-grow">{blog.excerpt}</p>
-          
+
+          <div className="flex justify-center items-center gap-6 text-xs text-gray-500 mt-2">
+            <span className="flex items-center">
+              <svg className="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+              </svg>
+              {blog.author}
+            </span>
+            <span className="flex items-center">
+              <svg className="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+              </svg>
+              {new Date(blog.date).toLocaleDateString('en-US', {
+                year: 'numeric',
+                month: 'short',
+                day: 'numeric'
+              })}
+            </span>
+          </div>
+        </div> */}
+        <div className="p-4 flex flex-col flex-grow items-center text-center">
+          <h3 className="text-lg font-semibold text-gray-800 mb-2 line-clamp-2">{blog.title}</h3>
+
+          {/* Wrap the paragraph in a div to break it out of center alignment */}
+          <div className="w-full">
+            <p className="text-gray-600 text-sm mb-4 line-clamp-3 text-left">
+              {blog.excerpt}
+            </p>
+          </div>
+
           {/* Author & Date */}
           <div className="flex justify-center items-center gap-6 text-xs text-gray-500 mt-2">
             <span className="flex items-center">
@@ -708,6 +736,7 @@ function BlogCard({ blog, index }) {
             </span>
           </div>
         </div>
+
       </Link>
     </div>
   );
