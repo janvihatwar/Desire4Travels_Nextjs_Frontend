@@ -16,6 +16,7 @@
   display: inline-block;
   width: 77%;
   overflow: hidden;
+  border-radius: 12px;
 }
 
 .package-details-main-image {
