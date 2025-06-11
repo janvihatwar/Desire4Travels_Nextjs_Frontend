@@ -349,8 +349,9 @@ const DestinationCard = ({
       )}
 
       <div
-        className="destination-card bg-white rounded-xl shadow-md hover:shadow-lg transition transform hover:-translate-y-1 
-                   overflow-hidden flex flex-col items-center justify-between min-h-[400px] sm:min-h-[unset] w-full text-center relative"
+          className="destination-card bg-white rounded-xl shadow-md hover:shadow-lg transition transform hover:-translate-y-1 
+             overflow-hidden flex flex-col items-center justify-start w-full text-center relative"
+
         onClick={handleCardClick}
         style={{ cursor: 'pointer' }}
       >
