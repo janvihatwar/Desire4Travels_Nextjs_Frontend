@@ -1,5 +1,4 @@
 import React from 'react';
-import './SuccessPopup.module.css';
 
 const SuccessPopup = ({ message, onClose }) => {
   return (
