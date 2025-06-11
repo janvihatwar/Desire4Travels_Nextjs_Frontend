@@ -363,7 +363,7 @@ export async function getServerSideProps(context) {
 const BlogPost = ({ blog, similarBlogs = [], error }) => {
   const [tripFormData, setTripFormData] = useState({
     destination: '',
-    startDate: null,
+    startDate: '',
     noofdays: '',
     travelers: '',
     preference: '',
@@ -409,27 +409,32 @@ const BlogPost = ({ blog, similarBlogs = [], error }) => {
     setTripFormData(prev => ({ ...prev, [name]: value }));
   };
 
-  const handleDateChange = (date) => {
-    setTripFormData(prev => ({ ...prev, startDate: date }));
-  };
+  const [successMessage, setSuccessMessage] = useState('');
 
   const handleTripSubmit = async (e) => {
     e.preventDefault();
     try {
       await axios.post('https://desire4travels-1.onrender.com/api/plan-trip', tripFormData);
-      alert('Trip planned successfully! We will contact you shortly.');
+      setSuccessMessage('Trip planned successful! Will contact you shortly.');
       setTripFormData({
         destination: '',
-        startDate: null,
+        startDate: '',
         noofdays: '',
         travelers: '',
         preference: '',
         mobileNumber: ''
       });
     } catch (err) {
-      alert(`Error: ${err.response?.data?.message || 'Failed to submit trip plan'}`);
+      setSuccessMessage(`Error: ${err.response?.data?.message || 'Failed to submit trip plan'}`);
     }
+
+    // Auto-hide message after 4 seconds
+    setTimeout(() => {
+      setSuccessMessage('');
+    }, 4000);
   };
+
+
 
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
@@ -489,11 +494,12 @@ const BlogPost = ({ blog, similarBlogs = [], error }) => {
 
         {/* Sidebar */}
         <div className="lg:w-1/3">
-          <div className="bg-gradient-to-b from-blue-600 to-cyan-500 p-6 rounded-xl shadow-xl sticky top-6">
-            <h3 className="text-xl font-bold text-white mb-6 text-center relative pb-4">
+          <div className="bg-gradient-to-b from-blue-800 via-blue-600 to-cyan-500 p-6 rounded-2xl shadow-2xl sticky top-6">
+            <h3 className="text-2xl font-bold text-white mb-6 text-center relative pb-4">
               Plan Your Dream Trip
-              <span className="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-12 h-1 bg-gradient-to-r from-blue-300 to-cyan-300 rounded-full"></span>
+              <span className="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-16 h-1 bg-gradient-to-r from-cyan-300 to-blue-300 rounded-full"></span>
             </h3>
+
             <form onSubmit={handleTripSubmit} className="space-y-4">
               <input
                 type="text"
@@ -501,16 +507,17 @@ const BlogPost = ({ blog, similarBlogs = [], error }) => {
                 placeholder="Where to?"
                 value={tripFormData.destination}
                 onChange={handleTripChange}
-                className="w-full px-4 py-3 rounded-lg border border-gray-200 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-cyan-400"
                 required
               />
 
-              <DatePicker
-                selected={tripFormData.startDate}
-                onChange={handleDateChange}
-                placeholderText="Travel Dates"
-                minDate={new Date()}
-                className="w-full px-4 py-3 rounded-lg border border-gray-200 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+              <input
+                type="text"
+                name="startDate"
+                placeholder="Travel Dates"
+                value={tripFormData.startDate}
+                onChange={handleTripChange}
+                className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-cyan-400"
                 required
               />
 
@@ -521,7 +528,7 @@ const BlogPost = ({ blog, similarBlogs = [], error }) => {
                 min="1"
                 value={tripFormData.noofdays}
                 onChange={handleTripChange}
-                className="w-full px-4 py-3 rounded-lg border border-gray-200 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-cyan-400"
                 required
               />
 
@@ -532,7 +539,7 @@ const BlogPost = ({ blog, similarBlogs = [], error }) => {
                 min="1"
                 value={tripFormData.travelers}
                 onChange={handleTripChange}
-                className="w-full px-4 py-3 rounded-lg border border-gray-200 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-cyan-400"
                 required
               />
 
@@ -543,55 +550,30 @@ const BlogPost = ({ blog, similarBlogs = [], error }) => {
                 pattern="[0-9]{10}"
                 value={tripFormData.mobileNumber}
                 onChange={handleTripChange}
-                className="w-full px-4 py-3 rounded-lg border border-gray-200 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-cyan-400"
                 required
               />
 
               <button
                 type="submit"
-                className="w-full bg-blue-700 hover:bg-blue-800 text-white font-bold py-3 px-4 rounded-lg transition-all duration-300 hover:-translate-y-1 shadow-lg"
+                className="w-full bg-cyan-600 hover:bg-cyan-700 text-white font-semibold py-3 px-4 rounded-lg transition-transform duration-300 hover:-translate-y-1 shadow-lg"
               >
                 Get Custom Plan
               </button>
             </form>
           </div>
-        </div>
-      </div>
 
-      {/* Similar Blogs Section
-      <div className="mt-16">
-        <h3 className="text-2xl font-bold text-gray-900 mb-8 text-center relative pb-4">
-          You Might Also Like
-          <span className="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-24 h-1 bg-gradient-to-r from-blue-600 to-blue-400 rounded-full"></span>
-        </h3>
-        
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {similarBlogs.map(b => (
-            <Link key={b.id} href={`/blogs/${b.id}`}>
-              <div className="bg-white rounded-xl shadow-md overflow-hidden transition-all duration-300 hover:-translate-y-2 hover:shadow-xl">
-                <div className="h-48 overflow-hidden">
-                  <img
-                    src={b.image}
-                    alt={b.alt || b.title}
-                    className="w-full h-full object-cover transition-transform duration-500 hover:scale-110"
-                    onError={e => {
-                      e.target.onerror = null;
-                      e.target.src = '/placeholder-image.jpg';
-                    }}
-                  />
-                </div>
-                <div className="p-6">
-                  <h4 className="text-lg font-semibold text-gray-900 mb-2">{b.title}</h4>
-                  <p className="text-gray-600 text-sm mb-4">{b.excerpt?.slice(0, 80)}...</p>
-                  <div className="flex items-center text-blue-600 font-medium text-sm">
-                    Read More <FiChevronRight className="ml-1" />
-                  </div>
-                </div>
-              </div>
-            </Link>
-          ))}
+          {successMessage && (
+            <div
+              className={`mt-4 p-4 rounded-md text-white transition-opacity duration-500 ${successMessage.startsWith('Error') ? 'bg-red-500' : 'bg-blue-500'
+                }`}
+            >
+              {successMessage}
+            </div>
+          )}
         </div>
-      </div> */}
+
+      </div>
 
       {/* Similar Blogs Section */}
       <div className="mt-16">
@@ -618,10 +600,10 @@ const BlogPost = ({ blog, similarBlogs = [], error }) => {
                 </div>
 
                 {/* Content container with flex-grow to push button to bottom */}
-                <div className="p-6 flex flex-col flex-grow">
+                <div className="p-6 flex flex-col flex-grow items-center text-center">
                   <h4 className="text-lg font-semibold text-gray-900 mb-2 line-clamp-2">{b.title}</h4>
                   <p className="text-gray-600 text-sm mb-4 line-clamp-3">{b.excerpt?.slice(0, 80)}...</p>
-                  <div className="mt-auto flex items-center text-blue-600 font-medium text-sm">
+                  <div className="mt-auto flex items-center justify-center text-blue-600 font-medium text-sm">
                     Read More <FiChevronRight className="ml-1" />
                   </div>
                 </div>
