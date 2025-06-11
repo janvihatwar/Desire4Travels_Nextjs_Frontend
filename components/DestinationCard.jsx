@@ -355,7 +355,7 @@ const DestinationCard = ({
         onClick={handleCardClick}
         style={{ cursor: 'pointer' }}
       >
-        <img src={imgSrc} alt={title} className="w-full h-48 object-cover" />
+        <img src={imgSrc} alt={title} className="w-full aspect-square object-cover" />
 
         <div className="p-4 space-y-2 flex flex-col items-center justify-center w-full">
           <h2 className="text-xl font-semibold text-gray-800">{title}</h2>
