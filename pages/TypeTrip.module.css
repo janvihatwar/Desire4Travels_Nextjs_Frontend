@@ -41,12 +41,12 @@
   font-size: 1rem;
 }
 
-/* You can remove this unless you're using a wrapper with this class */
-.trip-type-page h1 {
-  font-size: 2rem;
-  margin-bottom: 30px;
-  text-align: center;
-  color: #333;
+.h1 {
+  font-size: 2rem !important;
+  margin-bottom: 30px !important;
+  text-align: center !important;
+  color: #333 !important;
+  font-weight: 600 !important;
 }
 
 @media (max-width: 600px) {

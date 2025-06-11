@@ -29,7 +29,7 @@ const TypeTrip = () => {
         <meta property="og:title" content="Explore Different Types of Trips" />
         <meta property="og:description" content="Browse through a wide range of trip types to find your perfect getaway." />
       </Head>
-      <h1>Type of Trips</h1>
+      <h1 className={styles.h1}>Type of Trips</h1>
       <div className={styles.typetripBox}>
         {types.map((type) => (
           <Link key={type.name} href={`/triptype/${type.name.toLowerCase()}`} legacyBehavior>
