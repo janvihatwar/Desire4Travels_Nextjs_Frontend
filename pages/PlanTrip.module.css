@@ -25,12 +25,12 @@
   margin: auto;
 }
 
-.trip-boxes h2 {
+.heading {
   text-align: center;
+  font-size: 1.75rem;
+  font-weight: bold;
+  color: #2d3748;
   margin-bottom: 1.5rem;
-  color: black;
-  font-family: Georgia, 'Times New Roman', Times, serif !important;
-  font-weight: 1200;
 }
 
 .trip-boxes form {

@@ -54,7 +54,7 @@ const [showSuccessPopup, setShowSuccessPopup] = useState(false);
   return (
     <div className={styles['trip-container']}>
       <div className={styles['trip-boxes']}>
-        <h2>Plan Your Trip</h2>
+        <h2 className={styles.heading}>Plan Your Trip</h2>
         <form onSubmit={handleSubmit}>
           <input
             type="text"
