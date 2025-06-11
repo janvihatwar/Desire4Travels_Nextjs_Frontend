@@ -582,6 +582,33 @@ const BlogPost = ({ blog, similarBlogs = [], error }) => {
           <span className="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-24 h-1 bg-gradient-to-r from-blue-600 to-blue-400 rounded-full"></span>
         </h3>
 
+        {/* <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {similarBlogs.map(b => (
+            <Link key={b.id} href={`/blogs/${b.id}`}>
+              <div className="bg-white rounded-xl shadow-md overflow-hidden transition-all duration-300 hover:-translate-y-2 hover:shadow-xl h-full flex flex-col">
+                <div className="relative pt-[56.25%] overflow-hidden">
+                  <img
+                    src={b.image}
+                    alt={b.alt || b.title}
+                    className="absolute top-0 left-0 w-full h-full object-cover transition-transform duration-500 hover:scale-110"
+                    onError={e => {
+                      e.target.onerror = null;
+                      e.target.src = '/placeholder-image.jpg';
+                    }}
+                  />
+                </div>
+
+                <div className="p-6 flex flex-col flex-grow items-center text-center">
+                  <h4 className="text-lg font-semibold text-gray-900 mb-2 line-clamp-2">{b.title}</h4>
+                  <p className="text-gray-600 text-sm mb-4 line-clamp-3">{b.excerpt?.slice(0, 80)}...</p>
+                  <div className="mt-auto flex items-center justify-center text-blue-600 font-medium text-sm">
+                    Read More <FiChevronRight className="ml-1" />
+                  </div>
+                </div>
+              </div>
+            </Link>
+          ))}
+        </div> */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {similarBlogs.map(b => (
             <Link key={b.id} href={`/blogs/${b.id}`}>
@@ -599,10 +626,17 @@ const BlogPost = ({ blog, similarBlogs = [], error }) => {
                   />
                 </div>
 
-                {/* Content container with flex-grow to push button to bottom */}
+                {/* Content container */}
                 <div className="p-6 flex flex-col flex-grow items-center text-center">
                   <h4 className="text-lg font-semibold text-gray-900 mb-2 line-clamp-2">{b.title}</h4>
-                  <p className="text-gray-600 text-sm mb-4 line-clamp-3">{b.excerpt?.slice(0, 80)}...</p>
+
+                  {/* ✅ Wrap paragraph in div.w-full to allow full width */}
+                  <div className="w-full">
+                    <p className="text-gray-600 text-sm mb-4 line-clamp-3 text-left">
+                      {b.excerpt?.slice(0, 80)}...
+                    </p>
+                  </div>
+
                   <div className="mt-auto flex items-center justify-center text-blue-600 font-medium text-sm">
                     Read More <FiChevronRight className="ml-1" />
                   </div>
@@ -611,18 +645,19 @@ const BlogPost = ({ blog, similarBlogs = [], error }) => {
             </Link>
           ))}
         </div>
+
       </div>
 
       {/* Sticky Contact Buttons */}
       <div className="fixed bottom-1/2 right-0 transform translate-y-1/2 flex flex-col gap-3 z-50">
         <a
-          href="tel:+1234567890"
+          href="tel:+91-7977022583"
           className="bg-blue-600 text-white px-4 py-2 rounded-l-lg shadow-lg flex items-center justify-center gap-1 transition-all duration-300 hover:-translate-y-1 hover:shadow-xl text-sm w-24"
         >
           <span>Call</span>
         </a>
         <a
-          href="https://wa.me/1234567890"
+          href="https://wa.me/+91-7977022583"
           className="bg-green-500 text-white px-4 py-2 rounded-l-lg shadow-lg flex items-center justify-center gap-1 transition-all duration-300 hover:-translate-y-1 hover:shadow-xl text-sm w-24"
           target="_blank"
           rel="noopener noreferrer"
