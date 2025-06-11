@@ -658,19 +658,14 @@ export default function BlogList() {
     </div>
   );
 }
-
 function BlogCard({ blog, index }) {
   return (
-    // <div 
-    //   className="bg-white rounded-xl overflow-hidden shadow-md hover:shadow-xl transition-all duration-300 flex flex-col animate-fade-in"
-    //   style={{ animationDelay: `${index * 0.1}s` }}
-    // >
     <div
       className="bg-white rounded-xl overflow-hidden shadow-md hover:scale-[0.98] hover:shadow-lg transition-transform duration-300 flex flex-col animate-fade-in"
       style={{ animationDelay: `${index * 0.1}s` }}
     >
-
       <Link href={blog.url} className="flex flex-col h-full">
+        {/* Image Section */}
         <div className="relative w-full pt-[80%] overflow-hidden">
           <img
             src={blog.image}
@@ -687,10 +682,14 @@ function BlogCard({ blog, index }) {
             {blog.category}
           </span>
         </div>
-        <div className="p-4 flex flex-col flex-grow">
+
+        {/* Content Section */}
+        <div className="p-4 flex flex-col flex-grow items-center text-center">
           <h3 className="text-lg font-semibold text-gray-800 mb-2 line-clamp-2">{blog.title}</h3>
           <p className="text-gray-600 text-sm mb-4 line-clamp-3 flex-grow">{blog.excerpt}</p>
-          <div className="flex justify-between items-center text-xs text-gray-500">
+          
+          {/* Author & Date */}
+          <div className="flex justify-center items-center gap-6 text-xs text-gray-500 mt-2">
             <span className="flex items-center">
               <svg className="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
