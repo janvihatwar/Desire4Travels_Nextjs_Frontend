@@ -82,10 +82,10 @@ const PackageCard = ({ id, imgSrc, packageName, destinations, price, duration })
             <h2 className="package-title1" title={packageName}>
               {packageName.length > 25 ? `${packageName.slice(0, 25)}...` : packageName}
             </h2>
-
-            <p className="location">
-              <FaMapMarkerAlt /> {locations}
-            </p>
+            <div className="package-location-wrapper">
+              <FaMapMarkerAlt className="package-location-icon" />
+              <span className="package-location-text">{locations}</span>
+            </div>
             <p className="price">{formattedPrice}</p>
             <p className="duration">{duration}</p>
             <button className="request-btn" onClick={handleCallbackRequest}>Request Call Back</button>
@@ -97,7 +97,7 @@ const PackageCard = ({ id, imgSrc, packageName, destinations, price, duration })
                     type="tel"
                     value={mobileNumber}
                     onChange={(e) => setMobileNumber(e.target.value)}
-                    placeholder="Enter Mobile Number"
+                    placeholder="Mobile Number"
                     required
                   />
                 </div>

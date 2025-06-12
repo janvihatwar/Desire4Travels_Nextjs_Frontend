@@ -280,7 +280,7 @@
 
 // export default DestinationCard;
 
-'use client';
+/*'use client';
 
 import React, { useState } from 'react';
 import { useRouter } from 'next/router';
@@ -358,7 +358,13 @@ const DestinationCard = ({
         <img src={imgSrc} alt={title} className="w-full aspect-square object-cover" />
 
         <div className="p-4 space-y-2 flex flex-col items-center justify-center w-full">
-          <h2 className="text-xl font-semibold text-gray-800">{title}</h2>
+          <h2
+            className="py-[10px] font-bold text-base text-black"
+            style={{ fontFamily: "'Segoe UI', Tahoma, Geneva, Verdana, sans-serif" }}
+          >
+            {title}
+          </h2>
+
 
           {showLocation && (
             <p className="flex items-center justify-center text-sm text-gray-600">
@@ -401,6 +407,164 @@ const DestinationCard = ({
               <input
                 type="tel"
                 placeholder="Enter mobile number"
+                value={mobileNumber}
+                onChange={(e) => setMobileNumber(e.target.value)}
+                required
+                className="w-full px-4 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+              />
+
+              <div className="flex flex-col sm:flex-row gap-2">
+                <button
+                  type="submit"
+                  className="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 w-full"
+                >
+                  Submit
+                </button>
+                <button
+                  type="button"
+                  onClick={() => setShowCallbackForm(false)}
+                  className="bg-gray-400 text-white px-4 py-2 rounded-lg hover:bg-gray-500 w-full"
+                >
+                  Cancel
+                </button>
+              </div>
+            </form>
+          </div>
+        )}
+      </div>
+    </>
+  );
+};
+
+export default DestinationCard;
+*/
+
+'use client';
+
+import React, { useState } from 'react';
+import { useRouter } from 'next/router';
+import SuccessPopup from './SuccessPopup.jsx';
+import { FaMapMarkerAlt, FaStar } from 'react-icons/fa';
+
+const DestinationCard = ({
+  imgSrc,
+  title,
+  location,
+  tripType,
+  rating,
+  showExtras = true,
+  showLocation = true,
+}) => {
+  const [showCallbackForm, setShowCallbackForm] = useState(false);
+  const [mobileNumber, setMobileNumber] = useState('');
+  const [showSuccessTick, setShowSuccessTick] = useState(false);
+  const router = useRouter();
+
+  const handleCardClick = () => {
+    if (!showCallbackForm) {
+      router.push(`/destination/${title}`);
+    }
+  };
+
+  const handleCallbackRequest = (e) => {
+    e.stopPropagation();
+    setShowCallbackForm(true);
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      const response = await fetch('https://desire4travels-1.onrender.com/callback-destination', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          phoneNo: mobileNumber,
+          destination: title,
+          called: false,
+        }),
+      });
+
+      if (response.ok) {
+        setShowCallbackForm(false);
+        setMobileNumber('');
+        setShowSuccessTick(true);
+      } else {
+        const errorData = await response.json();
+        alert(`Error: ${errorData.error}`);
+      }
+    } catch (error) {
+      console.error('Network error:', error);
+      alert('Failed to send callback request. Please try again later.');
+    }
+  };
+
+  return (
+    <>
+      {showSuccessTick && (
+        <SuccessPopup
+          message="Your callback request has been submitted successfully."
+          onClose={() => setShowSuccessTick(false)}
+        />
+      )}
+
+      <div
+        className="destination-card bg-white rounded-xl shadow-md hover:shadow-lg transition transform hover:-translate-y-1 
+          overflow-hidden flex flex-col items-center justify-start w-full text-center relative"
+        onClick={handleCardClick}
+        style={{ cursor: 'pointer' }}
+      >
+        <img src={imgSrc} alt={title} className="w-full aspect-square object-cover" />
+
+        <div className="p-4 space-y-2 flex flex-col items-center justify-center w-full">
+          <h2
+            className="py-[10px] font-bold text-base text-black truncate w-full max-w-[220px] text-ellipsis overflow-hidden whitespace-nowrap"
+            style={{ fontFamily: "'Segoe UI', Tahoma, Geneva, Verdana, sans-serif" }}
+          >
+            {title}
+          </h2>
+
+          {showLocation && (
+              <div className="flex items-center text-sm text-gray-600 justify-center w-full">
+                <FaMapMarkerAlt className="text-red-500 flex-shrink-0" />
+                <span className="ml-1 truncate text-center">{location}</span>
+              </div>
+          )}
+
+          {tripType && (
+            <p className="text-sm text-gray-500 text-center w-full truncate">
+              Type: {Array.isArray(tripType) ? tripType.join(', ') : tripType}
+            </p>
+          )}
+
+          {showExtras && (
+            <>
+              <p className="flex items-center justify-center text-sm text-black w-full">
+                <FaStar className="mr-1" style={{ color: '#f5c518' }} /> {rating} / 5
+              </p>
+              <button
+                className="mt-2 w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded-full transition-all duration-300"
+                onClick={handleCallbackRequest}
+              >
+                Request Call Back
+              </button>
+            </>
+          )}
+        </div>
+
+        {showExtras && showCallbackForm && (
+          <div
+            className="absolute inset-0 bg-black/60 flex items-center justify-center z-50 p-4"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <form
+              className="bg-white rounded-2xl p-5 w-full max-w-xs shadow-2xl space-y-3"
+              onSubmit={handleSubmit}
+            >
+              <h3 className="text-lg font-bold text-gray-800 text-center">Request a Callback</h3>
+
+              <input
+                type="tel"
+                placeholder="Mobile Number"
                 value={mobileNumber}
                 onChange={(e) => setMobileNumber(e.target.value)}
                 required

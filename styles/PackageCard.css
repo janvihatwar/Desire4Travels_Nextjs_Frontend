@@ -12,6 +12,33 @@
   cursor: pointer !important;
 }
 
+.package-location-wrapper {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 4px !important;
+  margin-bottom: 8px !important;
+  max-width: 100% !important;
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
+  white-space: nowrap !important;
+  color: #555 !important;
+}
+
+.package-location-icon {
+  flex-shrink: 0 !important;
+  font-size: 14px !important;
+  color: #f44336 !important;
+  line-height: 1 !important;
+}
+
+.package-location-text {
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
+  white-space: nowrap !important;
+}
+
+
 .package-card:hover {
   transform: translateY(-10px) !important;
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2) !important;
@@ -154,4 +181,27 @@ form button[type="submit"]:hover {
   border-radius: 25px !important;
   padding: 10px !important;
 }
+}
+
+@media (max-width: 768px) {
+  form {
+    max-width: 90vw !important;
+    padding: 15px !important;
+    margin: 15px auto !important;
+  }
+
+  form input::placeholder {
+    font-size: 11px !important;
+  }
+
+  form input[type="tel"],
+  form input[type="text"] {
+    font-size: 14px !important;
+    padding: 10px !important;
+  }
+
+  form button[type="submit"] {
+    font-size: 14px !important;
+    padding: 8px !important;
+  }
 }
