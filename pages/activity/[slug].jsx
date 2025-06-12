@@ -1,6 +1,6 @@
 import { useRouter } from 'next/router'; 
 import { useState } from 'react';
-import { activities } from './data';
+import { activities } from '../../lib/data';
 
 export default function ActivityDetail() {
   const router = useRouter();

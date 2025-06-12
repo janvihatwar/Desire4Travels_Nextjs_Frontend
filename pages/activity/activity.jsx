@@ -48,10 +48,9 @@
 
 
 import Link from 'next/link';
-import { activities } from './data';
+import { activities } from '../../lib/data';
 import { useState } from 'react';
 import Head from 'next/head';
-
 
 export default function Activity() {
   const [showModal, setShowModal] = useState(false);
