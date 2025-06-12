@@ -246,6 +246,7 @@ const Footer = () => {
             <Link href="/about" className="text-gray-300 text-sm mb-2 hover:text-white">About Us</Link>
             <Link href="/careerpage" className="text-gray-300 text-sm mb-2 hover:text-white">Career Page</Link>
             <Link href="/reviews" className="text-gray-300 text-sm mb-2 hover:text-white">Reviews</Link>
+            <Link href="/activities/activity" className="text-gray-300 text-sm mb-2 hover:text-white">Activities</Link>
           </div>
 
           <div className="flex flex-col">
