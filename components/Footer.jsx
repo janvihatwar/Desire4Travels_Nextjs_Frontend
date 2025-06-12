@@ -278,7 +278,7 @@ const Footer = () => {
               <a href="https://www.facebook.com/hashtag/desire4travels/" target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-full bg-white border border-gray-300 flex items-center justify-center text-[#1877F2] hover:text-[#145dbf]">
                 <FaFacebookF className="text-lg" />
               </a>
-              <a href="https://www.youtube.com/channel/UCyeSVsm2NoBijIiE4saB2_A" target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-full bg-white border border-gray-300 flex items-center justify-center text-[#FF0000] hover:text-[#cc0000]">
+              <a href="https://www.youtube.com/@Desire4travels" target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-full bg-white border border-gray-300 flex items-center justify-center text-[#FF0000] hover:text-[#cc0000]">
                 <FaYoutube className="text-lg" />
               </a>
               <a href="https://in.linkedin.com/company/desire4travels" target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-full bg-white border border-gray-300 flex items-center justify-center text-[#0A66C2] hover:text-[#004182]">
