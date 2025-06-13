@@ -10,9 +10,9 @@ const PackageCard = ({ id, imgSrc, packageName, destinations, price, duration })
   const [mobileNumber, setMobileNumber] = useState("");
   const [showSuccessPopup, setShowSuccessPopup] = useState(false);
 
-  const formattedPrice = isNaN(parseFloat(price)) 
-  ? "N/A" 
-  : `₹${parseFloat(price).toLocaleString('en-IN')}`;
+const formattedPrice = isNaN(Number(price.toString().replace(/,/g, '')))
+  ? "N/A"
+  : `₹${Number(price.toString().replace(/,/g, '')).toLocaleString('en-IN')}`;
 
 
   const locations = Array.isArray(destinations) && destinations.length > 0
