@@ -4,6 +4,7 @@ import React, { useState, useEffect } from 'react';
 import styles from './PopUp.module.css';
 import Image from 'next/image';
 import Popup from '../public/assets/Popup.png';
+import plane from '../public/assets/plane.jpg';
 import axios from 'axios';
 
 export default function PopUp() {
@@ -65,6 +66,8 @@ export default function PopUp() {
             required
           />
           <button type="submit">Talk with Our Travel Experts</button>
+          <Image src={plane} alt="Travel" width={400} height={400} />
+
         </form>
         <div className={styles['popup-image']}>
           <Image src={Popup} alt="Travel" width={400} height={400} />

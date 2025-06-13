@@ -73,7 +73,7 @@ const AboutUs = () => {
           <h2 className="about-subtitle">Message from the Founder</h2>
           <div className="founder-content">
             <Image
-              src="/assets/ayush_agrawal.jpeg"
+              src="/assets/ayush_agrawal.jpg"
               alt="Ayush Agrawal - Founder"
               width={300}
               height={300}

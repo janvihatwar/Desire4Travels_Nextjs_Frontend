@@ -201,7 +201,7 @@
 
 
 import Link from 'next/link';
-import { activities } from '../../lib/data';
+import { activities } from '../lib/data';
 import { useState } from 'react';
 import Head from 'next/head';
 

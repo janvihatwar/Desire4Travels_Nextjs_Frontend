@@ -10,7 +10,7 @@ import Tawk from "../components/Tawk.jsx";
 
 import '../styles/globals.css';
 import '../styles/index.css';
-import '../styles/App.css';      
+import '../styles/App.css';
 import '../styles/Contact.css';
 import '../styles/Destination.css';
 import '../styles/Navbar.css';
@@ -46,8 +46,9 @@ function MyApp({ Component, pageProps }) {
     <>
       <Head>
         <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <title>Desire4Travels - Collect Moments Not Things</title>
-        <meta name="description" content="Explore the world with Desire4Travels. Discover amazing destinations, book travel packages, and plan your perfect trip." />
+        <title>Desire4travels | Best Tours and Holiday Packages | Plan your trip with us</title>
+        <meta name="description" content="Plan your perfect getaway with travel guides, tips, and stories from around the globe. Journey begins at Desire4Travels." />
+        <meta name="keywords" content="Desire4travels, destination tips, adventure travel, solo travel, family travel, vacation planning, world travel, India travel, Travel packages, Trekking packages, travel agency, personalized travel planning, tailor-made itineraries, 24/7 travel support, D4t" />
       </Head>
 
       <div className="app-container">

@@ -246,7 +246,6 @@ const Footer = () => {
             <Link href="/about" className="text-gray-300 text-sm mb-2 hover:text-white">About Us</Link>
             <Link href="/careerpage" className="text-gray-300 text-sm mb-2 hover:text-white">Career Page</Link>
             <Link href="/reviews" className="text-gray-300 text-sm mb-2 hover:text-white">Reviews</Link>
-            <Link href="/activity/activity" className="text-gray-300 text-sm mb-2 hover:text-white">Activities</Link>
           </div>
 
           <div className="flex flex-col">
@@ -258,7 +257,7 @@ const Footer = () => {
           <div className="flex flex-col">
             <h4 className="text-[#2873a1] text-sm font-medium mb-4">Resources</h4>
             <Link href="/faq" className="text-gray-300 text-sm mb-2 hover:text-white">FAQ</Link>
-            <Link href="/blogs/blogs" className="text-gray-300 text-sm mb-2 hover:text-white">Blogs</Link>
+            <Link href="/blogs" className="text-gray-300 text-sm mb-2 hover:text-white">Blogs</Link>
             <Link href="/terms" className="text-gray-300 text-sm mb-2 hover:text-white">Terms & Conditions</Link>
           </div>
 
@@ -266,6 +265,7 @@ const Footer = () => {
             <h4 className="text-[#2873a1] text-sm font-medium mb-4">Travel</h4>
             <Link href="/destination" className="text-gray-300 text-sm mb-2 hover:text-white">Destinations</Link>
             <Link href="/package" className="text-gray-300 text-sm mb-2 hover:text-white">Packages</Link>
+            <Link href="/activity" className="text-gray-300 text-sm mb-2 hover:text-white">Activities</Link>
           </div>
 
           <div className="col-span-2 md:col-span-1 flex flex-col items-center md:items-start">

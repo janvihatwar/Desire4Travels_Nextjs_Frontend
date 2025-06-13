@@ -29,13 +29,13 @@ const TypeTrip = () => {
         <meta property="og:title" content="Explore Different Types of Trips" />
         <meta property="og:description" content="Browse through a wide range of trip types to find your perfect getaway." />
       </Head>
-      <h1 className={styles.h1}>Type of Trips</h1>
+      <h2 className={styles.h1}>Type of Trips</h2>
       <div className={styles.typetripBox}>
         {types.map((type) => (
           <Link key={type.name} href={`/triptype/${type.name.toLowerCase()}`} legacyBehavior>
             <a className={styles.typetripcard}>
               <img src={type.image.src} alt={type.name} className={styles.logo} />
-              <p>{type.name.toUpperCase()}</p>
+              <h3><b>{type.name.toUpperCase()}</b></h3>
             </a>
           </Link>
         ))}
