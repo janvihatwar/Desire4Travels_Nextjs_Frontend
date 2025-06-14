@@ -47,9 +47,11 @@ export async function getServerSideProps(context) {
 
     const packages = allPackages.filter(pkg => {
       if (!Array.isArray(pkg.destinations)) return false;
-      return pkg.destinations.some(dest =>
-        normalizeDestination(dest).toLowerCase() === normalizedName
-      );
+
+      return pkg.destinations.some(dest => {
+        const normalizedDest = normalizeDestination(dest).toLowerCase();
+        return normalizedDest.includes(normalizedName) || normalizedName.includes(normalizedDest);
+      });
     });
 
     if (!destinationInfo) {
