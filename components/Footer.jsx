@@ -275,19 +275,49 @@ const Footer = () => {
             </div>
             <p className="text-gray-300 text-xs mb-4 text-center md:text-left">Reviews, podcasts, blogs and more...</p>
             <div className="flex gap-3">
-              <a href="https://www.facebook.com/hashtag/desire4travels/" target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-full bg-white border border-gray-300 flex items-center justify-center text-[#1877F2] hover:text-[#145dbf]">
+              <a
+                href="https://www.facebook.com/hashtag/desire4travels/"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Facebook"
+                className="w-10 h-10 rounded-full bg-white border border-gray-300 flex items-center justify-center text-[#1877F2] hover:text-[#145dbf]"
+              >
                 <FaFacebookF className="text-lg" />
               </a>
-              <a href="https://www.youtube.com/@Desire4travels" target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-full bg-white border border-gray-300 flex items-center justify-center text-[#FF0000] hover:text-[#cc0000]">
+              <a
+                href="https://www.youtube.com/@Desire4travels"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="YouTube"
+                className="w-10 h-10 rounded-full bg-white border border-gray-300 flex items-center justify-center text-[#FF0000] hover:text-[#cc0000]"
+              >
                 <FaYoutube className="text-lg" />
               </a>
-              <a href="https://in.linkedin.com/company/desire4travels" target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-full bg-white border border-gray-300 flex items-center justify-center text-[#0A66C2] hover:text-[#004182]">
+              <a
+                href="https://in.linkedin.com/company/desire4travels"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="LinkedIn"
+                className="w-10 h-10 rounded-full bg-white border border-gray-300 flex items-center justify-center text-[#0A66C2] hover:text-[#004182]"
+              >
                 <FaLinkedinIn className="text-lg" />
               </a>
-              <a href="https://www.instagram.com/desire4travels/" target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-full bg-white border border-gray-300 flex items-center justify-center text-[#E1306C] hover:text-[#c13584]">
+              <a
+                href="https://www.instagram.com/desire4travels/"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Instagram"
+                className="w-10 h-10 rounded-full bg-white border border-gray-300 flex items-center justify-center text-[#E1306C] hover:text-[#c13584]"
+              >
                 <FaInstagram className="text-lg" />
               </a>
-              <a href="https://wa.me/917977022583" target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-full bg-white border border-gray-300 flex items-center justify-center text-[#25D366]">
+              <a
+                href="https://wa.me/917977022583"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="WhatsApp"
+                className="w-10 h-10 rounded-full bg-white border border-gray-300 flex items-center justify-center text-[#25D366]"
+              >
                 <FaWhatsapp className="text-lg" />
               </a>
             </div>

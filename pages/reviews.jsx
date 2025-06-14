@@ -150,6 +150,7 @@ const Review = () => {
             key={index}
             className={`indicator ${index === currentIndex ? 'active' : ''}`}
             onClick={() => goToReview(index)}
+            aria-label={`Go to review ${index + 1}`}
           />
         ))}
       </div>
