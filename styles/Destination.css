@@ -42,7 +42,7 @@
   color: white;
 }
 
-.destination-hero-content select {
+/* .destination-hero-content select {
   position: absolute;
   top: 0;
   right: 0;
@@ -55,7 +55,7 @@
   background-color: white;
   color: #333;
   min-width: 140px;
-}
+} */
 
 .cards-container {
   display: grid !important;

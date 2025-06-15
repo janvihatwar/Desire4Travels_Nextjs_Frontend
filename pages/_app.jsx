@@ -60,7 +60,7 @@ function MyApp({ Component, pageProps }) {
         <div className={`app-content ${blurClass}`}>
           <Component {...pageProps} />
         </div>
-        <Tawk />
+        {/* <Tawk /> */}
         <Footer />
       </div>
     </>

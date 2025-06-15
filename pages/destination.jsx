@@ -350,42 +350,46 @@ export default function Destination({ initialDestinations, initialFilteredType }
         />
       </Head>
 
-      <header className="destination-hero px-4 sm:px-8 py-8">
-        <div className="destination-hero-content max-w-5xl mx-auto">
-          <h1 className="destination-title text-3xl sm:text-4xl font-bold text-center mb-6">Destinations</h1>
+<header className="destination-hero px-4 sm:px-8 py-8">
+  <div className="destination-hero-content max-w-5xl mx-auto">
+    <h1 className="destination-title text-3xl sm:text-4xl font-bold text-center mb-6"   style={{ marginBottom: '1rem' }} // equals mb-10 (40px)
+>
+      Destinations
+    </h1>
 
-          <div className="w-full flex flex-col sm:flex-row sm:items-start sm:justify-center gap-4">
-            {/* Search Input + Button Group with downward offset */}
-            <div className="flex flex-col sm:flex-row sm:items-center gap-2 mt-2 sm:mt-3 w-full sm:w-[50%]">
-              <input
-                type="text"
-                placeholder="Search destination..."
-                value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
-                className="w-full sm:w-[65%] px-4 py-2.5 border border-gray-300 rounded-md text-base text-black focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none"
-              />
+    {/* Horizontal Flex Row for Search + Dropdown */}
+    <div className="w-full flex flex-col sm:flex-row sm:items-center sm:justify-center gap-3">
+      
+      {/* Search Input */}
+      <input
+        type="text"
+        placeholder="Search destination..."
+        value={searchQuery}
+        onChange={(e) => setSearchQuery(e.target.value)}
+        className="w-full sm:w-[45%] px-4 py-2.5 border border-gray-300 rounded-md text-base text-black focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none"
+      />
 
-              <button
-                onClick={() => setCurrentPage(1)}
-                className="w-full sm:w-auto px-4 py-2.5 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition text-sm font-medium whitespace-nowrap"
-              >
-                Search
-              </button>
-            </div>
+      {/* Search Button */}
+      <button
+        onClick={() => setCurrentPage(1)}
+        className="w-full sm:w-auto px-4 py-2.5 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition text-sm font-medium whitespace-nowrap"
+      >
+        Search
+      </button>
 
-            {/* Dropdown Filter (aligned top) */}
-            <select
-              value={filteredType}
-              onChange={handleTypeChange}
-              className="w-full sm:w-[25%] px-4 py-2.5 border border-gray-300 rounded-md text-base text-black focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none bg-white"
-            >
-              {tripTypes.map(type => (
-                <option key={type} value={type}>{type}</option>
-              ))}
-            </select>
-          </div>
-        </div>
-      </header>
+      {/* Dropdown */}
+      <select
+        value={filteredType}
+        onChange={handleTypeChange}
+        className="w-full sm:w-[25%] px-4 py-2.5 border border-gray-300 rounded-md text-base text-black focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none bg-white"
+      >
+        {tripTypes.map(type => (
+          <option key={type} value={type}>{type}</option>
+        ))}
+      </select>
+    </div>
+  </div>
+</header>
 
       <div className="cards-container px-4 sm:px-8 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
         {paginatedDestinations.length > 0 ? (
