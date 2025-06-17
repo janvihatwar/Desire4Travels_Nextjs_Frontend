@@ -243,7 +243,7 @@ export default function BlogList() {
 
 
         {/* Pagination */}
-        {totalPages > 1 && (
+        {totalPages > 0 && (
           <div className="flex justify-center items-center gap-2 my-12">
             <button
               onClick={() => setCurrentPage(prev => Math.max(prev - 1, 1))}
