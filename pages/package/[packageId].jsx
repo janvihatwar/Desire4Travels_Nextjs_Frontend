@@ -204,7 +204,7 @@ const handleSubmit = async (e) => {
       <div className="package-details-header-flex">
         <div className="desktop-only package-main-image-wrapper">
           <img
-            src={photo}
+            src={`${photo}${photo.includes('?') ? '&' : '?'}tr=w-1600`}
             alt={packageName}
             className="package-details-main-image"
           />

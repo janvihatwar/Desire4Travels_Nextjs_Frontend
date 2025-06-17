@@ -160,7 +160,7 @@ export default function Package({ packages, totalPages, currentPage }) {
 export async function getServerSideProps(context) {
   const { query } = context;
   const currentPage = parseInt(query.page) || 1;
-  const limit = 6; // items per page
+  const limit = 12; // items per page
 
   try {
     const res = await fetch(`https://desire4travels-1.onrender.com/api/packages`);
