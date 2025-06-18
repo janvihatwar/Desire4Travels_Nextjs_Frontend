@@ -5,6 +5,7 @@ import TopDestination from './TopDestination';
 import TypeTrip from './TypeTrip';
 import Review from './reviews';
 import PlanTrip from './PlanTrip';
+import WhyChooseUs from '../components/WhyChooseUs';
 
 export default function Home({ heroData }) {
   const [heroCount, setHeroCount] = useState(0);
@@ -23,8 +24,13 @@ export default function Home({ heroData }) {
   return (
     <>
       <Head>
-        <title>Travel Management</title>
+        {/* <title>Travel Management</title> */}
         <link rel="icon" href="/favicon.ico" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <title>Desire4travels | Best Tours and Holiday Packages | Plan your trip with us</title>
+        <meta name="description" content="Plan your perfect getaway with travel guides, tips, and stories from around the globe. Journey begins at Desire4Travels." />
+        <meta name="keywords" content="Desire4travels, destination tips, adventure travel, solo travel, family travel, vacation planning, world travel, India travel, Travel packages, Trekking packages, travel agency, personalized travel planning, tailor-made itineraries, 24/7 travel support, D4t" />
+
       </Head>
 
       {heroData && heroData.length > 0 && (
@@ -41,6 +47,7 @@ export default function Home({ heroData }) {
       <div ref={planTripRef}>
         <PlanTrip />
       </div>
+      <WhyChooseUs />
     </>
   );
 }
