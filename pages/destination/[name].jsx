@@ -86,10 +86,10 @@ const DestinationDetail = ({ destinationInfo, packages }) => {
           src={destinationInfo.image}
           alt={destinationInfo.name}
           className="destination-image destination-image-desktop"
-          style={{ height: '400px', marginBottom: '0' }}
+          style={{ height: '360px', marginBottom: '0' }}
         />
         <div className="destination-description">
-          <h1 style={{ fontSize: '36px', fontWeight: 'bold', margin: '0', marginTop: '-30px' }}>{destinationInfo.name}</h1>
+          <h1 style={{ fontSize: '36px', fontWeight: 'bold', marginBottom: '5px', marginTop: '-15px' }}>{destinationInfo.name}</h1>
           <div
             className={`destination-description-text ${isExpanded ? 'expanded' : 'collapsed'}`}
             dangerouslySetInnerHTML={{
