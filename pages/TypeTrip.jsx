@@ -1,4 +1,4 @@
-import React from 'react'; 
+import React from 'react';
 import Link from 'next/link';
 import Head from 'next/head';
 import styles from './TypeTrip.module.css';
@@ -21,14 +21,33 @@ const types = [
 const TypeTrip = () => {
   return (
     <div className={styles.typetrip}>
-      <Head>
+      {/* <Head>
         <title>Trip Types | Desire4Travels</title>
         <meta name="description" content="Explore various types of trips like mountain, beach, religious, and more to plan your next adventure." />
         <meta name="keywords" content="trip types, mountain, beach, religious, treks, offbeat, other travel" />
         <meta name="author" content="Desire4Travels" />
         <meta property="og:title" content="Explore Different Types of Trips" />
         <meta property="og:description" content="Browse through a wide range of trip types to find your perfect getaway." />
+      </Head> */}
+
+      <Head>
+        {/* ✅ Safe for sections inside pages */}
+
+        {/* Semantic/Custom meta for analytics or structured context */}
+        <meta name="d4t:component" content="TypeTrip" />
+        <meta name="d4t:triptypes" content="mountain, beach, religious, treks, offbeat, other" />
+
+        {/* Author (optional, safe) */}
+        <meta name="author" content="Desire4Travels" />
+
+        {/* Open Graph (non-conflicting if no title/desc) */}
+        <meta property="og:section" content="Trip Types" />
+        <meta property="og:type" content="website" />
+        <meta property="og:image" content="/assets/Mountain.webp" />
+        <meta property="og:site_name" content="Desire4Travels" />
       </Head>
+
+
       <h2 className={styles.h1}>Type of Trips</h2>
       <div className={styles.typetripBox}>
         {types.map((type) => (
