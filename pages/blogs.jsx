@@ -374,6 +374,9 @@ export default function BlogList() {
   );
 }
 function BlogCard({ blog, index }) {
+  // Get the first image from the images array, fallback to blog.image if array doesn't exist
+  const imageUrl = blog.images?.length > 0 ? blog.images[0] : blog.image;
+
   return (
     <div
       className="bg-white rounded-xl overflow-hidden shadow-md hover:scale-[0.98] hover:shadow-lg transition-transform duration-300 flex flex-col animate-fade-in"
@@ -383,7 +386,7 @@ function BlogCard({ blog, index }) {
         {/* Image Section */}
         <div className="relative w-full pt-[80%] overflow-hidden">
           <img
-            src={blog.image}
+            src={imageUrl}
             alt={blog.alt || blog.title}
             className="absolute top-0 left-0 w-full h-full object-cover transition-transform duration-500 hover:scale-105"
             loading="lazy"
@@ -399,29 +402,6 @@ function BlogCard({ blog, index }) {
         </div>
 
         {/* Content Section */}
-        {/* <div className="p-4 flex flex-col flex-grow items-center text-center">
-          <h3 className="text-lg font-semibold text-gray-800 mb-2 line-clamp-2">{blog.title}</h3>
-          <p className="text-gray-600 text-sm mb-4 line-clamp-3 flex-grow">{blog.excerpt}</p>
-
-          <div className="flex justify-center items-center gap-6 text-xs text-gray-500 mt-2">
-            <span className="flex items-center">
-              <svg className="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
-              </svg>
-              {blog.author}
-            </span>
-            <span className="flex items-center">
-              <svg className="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
-              </svg>
-              {new Date(blog.date).toLocaleDateString('en-US', {
-                year: 'numeric',
-                month: 'short',
-                day: 'numeric'
-              })}
-            </span>
-          </div>
-        </div> */}
         <div className="p-4 flex flex-col flex-grow items-center text-center">
           <h3 className="text-lg font-semibold text-gray-800 mb-2 line-clamp-2">{blog.title}</h3>
 
@@ -452,7 +432,6 @@ function BlogCard({ blog, index }) {
             </span>
           </div>
         </div>
-
       </Link>
     </div>
   );
