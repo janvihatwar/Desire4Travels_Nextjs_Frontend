@@ -7,8 +7,6 @@ import Review from './reviews';
 import PlanTrip from './PlanTrip';
 import WhyChooseUs from '../components/WhyChooseUs';
 
-import { pageview, event as gtagEvent } from '../lib/gtag'; //google analytics tracking
-
 export default function Home({ heroData }) {
   const [heroCount, setHeroCount] = useState(0);
   const planTripRef = useRef(null);
@@ -16,27 +14,9 @@ export default function Home({ heroData }) {
   useEffect(() => {
     if (!heroData || heroData.length === 0) return;
 
-    //GA pageview
-    if (typeof window !== 'undefined') {
-      pageview(window.location.pathname);
-    }
-
     const interval = setInterval(() => {
-      setHeroCount((prevCount) => {
-        const nextCount = prevCount === heroData.length - 1 ? 0 : prevCount + 1;
-
-        //Fire GA custom event
-        gtagEvent({
-          action: 'hero_slide_viewed',
-          params: {
-            destination: heroData[nextCount].text1,
-          },
-        });
-
-        return nextCount;
-      });
+      setHeroCount((count) => (count === heroData.length - 1 ? 0 : count + 1));
     }, 10000);
-
 
     return () => clearInterval(interval);
   }, [heroData]);

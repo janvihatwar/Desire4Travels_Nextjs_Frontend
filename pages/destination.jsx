@@ -245,9 +245,6 @@ import Head from 'next/head';
 import { useRouter } from 'next/router';
 import DestinationCard from '../components/DestinationCard';
 
-import { event as gtagEvent } from '../lib/gtag'; // Google Analytics tracking
-
-
 const ITEMS_PER_PAGE = 12;
 const tripTypes = ['All', 'Mountain', 'Beach', 'Religious', 'Treks', 'Offbeat', 'Other'];
 
@@ -298,28 +295,12 @@ export default function Destination({ initialDestinations, initialFilteredType }
       const matchedType = tripTypes.find(t => t.toLowerCase() === triptype.toLowerCase()) || 'All';
       setFilteredType(matchedType);
       setCurrentPage(1);
-
-      gtagEvent({
-        action: 'trip_type_selected',
-        params: {
-          type: matchedType,
-        },
-      });
-
     }
   }, [triptype]);
 
   const handleTypeChange = (e) => {
     const selected = e.target.value;
     setCurrentPage(1);
-
-    //Google Analytics event tracking
-    if (typeof window !== 'undefined' && window.gtag) {
-      window.gtag('event', 'trip_type_filter_changed', {
-        selected_type: selected,
-      });
-    }
-
     if (selected === 'All') {
       router.push('/destination', undefined, { shallow: true });
     } else {
@@ -369,46 +350,46 @@ export default function Destination({ initialDestinations, initialFilteredType }
         />
       </Head>
 
-      <header className="destination-hero px-4 sm:px-8 py-8">
-        <div className="destination-hero-content max-w-5xl mx-auto">
-          <h1 className="destination-title text-3xl sm:text-4xl font-bold text-center mb-6" style={{ marginBottom: '1rem' }} // equals mb-10 (40px)
-          >
-            Destinations
-          </h1>
+<header className="destination-hero px-4 sm:px-8 py-8">
+  <div className="destination-hero-content max-w-5xl mx-auto">
+    <h1 className="destination-title text-3xl sm:text-4xl font-bold text-center mb-6"   style={{ marginBottom: '1rem' }} // equals mb-10 (40px)
+>
+      Destinations
+    </h1>
 
-          {/* Horizontal Flex Row for Search + Dropdown */}
-          <div className="w-full flex flex-col sm:flex-row sm:items-center sm:justify-center gap-3">
+    {/* Horizontal Flex Row for Search + Dropdown */}
+    <div className="w-full flex flex-col sm:flex-row sm:items-center sm:justify-center gap-3">
+      
+      {/* Search Input */}
+      <input
+        type="text"
+        placeholder="Search destination..."
+        value={searchQuery}
+        onChange={(e) => setSearchQuery(e.target.value)}
+        className="w-full sm:w-[45%] px-4 py-2.5 border border-gray-300 rounded-md text-base text-black focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none"
+      />
 
-            {/* Search Input */}
-            <input
-              type="text"
-              placeholder="Search destination..."
-              value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
-              className="w-full sm:w-[45%] px-4 py-2.5 border border-gray-300 rounded-md text-base text-black focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none"
-            />
+      {/* Search Button */}
+      <button
+        onClick={() => setCurrentPage(1)}
+        className="w-full sm:w-auto px-4 py-2.5 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition text-sm font-medium whitespace-nowrap"
+      >
+        Search
+      </button>
 
-            {/* Search Button */}
-            <button
-              onClick={() => setCurrentPage(1)}
-              className="w-full sm:w-auto px-4 py-2.5 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition text-sm font-medium whitespace-nowrap"
-            >
-              Search
-            </button>
-
-            {/* Dropdown */}
-            <select
-              value={filteredType}
-              onChange={handleTypeChange}
-              className="w-full sm:w-[25%] px-4 py-2.5 border border-gray-300 rounded-md text-base text-black focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none bg-white"
-            >
-              {tripTypes.map(type => (
-                <option key={type} value={type}>{type}</option>
-              ))}
-            </select>
-          </div>
-        </div>
-      </header>
+      {/* Dropdown */}
+      <select
+        value={filteredType}
+        onChange={handleTypeChange}
+        className="w-full sm:w-[25%] px-4 py-2.5 border border-gray-300 rounded-md text-base text-black focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none bg-white"
+      >
+        {tripTypes.map(type => (
+          <option key={type} value={type}>{type}</option>
+        ))}
+      </select>
+    </div>
+  </div>
+</header>
 
       <div className="cards-container px-4 sm:px-8 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
         {paginatedDestinations.length > 0 ? (
@@ -420,17 +401,7 @@ export default function Destination({ initialDestinations, initialFilteredType }
               location={dest.state}
               tripType={dest.type}
               rating={parseFloat(dest.rating || 0).toFixed(1)}
-              onClick={() => {
-                // Google Analytics event tracking
-                gtagEvent({
-                  action: 'destination_card_clicked',
-                  params: {
-                    destination_id: dest.id,
-                    destination_name: dest.name,
-                  },
-                });
-                router.push(`/destination/${dest.id}`)
-              }}
+              onClick={() => router.push(`/destination/${dest.id}`)}
             />
           ))
         ) : (

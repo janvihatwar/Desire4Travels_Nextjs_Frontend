@@ -212,7 +212,6 @@ import React, { useRef } from "react";
 import PackageCard from "../components/PackageCard";
 import Head from "next/head";
 import { useRouter } from "next/router";
-import { event as gtagEvent } from '../lib/gtag'; // Google Analytics tracking
 
 export default function Package({ packages, totalPages, currentPage }) {
   const router = useRouter();
@@ -220,19 +219,12 @@ export default function Package({ packages, totalPages, currentPage }) {
 
   const goToPage = (page) => {
     router.push(`/package?page=${page}`).then(() => {
-      // Trigger GA Event
-      gtagEvent({
-        action: 'select_package_page',
-        category: 'Pagination',
-        label: `Page ${page}`,
-        value: page
-      });
       // Use setTimeout to ensure DOM is fully updated
       setTimeout(() => {
         if (heroRef.current) {
-          heroRef.current.scrollIntoView({
-            behavior: "smooth",
-            block: "start"
+          heroRef.current.scrollIntoView({ 
+            behavior: "smooth", 
+            block: "start" 
           });
         }
       }, 0);
@@ -260,8 +252,8 @@ export default function Package({ packages, totalPages, currentPage }) {
         <meta property="og:type" content="website" />
       </Head>
 
-      <header
-        ref={heroRef}
+      <header 
+        ref={heroRef} 
         className="package-hero py-12 bg-gradient-to-r from-purple-700 to-indigo-600 text-white text-center"
       >
         <div className="package-hero-content">
@@ -280,14 +272,6 @@ export default function Package({ packages, totalPages, currentPage }) {
               destinations={pkg.destinations}
               price={pkg.price}
               duration={pkg.duration}
-              onClick={() => {
-                gtagEvent({
-                  action: 'click_package_card',
-                  category: 'Package',
-                  label: pkg.packageName,
-                  value: pkg.id,
-                }); // Google Analytics event tracking
-              }}
             />
           ))
         ) : (
@@ -311,10 +295,11 @@ export default function Package({ packages, totalPages, currentPage }) {
             <button
               key={pageNum}
               onClick={() => goToPage(pageNum)}
-              className={`px-3 py-1 rounded ${pageNum === currentPage
-                ? "bg-blue-600 text-white"
-                : "bg-gray-100 hover:bg-gray-200"
-                }`}
+              className={`px-3 py-1 rounded ${
+                pageNum === currentPage
+                  ? "bg-blue-600 text-white"
+                  : "bg-gray-100 hover:bg-gray-200"
+              }`}
             >
               {pageNum}
             </button>
