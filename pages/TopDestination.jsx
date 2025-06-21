@@ -4,6 +4,8 @@ import { useRouter } from 'next/router';
 import styles from './TopDestination.module.css';
 import DestinationCard from '../components/DestinationCard';
 
+import { event as gtagEvent } from '../lib/gtag'; // Google Analytics tracking
+
 const TopDestination = () => {
   const [destinations, setDestinations] = useState([]);
   const router = useRouter();
@@ -15,7 +17,16 @@ const TopDestination = () => {
         return res.json();
       })
       .then(data => {
-        setDestinations(data.destinations || []);
+        const loaded = data.destinations || [];
+        setDestinations(loaded);
+
+        //Fire GA Event for loaded destinations
+        gtagEvent({
+          action: 'top_destinations_loaded',
+          params: {
+            count: loaded.length,
+          },
+        });
       })
       .catch(err => {
         console.error('Failed to fetch destinations:', err);
@@ -45,7 +56,15 @@ const TopDestination = () => {
       </div>
       <div className={styles['topdestination-link']}>
         <Link href="/destination" legacyBehavior>
-          <a>See all →</a>
+          <a
+            onClick={() =>
+              gtagEvent({
+                action: 'see_all_destinations_clicked',
+              })
+            }
+          >
+            See all →
+          </a>
         </Link>
       </div>
     </div>

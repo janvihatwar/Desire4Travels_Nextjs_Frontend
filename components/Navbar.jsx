@@ -206,6 +206,9 @@ import React, { useState } from 'react';
 import { useRouter } from 'next/router';
 import Link from 'next/link';
 
+//IMPORTING GTAG EVENT TRACKER
+import { event as gtagEvent } from '../lib/gtag';
+
 const Navbar = () => {
   const [menuOpen, setMenuOpen] = useState(false);
   const router = useRouter();
@@ -214,6 +217,16 @@ const Navbar = () => {
 
   const handleTripTypeChange = (type) => {
     if (type) {
+      //TRIGGERED GOOGLE ANALYTICS CUSTOM EVENT
+      if (typeof window !== 'undefined') {
+        gtagEvent({
+          action: 'trip_type_selected',
+          params: {
+            trip_type: type,
+          },
+        });
+      }
+
       router.push(`/triptype/${type}`);
       setMenuOpen(false);
     }
