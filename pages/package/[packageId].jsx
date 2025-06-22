@@ -156,50 +156,57 @@ const handleSubmit = async (e) => {
   );
 
   return (
-    <div className="package-details-container">
-      <div className="mobile-slider mobile-only">
-        <Swiper
-          modules={[Autoplay]}
-          spaceBetween={16}
-          slidesPerView={1}
-          loop={true}
-          autoplay={{ delay: 3000, disableOnInteraction: false }}
-        >
-          <SwiperSlide>
-        <div className="package-main-image-wrapper">
+<div className="package-details-container">
+  <div className="mobile-slider mobile-only">
+    <Swiper
+      modules={[Autoplay]}
+      spaceBetween={16}
+      slidesPerView={1}
+      loop={true}
+      autoplay={{ delay: 3000, disableOnInteraction: false }}
+    >
+      {/* Main image with overlay */}
+      <SwiperSlide>
+        <div className="relative package-main-image-wrapper">
           <img
             src={photo}
             alt={packageName}
             className="package-details-main-image"
           />
-
-          <div className="premium-package-header-bottom-overlay">
-            <h1 className="premium-package-title">{packageName}</h1>
-            <h2 className="premium-package-duration">🕒 {duration}</h2>
-            <h3 className="premium-package-price">💰 ₹{price}</h3>
+          <div className="absolute bottom-0 left-0 w-full bg-black bg-opacity-60 text-white text-sm text-center p-2">
+            <h1 className="font-semibold">{packageName}</h1>
+            <h2>🕒 {duration}</h2>
+            <h3>💰 ₹{price}</h3>
           </div>
         </div>
-          </SwiperSlide>
-          {[
-            "/assets/Hotel.png",
-            "/assets/Taxi.png",
-            "/assets/Passport.png",
-            "/assets/Flight.png",
-          ].map((imgSrc, index) => (
-            <SwiperSlide key={index}>
-              <div className="slider-image-container">
-                <Image
-                  src={imgSrc}
-                  alt={`Slide ${index + 1}`}
-                  width={300}
-                  height={200}
-                  style={{ objectFit: "cover" }}
-                />
-              </div>
-            </SwiperSlide>
-          ))}
-        </Swiper>
-      </div>
+      </SwiperSlide>
+
+      {/* Icons with overlay */}
+      {[
+        "/assets/Hotel.png",
+        "/assets/Taxi.png",
+        "/assets/Passport.png",
+        "/assets/Flight.png",
+      ].map((imgSrc, index) => (
+        <SwiperSlide key={index}>
+          <div className="relative slider-image-container">
+            <Image
+              src={imgSrc}
+              alt={`Slide ${index + 1}`}
+              width={300}
+              height={200}
+              style={{ objectFit: "cover" }}
+            />
+            <div className="absolute bottom-0 left-0 w-full bg-black bg-opacity-60 text-white text-sm text-center p-2">
+              <h1 className="font-semibold">{packageName}</h1>
+              <h2>🕒 {duration}</h2>
+              <h3>💰 ₹{price}</h3>
+            </div>
+          </div>
+        </SwiperSlide>
+      ))}
+    </Swiper>
+  </div>
 
       <div className="package-details-header-flex">
         <div className="desktop-only package-main-image-wrapper">

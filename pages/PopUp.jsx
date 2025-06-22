@@ -207,6 +207,7 @@ import React, { useState, useEffect } from 'react';
 import Image from 'next/image';
 import Popup from '../public/assets/Popup.jpg';
 import axios from 'axios';
+import Popup2 from '../public/assets/Popup.png'; // Ensure this path is correct
 
 export default function PopUp() {
   const [isVisible, setIsVisible] = useState(false);
@@ -266,10 +267,11 @@ export default function PopUp() {
             </p>
             <div className="relative w-full h-48 md:h-64">
               <Image
-                src={Popup}
+                src={Popup2}
                 alt="Travel"
                 fill
-                className="rounded-lg object-cover"
+                // className="rounded-lg object-cover"
+                className="rounded-lg object-contain"
               />
             </div>
           </div>

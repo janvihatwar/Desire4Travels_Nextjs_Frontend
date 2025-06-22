@@ -108,43 +108,44 @@ export default function Activity() {
       </div>
 
       {/* Modal */}
-      {showModal && (
-        <div className="fixed inset-0 bg-black bg-opacity-40 flex justify-center items-center z-50">
-          <div className="bg-white rounded-xl p-6 max-w-md w-full shadow-xl">
-            {!submitted ? (
-              <>
-                <h2 className="text-xl font-semibold mb-4">Request a Callback</h2>
-                <input
-                  type="tel"
-                  value={number}
-                  onChange={(e) => setNumber(e.target.value)}
-                  placeholder="Enter your mobile number"
-                  className="w-full border border-gray-300 rounded-md p-2 mb-4"
-                />
-                <div className="flex justify-end gap-4">
-                  <button
-                    onClick={() => setShowModal(false)}
-                    className="px-4 py-2 text-gray-600 hover:text-gray-900"
-                  >
-                    Cancel
-                  </button>
-                  <button
-                    onClick={handleSubmit}
-                    className="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700"
-                    disabled={loading}
-                  >
-                    {loading ? 'Submitting...' : 'Submit'}
-                  </button>
-                </div>
-              </>
-            ) : (
-              <div className="text-center text-green-600 font-semibold text-lg">
-                Callback requested successfully!
-              </div>
-            )}
+{showModal && (
+  <div className="fixed inset-0 bg-black bg-opacity-40 flex justify-center items-center z-50">
+    <div className="bg-white rounded-xl p-6 max-w-md w-full shadow-xl text-center">
+      {!submitted ? (
+        <>
+          <h2 className="text-2xl font-semibold mb-4">Request a Callback</h2>
+          <input
+            type="tel"
+            value={number}
+            onChange={(e) => setNumber(e.target.value)}
+            placeholder="Enter your mobile number"
+            className="w-full border border-gray-300 rounded-md p-2 mb-4 text-center"
+          />
+          <div className="flex justify-between w-full">
+            <button
+              onClick={() => setShowModal(false)}
+              className="px-4 py-2 text-gray-600 hover:text-gray-900 border border-gray-300 rounded"
+            >
+              Cancel
+            </button>
+            <button
+              onClick={handleSubmit}
+              className="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700"
+              disabled={loading}
+            >
+              {loading ? 'Submitting...' : 'Submit'}
+            </button>
           </div>
+        </>
+      ) : (
+        <div className="text-green-600 font-semibold text-lg">
+          Callback requested successfully!
         </div>
       )}
+    </div>
+  </div>
+)}
+
     </div>
   );
 }
