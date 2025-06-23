@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import Head from "next/head";  // <-- import Head
+import Script from "next/script";
 
 import Navbar from "../components/Navbar.jsx";
 import Footer from "../components/Footer.jsx";
@@ -40,6 +41,19 @@ function MyApp({ Component, pageProps }) {
     setIsPopupVisible(true);
   }, [router.pathname]);
 
+  useEffect(() => {
+    const handleRouteChange = (url) => {
+      window.gtag && window.gtag('config', 'G-ZNNNDLWS6B', {
+        page_path: url,
+      });
+    };// This will track page views with Google Analytics
+
+    router.events.on('routeChangeComplete', handleRouteChange);
+    return () => {
+      router.events.off('routeChangeComplete', handleRouteChange);
+    };
+  }, [router.events]);
+
   const blurClass = isPopupVisible ? "blurred" : "";
 
   return (
@@ -49,6 +63,15 @@ function MyApp({ Component, pageProps }) {
         <title>Desire4travels | Best Tours and Holiday Packages | Plan your trip with us</title>
         <meta name="description" content="Plan your perfect getaway with travel guides, tips, and stories from around the globe. Journey begins at Desire4Travels." />
         <meta name="keywords" content="Desire4travels, destination tips, adventure travel, solo travel, family travel, vacation planning, world travel, India travel, Travel packages, Trekking packages, travel agency, personalized travel planning, tailor-made itineraries, 24/7 travel support, D4t" />
+        <Script async src="https://www.googletagmanager.com/gtag/js?id=G-ZNNNDLWS6B"></Script>
+        <Script id="google-analytics">
+          {`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', 'G-ZNNNDLWS6B'); 
+          `}
+        </Script>
       </Head>
 
       <div className="app-container">
