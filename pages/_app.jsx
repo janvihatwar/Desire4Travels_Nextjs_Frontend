@@ -58,20 +58,21 @@ function MyApp({ Component, pageProps }) {
 
   return (
     <>
-      <Head>
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <title>Desire4travels | Best Tours and Holiday Packages | Plan your trip with us</title>
-        <meta name="description" content="Plan your perfect getaway with travel guides, tips, and stories from around the globe. Journey begins at Desire4Travels." />
-        <meta name="keywords" content="Desire4travels, destination tips, adventure travel, solo travel, family travel, vacation planning, world travel, India travel, Travel packages, Trekking packages, travel agency, personalized travel planning, tailor-made itineraries, 24/7 travel support, D4t" />
-        <Script async src="https://www.googletagmanager.com/gtag/js?id=G-ZNNNDLWS6B"></Script>
-        <Script id="google-analytics">
-          {`
+      <Script async src="https://www.googletagmanager.com/gtag/js?id=G-ZNNNDLWS6B"></Script>
+      <Script id="google-analytics">
+        {`
             window.dataLayer = window.dataLayer || [];
             function gtag(){dataLayer.push(arguments);}
             gtag('js', new Date());
             gtag('config', 'G-ZNNNDLWS6B'); 
           `}
-        </Script>
+      </Script>
+      <Head>
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <title>Desire4travels | Best Tours and Holiday Packages | Plan your trip with us</title>
+        <meta name="description" content="Plan your perfect getaway with travel guides, tips, and stories from around the globe. Journey begins at Desire4Travels." />
+        <meta name="keywords" content="Desire4travels, destination tips, adventure travel, solo travel, family travel, vacation planning, world travel, India travel, Travel packages, Trekking packages, travel agency, personalized travel planning, tailor-made itineraries, 24/7 travel support, D4t" />
+
       </Head>
 
       <div className="app-container">
