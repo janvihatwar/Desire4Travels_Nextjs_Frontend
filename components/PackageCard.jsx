@@ -271,7 +271,7 @@ const PackageCard = ({ id, imgSrc, packageName, destinations, price, duration })
                 textAlign: 'center',
                 marginBottom: '1rem'
               }}>
-                For: {packageName}
+                {packageName}
               </p>
 
               <input
