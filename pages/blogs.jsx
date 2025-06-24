@@ -196,9 +196,11 @@ export default function BlogList() {
               <option value="all">All Categories</option>
               <option value="Mountain">Mountain</option>
               <option value="Beach">Beach</option>
-              <option value="Heritage">Heritage</option>
+              <option value="Heritage">Religious</option>
               <option value="Treks">Treks</option>
               <option value="Offbeat">Offbeat</option>
+              <option value="Desert">Desert</option>
+              <option value="Cityscape">Cityscape</option>
               <option value="Other">Other</option>
             </select>
             <div className="absolute right-4 top-1/2 transform -translate-y-1/2 pointer-events-none text-gray-500">▼</div>

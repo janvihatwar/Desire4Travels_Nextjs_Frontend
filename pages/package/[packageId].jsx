@@ -40,15 +40,15 @@ const PackageDetails = ({ packageData, error }) => {
     typeof inclusions === "string"
       ? inclusions.split(";").map((i) => i.trim()).filter(Boolean)
       : Array.isArray(inclusions)
-      ? inclusions
-      : [];
+        ? inclusions
+        : [];
 
   const itineraryArray =
     typeof itinerary === "string"
       ? itinerary.split(";").map((i) => i.trim()).filter(Boolean)
       : Array.isArray(itinerary)
-      ? itinerary
-      : [];
+        ? itinerary
+        : [];
 
   const dayHeaderRegex = /^day\s*\d+\s*:/i;
   const days = [];
@@ -104,31 +104,31 @@ const PackageDetails = ({ packageData, error }) => {
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
-const handleSubmit = async (e) => {
-  e.preventDefault();
-  if (!packageData) {
-    alert("Package data not loaded. Please try again.");
-    return;
-  }
-  try {
-    const payload = {
-      ...formData,
-      packageName: packageData.packageName,
-    };
-    await axios.post(
-      "https://desire4travels-1.onrender.com/api/custom-quotes",
-      payload
-    );
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    if (!packageData) {
+      alert("Package data not loaded. Please try again.");
+      return;
+    }
+    try {
+      const payload = {
+        ...formData,
+        packageName: packageData.packageName,
+      };
+      await axios.post(
+        "https://desire4travels-1.onrender.com/api/custom-quotes",
+        payload
+      );
 
-    setShowQuoteForm(false);
-    setFormData({ name: "", mobile: "", travelers: "", date: "" });
+      setShowQuoteForm(false);
+      setFormData({ name: "", mobile: "", travelers: "", date: "" });
 
-    setShowSuccessPopup(true);
-  } catch (err) {
-    console.error("Submission failed:", err);
-    alert("Failed to submit request.");
-  }
-};
+      setShowSuccessPopup(true);
+    } catch (err) {
+      console.error("Submission failed:", err);
+      alert("Failed to submit request.");
+    }
+  };
 
 
   const DestinationsJSX = (
@@ -156,57 +156,57 @@ const handleSubmit = async (e) => {
   );
 
   return (
-<div className="package-details-container">
-  <div className="mobile-slider mobile-only">
-    <Swiper
-      modules={[Autoplay]}
-      spaceBetween={16}
-      slidesPerView={1}
-      loop={true}
-      autoplay={{ delay: 3000, disableOnInteraction: false }}
-    >
-      {/* Main image with overlay */}
-      <SwiperSlide>
-        <div className="relative package-main-image-wrapper">
-          <img
-            src={photo}
-            alt={packageName}
-            className="package-details-main-image"
-          />
-          <div className="absolute bottom-0 left-0 w-full bg-black bg-opacity-60 text-white text-sm text-center p-2">
+    <div className="package-details-container">
+      <div className="mobile-slider mobile-only">
+        <div className="relative package-main-image-wrapper w-full h-[200px] overflow-hidden">
+          {/* Swiper for images only */}
+          <Swiper
+            modules={[Autoplay]}
+            spaceBetween={16}
+            slidesPerView={1}
+            loop={true}
+            autoplay={{ delay: 3000, disableOnInteraction: false }}
+          >
+            {/* Main image */}
+            <SwiperSlide>
+              <div className="relative w-full h-[200px]">
+                <Image
+                  src={photo}
+                  alt={packageName}
+                  layout="fill"
+                  objectFit="cover"
+                />
+              </div>
+            </SwiperSlide>
+
+            {/* Icons */}
+            {[
+              "/assets/Hotel.png",
+              "/assets/Taxi.png",
+              "/assets/Passport.png",
+              "/assets/Flight.png",
+            ].map((imgSrc, index) => (
+              <SwiperSlide key={index}>
+                <div className="relative w-full h-[200px]">
+                  <Image
+                    src={imgSrc}
+                    alt={`Slide ${index + 1}`}
+                    layout="fill"
+                    objectFit="cover"
+                  />
+                </div>
+              </SwiperSlide>
+            ))}
+          </Swiper>
+
+          {/* Static package details overlay */}
+          <div className="absolute bottom-0 left-0 w-full bg-black bg-opacity-60 text-white text-sm text-center p-2 z-10">
             <h1 className="font-semibold">{packageName}</h1>
             <h2>🕒 {duration}</h2>
             <h3>💰 ₹{price}</h3>
           </div>
         </div>
-      </SwiperSlide>
-
-      {/* Icons with overlay */}
-      {[
-        "/assets/Hotel.png",
-        "/assets/Taxi.png",
-        "/assets/Passport.png",
-        "/assets/Flight.png",
-      ].map((imgSrc, index) => (
-        <SwiperSlide key={index}>
-          <div className="relative slider-image-container">
-            <Image
-              src={imgSrc}
-              alt={`Slide ${index + 1}`}
-              width={300}
-              height={200}
-              style={{ objectFit: "cover" }}
-            />
-            <div className="absolute bottom-0 left-0 w-full bg-black bg-opacity-60 text-white text-sm text-center p-2">
-              <h1 className="font-semibold">{packageName}</h1>
-              <h2>🕒 {duration}</h2>
-              <h3>💰 ₹{price}</h3>
-            </div>
-          </div>
-        </SwiperSlide>
-      ))}
-    </Swiper>
-  </div>
+      </div>
 
       <div className="package-details-header-flex">
         <div className="desktop-only package-main-image-wrapper">
@@ -263,9 +263,8 @@ const handleSubmit = async (e) => {
           <section className="package-details-section">
             <h1 className="package-title">About the Package</h1>
             <div
-              className={`package-description ${
-                expandedCards["about"] ? "expanded" : "collapsed"
-              }`}
+              className={`package-description ${expandedCards["about"] ? "expanded" : "collapsed"
+                }`}
               dangerouslySetInnerHTML={{ __html: description || "" }}
             />
             {description && description.split(" ").length > 50 && (
@@ -359,7 +358,7 @@ const handleSubmit = async (e) => {
                 required
               />
               <input
-                
+
                 type="text"
                 name="travelers"
                 placeholder="Number of Travelers"
@@ -389,7 +388,7 @@ const handleSubmit = async (e) => {
         </div>
       )}
 
-    {showSuccessPopup && (
+      {showSuccessPopup && (
         <SuccessPopup
           message="Your request has been submitted successfully!"
           onClose={() => setShowSuccessPopup(false)}

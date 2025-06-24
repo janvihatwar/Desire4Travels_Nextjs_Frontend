@@ -8,6 +8,8 @@ import Religious from '../public/assets/Religious.webp';
 import Treks from '../public/assets/Treks.webp';
 import Offbeat from '../public/assets/Offbeat.webp';
 import Other from '../public/assets/Other.webp';
+import Desert from '../public/assets/Desert.jpg';
+import Cityscape from '../public/assets/Cityscape.jpg';
 
 const types = [
   { name: 'Mountain', image: Mountain },
@@ -15,6 +17,8 @@ const types = [
   { name: 'Religious', image: Religious },
   { name: 'Treks', image: Treks },
   { name: 'Offbeat', image: Offbeat },
+  { name: 'Desert', image: Desert },
+  { name: 'Cityscape ', image: Cityscape },
   { name: 'Other', image: Other }
 ];
 

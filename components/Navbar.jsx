@@ -257,7 +257,7 @@ const Navbar = () => {
             <div className="dropdown-container">
               <button className="dropdown-toggle">TRIP TYPE</button>
               <ul className="dropdown-menu">
-                {["mountain", "beach", "religious", "treks", "offbeat", "other"].map((type) => (
+                {["mountain", "beach", "religious", "treks", "offbeat", "desert", "cityscape", "other"].map((type) => (
                   <li key={type}>
                     <button onClick={() => handleTripTypeChange(type)}>
                       {type.toUpperCase()}
