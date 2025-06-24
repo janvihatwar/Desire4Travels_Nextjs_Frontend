@@ -142,7 +142,7 @@ body {
 .enquiry-form select,
 .enquiry-form textarea {
   padding: 14px 18px !important;
-  font-size: 16px !important;
+  font-size: 20px !important;
   border: 2px solid rgba(255, 255, 255, 0.2) !important;
   border-radius: 12px !important;
   background: rgba(255, 255, 255, 0.08) !important;
@@ -260,6 +260,18 @@ body {
 
   .enquiry-form h2 {
     font-size: 20px !important;
+  }
+
+  /* LARGER FONT SIZES FOR MOBILE INPUTS */
+  .enquiry-form input,
+  .enquiry-form select,
+  .enquiry-form textarea {
+    font-size: 18px !important;
+  }
+
+  .enquiry-form input::placeholder,
+  .enquiry-form textarea::placeholder {
+    font-size: 18px !important;
   }
 
   .enquiry-btn {

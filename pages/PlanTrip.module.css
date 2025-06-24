@@ -51,7 +51,7 @@
 }
 
 .trip-boxes input::placeholder {
-  color: #333;
+  color: #6b7280;
 }
 
 .trip-boxes select:invalid {
@@ -107,15 +107,12 @@ input.flatpickr-input::placeholder {
     padding: 1rem;
     margin-bottom: 10px !important;
   }
+
+  .trip-boxes input {
+    font-size: 18px !important;
+  }
+
+  .trip-boxes input::placeholder {
+    font-size: 18px !important;
+  }
 }
-
-
-
-
-
-
-
-
-
-
-

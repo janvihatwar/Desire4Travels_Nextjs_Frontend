@@ -13,7 +13,7 @@ const PlanTrip = () => {
     mobileNumber: ''
   });
 
-const [showSuccessPopup, setShowSuccessPopup] = useState(false);
+  const [showSuccessPopup, setShowSuccessPopup] = useState(false);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -103,11 +103,11 @@ const [showSuccessPopup, setShowSuccessPopup] = useState(false);
         </form>
       </div>
       {showSuccessPopup && (
-          <SuccessPopup
-            message="Thanks! Trip planned!"
-            onClose={() => setShowSuccessPopup(false)}
-          />
-        )}
+        <SuccessPopup
+          message="Thanks! Trip planned!"
+          onClose={() => setShowSuccessPopup(false)}
+        />
+      )}
     </div>
   );
 };

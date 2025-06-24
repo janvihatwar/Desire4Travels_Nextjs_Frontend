@@ -459,6 +459,16 @@ const DestinationCard = ({
   const [mobileNumber, setMobileNumber] = useState('');
   const [showSuccessTick, setShowSuccessTick] = useState(false);
   const router = useRouter();
+  const [isMobile, setIsMobile] = useState(false);
+
+  React.useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+    handleResize();
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
 
   const handleCardClick = () => {
     if (!showCallbackForm) {
@@ -498,6 +508,47 @@ const DestinationCard = ({
     }
   };
 
+
+  const CallbackFormPopup = () => (
+    <div
+      className={`bg-black/60 flex items-center justify-center z-50 p-4
+        ${isMobile ? 'fixed top-0 left-0 w-full h-full' : 'absolute inset-0'}`}
+      onClick={(e) => e.stopPropagation()}
+    >
+      <form
+        className="bg-white rounded-2xl p-5 w-full max-w-xs shadow-2xl space-y-3"
+        onSubmit={handleSubmit}
+      >
+        <h3 className="text-lg font-bold text-gray-800 text-center">Request a Callback</h3>
+
+        <input
+          type="tel"
+          placeholder="Mobile Number"
+          value={mobileNumber}
+          onChange={(e) => setMobileNumber(e.target.value)}
+          required
+          className="w-full px-4 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+        />
+
+        <div className="flex flex-col sm:flex-row gap-2">
+          <button
+            type="submit"
+            className="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 w-full"
+          >
+            Submit
+          </button>
+          <button
+            type="button"
+            onClick={() => setShowCallbackForm(false)}
+            className="bg-gray-400 text-white px-4 py-2 rounded-lg hover:bg-gray-500 w-full"
+          >
+            Cancel
+          </button>
+        </div>
+      </form>
+    </div>
+  );
+
   return (
     <>
       {showSuccessTick && (
@@ -524,10 +575,10 @@ const DestinationCard = ({
           </h2>
 
           {showLocation && (
-              <div className="flex items-center text-sm text-gray-600 justify-center w-full">
-                <FaMapMarkerAlt className="text-red-500 flex-shrink-0" />
-                <span className="ml-1 truncate text-center">{location}</span>
-              </div>
+            <div className="flex items-center text-sm text-gray-600 justify-center w-full">
+              <FaMapMarkerAlt className="text-red-500 flex-shrink-0" />
+              <span className="ml-1 truncate text-center">{location}</span>
+            </div>
           )}
 
           {tripType && (
@@ -550,46 +601,9 @@ const DestinationCard = ({
             </>
           )}
         </div>
-
-        {showExtras && showCallbackForm && (
-          <div
-            className="absolute inset-0 bg-black/60 flex items-center justify-center z-50 p-4"
-            onClick={(e) => e.stopPropagation()}
-          >
-            <form
-              className="bg-white rounded-2xl p-5 w-full max-w-xs shadow-2xl space-y-3"
-              onSubmit={handleSubmit}
-            >
-              <h3 className="text-lg font-bold text-gray-800 text-center">Request a Callback</h3>
-
-              <input
-                type="tel"
-                placeholder="Mobile Number"
-                value={mobileNumber}
-                onChange={(e) => setMobileNumber(e.target.value)}
-                required
-                className="w-full px-4 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
-              />
-
-              <div className="flex flex-col sm:flex-row gap-2">
-                <button
-                  type="submit"
-                  className="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 w-full"
-                >
-                  Submit
-                </button>
-                <button
-                  type="button"
-                  onClick={() => setShowCallbackForm(false)}
-                  className="bg-gray-400 text-white px-4 py-2 rounded-lg hover:bg-gray-500 w-full"
-                >
-                  Cancel
-                </button>
-              </div>
-            </form>
-          </div>
-        )}
       </div>
+      {/* Mobile fullscreen popup - rendered outside card */}
+      {showExtras && showCallbackForm && <CallbackFormPopup />}
     </>
   );
 };

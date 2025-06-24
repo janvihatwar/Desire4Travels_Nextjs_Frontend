@@ -126,6 +126,16 @@ const PackageCard = ({ id, imgSrc, packageName, destinations, price, duration })
   const [showCallbackForm, setShowCallbackForm] = useState(false);
   const [mobileNumber, setMobileNumber] = useState("");
   const [showSuccessPopup, setShowSuccessPopup] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
+
+  React.useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+    handleResize();
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
 
   const formattedPrice = isNaN(Number(price.toString().replace(/,/g, '')))
     ? "N/A"
@@ -173,8 +183,8 @@ const PackageCard = ({ id, imgSrc, packageName, destinations, price, duration })
   const handleCardClick = () => {
     if (!showCallbackForm) {
       router.push(`/package/${id}`);
-//       const slug = packageName.toLowerCase().replace(/\s+/g, '-').replace(/[^\w\-]+/g, '');
-// router.push(`/package/${slug}`);
+      //       const slug = packageName.toLowerCase().replace(/\s+/g, '-').replace(/[^\w\-]+/g, '');
+      // router.push(`/package/${slug}`);
 
     }
   };
@@ -209,8 +219,8 @@ const PackageCard = ({ id, imgSrc, packageName, destinations, price, duration })
             </div>
             <p className="price">{formattedPrice}</p>
             <p className="duration">{duration}</p>
-            <button 
-              className="request-btn" 
+            <button
+              className="request-btn"
               onClick={handleCallbackRequest}
             >
               Request Call Back
@@ -219,9 +229,9 @@ const PackageCard = ({ id, imgSrc, packageName, destinations, price, duration })
         </div>
 
         {showCallbackForm && (
-          <div 
+          <div
             style={{
-              position: 'absolute',
+              position: isMobile ? 'fixed' : 'absolute',
               top: 0,
               left: 0,
               right: 0,

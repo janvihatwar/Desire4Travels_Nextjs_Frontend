@@ -14,7 +14,7 @@ const Hero = ({ heroData, setHeroCount, heroCount, planTripRef }) => {
     travelDate: ''
   });
 
- const [showSuccessPopup, setShowSuccessPopup] = useState(false); 
+  const [showSuccessPopup, setShowSuccessPopup] = useState(false);
 
   useEffect(() => {
     let touchStartX = 0;
@@ -81,27 +81,27 @@ const Hero = ({ heroData, setHeroCount, heroCount, planTripRef }) => {
     }
   };
 
-const handleSubmit = async (e) => {
-  e.preventDefault();
+  const handleSubmit = async (e) => {
+    e.preventDefault();
 
-  try {
-    const res = await fetch('https://desire4travels-1.onrender.com/enquiry', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(formData)
-    });
+    try {
+      const res = await fetch('https://desire4travels-1.onrender.com/enquiry', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(formData)
+      });
 
-    const data = await res.json();
-    if (res.ok) {
-      setShowSuccessPopup(true);
-      setFormData({ name: '', phone: '', destination: '', travelers: '', travelDate: '' });
-    } else {
-      alert(`Error: ${data.error}`);
+      const data = await res.json();
+      if (res.ok) {
+        setShowSuccessPopup(true);
+        setFormData({ name: '', phone: '', destination: '', travelers: '', travelDate: '' });
+      } else {
+        alert(`Error: ${data.error}`);
+      }
+    } catch (err) {
+      alert('Failed to submit form');
     }
-  } catch (err) {
-    alert('Failed to submit form');
-  }
-};
+  };
 
 
   return (
@@ -164,10 +164,10 @@ const handleSubmit = async (e) => {
         </div>
       </div>
       {showSuccessPopup && (
-      <SuccessPopup
-        message="Thanks! We've connected your request with a travel expert."
-        onClose={() => setShowSuccessPopup(false)}
-       />
+        <SuccessPopup
+          message="Thanks! We've connected your request with a travel expert."
+          onClose={() => setShowSuccessPopup(false)}
+        />
       )}
     </div>
   );
