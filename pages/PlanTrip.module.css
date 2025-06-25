@@ -108,9 +108,15 @@ input.flatpickr-input::placeholder {
     margin-bottom: 10px !important;
   }
 
-  .trip-boxes input {
+  .trip-boxes input[type="text"] {
     font-size: 18px !important;
   }
+
+  
+  .trip-boxes input[type="tel"] {
+    font-size: 18px !important;
+  }
+
 
   .trip-boxes input::placeholder {
     font-size: 18px !important;

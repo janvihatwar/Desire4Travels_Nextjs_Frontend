@@ -182,9 +182,9 @@ const PackageCard = ({ id, imgSrc, packageName, destinations, price, duration })
 
   const handleCardClick = () => {
     if (!showCallbackForm) {
-      router.push(`/package/${id}`);
-      //       const slug = packageName.toLowerCase().replace(/\s+/g, '-').replace(/[^\w\-]+/g, '');
-      // router.push(`/package/${slug}`);
+      // router.push(`/package/${id}`);
+            const slug = packageName.toLowerCase().replace(/\s+/g, '-').replace(/[^\w\-]+/g, '');
+      router.push(`/package/${slug}`);
 
     }
   };

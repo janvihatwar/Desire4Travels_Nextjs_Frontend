@@ -246,7 +246,7 @@ import { useRouter } from 'next/router';
 import DestinationCard from '../components/DestinationCard';
 
 const ITEMS_PER_PAGE = 12;
-const tripTypes = ['All', 'Mountain', 'Beach', 'Religious', 'Treks', 'Offbeat', 'Other'];
+const tripTypes = ['All', 'Mountain', 'Beach', 'Religious', 'Treks', 'Offbeat', 'Desert', 'Cityscape', 'Other'];
 
 export default function Destination({ initialDestinations, initialFilteredType }) {
   const router = useRouter();
