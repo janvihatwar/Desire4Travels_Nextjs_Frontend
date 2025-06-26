@@ -1,0 +1,164 @@
+.trip-container {
+  padding: 24px;
+  max-width: 1200px;
+  margin: auto;
+}
+
+.trip-title {
+  font-size: 2rem;
+  font-weight: bold;
+  text-align: center;
+  margin-bottom: 24px;
+  color: #1a202c;
+}
+
+/* Grid layout that adjusts based on screen size */
+.trip-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 20px;
+  justify-content: center;
+}
+
+.trip-card {
+  width: 100%;
+  max-width: 300px;
+  min-width: 200px;
+  border-radius: 15px;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  background: #f9f9f9;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  display: flex;
+  flex-direction: column;
+  cursor: pointer;
+  margin: 0 auto;
+}
+
+.trip-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+}
+
+.trip-image {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+  padding: 10px;
+  border-radius: 25px;
+}
+
+.trip-content {
+  padding: 15px;
+  text-align: center;
+}
+
+.trip-name {
+  font-size: 16px;
+  font-weight: bold;
+  margin-bottom: 8px;
+  color: #333;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.trip-location {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  margin-bottom: 8px;
+  color: #555;
+  font-size: 14px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.location-icon {
+  color: #f44336;
+  font-size: 14px;
+}
+
+.trip-price,
+.trip-duration {
+  font-size: 14px;
+  margin-bottom: 8px;
+  color: #555;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.trip-date {
+  text-align: center;
+  font-size: 14px;
+  color: black;
+  padding: 8px;
+}
+
+.no-trips-message {
+  text-align: center;
+  font-size: 1rem;
+  color: #999;
+  margin-top: 2rem;
+}
+
+/* Responsive adjustments */
+
+@media (max-width: 1024px) {
+  .trip-grid {
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  }
+
+  .trip-card {
+    max-width: 280px;
+  }
+}
+
+@media (max-width: 768px) {
+  .trip-grid {
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  }
+
+  .trip-title {
+    font-size: 1.5rem;
+  }
+
+  .trip-card {
+    max-width: 100%;
+    width: 90%;
+  }
+
+  .trip-image {
+    padding: 8px;
+    aspect-ratio: auto;
+    height: auto;
+  }
+}
+
+@media (max-width: 480px) {
+  .trip-title {
+    font-size: 1.3rem;
+  }
+
+  .trip-card {
+    padding: 0;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  }
+
+  .trip-content {
+    padding: 10px;
+  }
+
+  .trip-name {
+    font-size: 14px;
+  }
+
+  .trip-price,
+  .trip-duration,
+  .trip-date {
+    font-size: 13px;
+  }
+}
