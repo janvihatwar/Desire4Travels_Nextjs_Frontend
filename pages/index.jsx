@@ -6,6 +6,7 @@ import TypeTrip from './TypeTrip';
 import Review from './reviews';
 import PlanTrip from './PlanTrip';
 import WhyChooseUs from '../components/WhyChooseUs';
+import UpcomingTrip from '../components/UpcomingTrip';
 
 export default function Home({ heroData }) {
   const [heroCount, setHeroCount] = useState(0);
@@ -48,6 +49,7 @@ export default function Home({ heroData }) {
         <PlanTrip />
       </div>
       <WhyChooseUs />
+      <UpcomingTrip />
     </>
   );
 }
