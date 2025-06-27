@@ -259,6 +259,17 @@ const Footer = () => {
             <Link href="/faq" className="text-gray-300 text-sm mb-2 hover:text-white">FAQ</Link>
             <Link href="/blogs" className="text-gray-300 text-sm mb-2 hover:text-white">Blogs</Link>
             <Link href="/terms" className="text-gray-300 text-sm mb-2 hover:text-white">Terms & Conditions</Link>
+            {/* ✅ Sitemap links */}
+            <a
+              href="https://desire4travels.com/server-sitemap.xml"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-gray-300 text-sm mb-2 hover:text-white"
+            >
+              Sitemap
+            </a>
+            {/* <a href="http://localhost:3000/server-sitemap.xml" className="text-gray-300 text-sm mb-2 hover:text-white">Dynamic Sitemap</a> */}
+
           </div>
 
           <div className="flex flex-col">

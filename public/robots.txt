@@ -7,7 +7,7 @@ Disallow: /terms
 Disallow: /faq
 
 # Host
-Host: https://desire4travels-nextjs-frontend.vercel.app
+Host: https://desire4travels.com
 
 # Sitemaps
-Sitemap: https://desire4travels-nextjs-frontend.vercel.app/sitemap.xml
+Sitemap: https://desire4travels.com/server-sitemap.xml
