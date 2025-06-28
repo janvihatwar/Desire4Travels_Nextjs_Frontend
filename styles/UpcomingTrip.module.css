@@ -93,7 +93,7 @@
 
 .trip-date {
   text-align: center;
-  font-size: 14px;
+  font-size: 18px;
   color: black;
   padding: 8px;
 }
@@ -155,10 +155,11 @@
   .trip-name {
     font-size: 14px;
   }
+  
 
   .trip-price,
   .trip-duration,
   .trip-date {
-    font-size: 13px;
+    font-size: 16px;
   }
 }
