@@ -252,6 +252,7 @@ const Footer = () => {
             <h4 className="text-[#2873a1] text-sm font-medium mb-4">Navigation</h4>
             <Link href="/" className="text-gray-300 text-sm mb-2 hover:text-white">Home</Link>
             <Link href="/contact" className="text-gray-300 text-sm mb-2 hover:text-white">Contact Us</Link>
+            <Link href="/service_providers" className="text-gray-300 text-sm mb-2 hover:text-white">Partners with us</Link>
           </div>
 
           <div className="flex flex-col">

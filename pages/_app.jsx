@@ -31,6 +31,7 @@ import '../styles/TripTypePage.css';
 import '../styles/DestinationDetails.css';
 import '../styles/PackageDetails.css';
 import '../styles/SuccessPopup.css';
+// import '../styles/ServiceProviders.css';
 
 function MyApp({ Component, pageProps }) {
   const router = useRouter();
