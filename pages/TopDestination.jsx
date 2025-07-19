@@ -9,7 +9,7 @@ const TopDestination = () => {
   const router = useRouter();
 
   useEffect(() => {
-    fetch('https://desire4travels-1.onrender.com/api/destinations?limit=4&random=true')
+    fetch('https://desire4travels-1.onrender.com/api/destinations?limit=4')
       .then(res => {
         if (!res.ok) throw new Error('Failed to fetch');
         return res.json();

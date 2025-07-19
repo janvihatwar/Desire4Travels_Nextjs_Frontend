@@ -7,34 +7,36 @@ const UpcomingTrip = () => {
   const router = useRouter();
 
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const [tripRes, packageRes] = await Promise.all([
-          fetch("https://desire4travels-1.onrender.com/api/upcoming-trips"),
-          fetch("https://desire4travels-1.onrender.com/api/packages/"),
-        ]);
+  const fetchData = async () => {
+    try {
+      const [tripRes, packageRes] = await Promise.all([
+        fetch("https://desire4travels-1.onrender.com/api/upcoming-trips"),
+        fetch("https://desire4travels-1.onrender.com/api/packages"),
+      ]);
 
-        const tripData = await tripRes.json();
-        const packageData = await packageRes.json();
+      const tripData = await tripRes.json();
+      const packageData = await packageRes.json();
 
-        const enrichedTrips = tripData.map((trip) => {
-          const matchedPackage = packageData.find(
-            (pkg) => decodeHtml(pkg.packageName) === decodeHtml(trip.tripName)
-          );
-          return {
-            ...trip,
-            packageDetails: matchedPackage || null,
-          };
-        });
+      const enrichedTrips = (tripData.trips || []).map((trip) => {
+        const matchedPackage = packageData.find(
+          (pkg) =>
+            decodeHtml(pkg.packageName) === decodeHtml(trip.tripName)
+        );
+        return {
+          ...trip,
+          packageDetails: matchedPackage || null,
+        };
+      });
 
-        setTrips(enrichedTrips);
-      } catch (error) {
-        console.error("Failed to fetch data:", error);
-      }
-    };
+      setTrips(enrichedTrips);
+    } catch (error) {
+      console.error("Failed to fetch data:", error);
+    }
+  };
 
-    fetchData();
-  }, []);
+  fetchData();
+}, []);
+
 
   function decodeHtml(html) {
     const txt = document.createElement("textarea");

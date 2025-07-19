@@ -105,3 +105,42 @@ width: 100%;
     font-size: 0.9rem;
   }
 }
+
+
+.customHeader  {
+  width: 100vw;
+  background: linear-gradient(to right, #0F172A, #5B76D6);
+  padding-top: 4rem;
+  padding-bottom: 4rem;
+  color: white;
+  position: relative;
+  left: 50%;
+  right: 50%;
+  margin-left: -50vw;
+  margin-right: -50vw;
+  text-align: center;
+}
+
+.headerContent {
+  max-width: 64rem;
+  margin: 0 auto;
+  padding-left: 1.25rem;
+  padding-right: 1.25rem;
+}
+
+.headerTitle {
+  font-size: 2.25rem;
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+}
+
+@media (min-width: 768px) {
+  .headerTitle {
+    font-size: 3rem;
+  }
+}
+
+.headerSubtitle {
+  font-size: 1.25rem;
+}
+
