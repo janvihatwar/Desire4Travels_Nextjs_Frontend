@@ -283,8 +283,17 @@ const ServiceProviders = () => {
   };
 
   return (
+  <>
+    <header className={styles.customHeader}>
+  <div className={styles.headerContent}>
+    <h4 className={styles.headerTitle}>Partner With Us</h4>
+    {/* <p className={styles.headerSubtitle}>We're here to help you plan your perfect trip!</p> */}
+  </div>
+</header>
+
+
     <div className={styles.container}>
-      <h1 className={styles.heading}>Service Provider Registration</h1>
+      <h1 className={styles.heading}></h1>
 
       <label className={styles.dropdownLabel}>
         Select provider type&nbsp;
@@ -301,17 +310,20 @@ const ServiceProviders = () => {
         </select>
       </label>
 
-      <form  id="fom"
-  className={`${styles.form} ${styles.card}`}
-  onSubmit={handleSubmit}
->
+      <form
+        id="fom"
+        className={`${styles.form} ${styles.card}`}
+        onSubmit={handleSubmit}
+      >
         {renderForm()}
         <button type="submit" className={styles.submitButton}>
           Submit
         </button>
       </form>
     </div>
-  );
+  </>
+);
+
 };
 
 export default ServiceProviders;
