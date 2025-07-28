@@ -54,6 +54,9 @@ const initialFormValues = {
 const ServiceProviders = () => {
   const [selected, setSelected] = useState("hotel");
   const [forms, setForms] = useState(initialFormValues);
+const [successMessage, setSuccessMessage] = useState("");
+const [errorMessage, setErrorMessage] = useState("");
+
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -67,34 +70,46 @@ const ServiceProviders = () => {
   };
 
   async function saveProvider(type, data) {
-  const res = await fetch(
-    `https://desire4travels-1.onrender.com/service-providers`,
-    {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ type, data }),
+    const res = await fetch(
+      `https://desire4travels-1.onrender.com/service-providers`,
+      {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ type, data }),
+      }
+    );
+
+    if (!res.ok) {
+      const { error } = await res.json();
+      throw new Error(error || "Request failed");
     }
-  );
-
-  if (!res.ok) {
-    const { error } = await res.json();
-    throw new Error(error || "Request failed");
   }
-}
 
-
- const handleSubmit = async (e) => {
+const handleSubmit = async (e) => {
   e.preventDefault();
-  try {
-    // send the active form section
-    await saveProvider(selected, forms[selected]);
 
-    alert("Submitted!");
-    setForms(initialFormValues);   // clear the form
+  const formData = forms[selected];
+  const emptyFields = Object.entries(formData).filter(([_, val]) => val.trim() === "");
+
+  if (emptyFields.length > 0) {
+    setErrorMessage("Please fill all fields before submitting.");
+    setTimeout(() => setErrorMessage(""), 3000);
+    return;
+  }
+
+  try {
+    await saveProvider(selected, formData);
+
+    setSuccessMessage("Form submitted successfully!");
+    setForms(initialFormValues);
+
+    setTimeout(() => setSuccessMessage(""), 3000);
   } catch (err) {
-    alert("Error: " + err.message);
+    setErrorMessage("Submission failed. Please try again.");
+    setTimeout(() => setErrorMessage(""), 3000);
   }
 };
+
 
 
   /** ---------- Render helpers ---------- */
@@ -102,7 +117,11 @@ const ServiceProviders = () => {
     <>
       <label>
         Hotel Name
-        <input name="hotelName" value={forms.hotel.hotelName} onChange={handleChange} />
+        <input
+          name="hotelName"
+          value={forms.hotel.hotelName}
+          onChange={handleChange}
+        />
       </label>
 
       <label>
@@ -111,18 +130,28 @@ const ServiceProviders = () => {
       </label>
 
       <label className={styles.fullWidth}>
-  Address
-  <textarea
-    name="address"
-    value={forms.hotel.address}
-    onChange={handleChange}
-  />
-</label>
+        Address
+        <textarea
+          name="address"
+          value={forms.hotel.address}
+          onChange={handleChange}
+        />
+      </label>
 
       <label>
         Contact Person Name &amp; Mobile
-        <input name="contactPerson" placeholder="Name" value={forms.hotel.contactPerson} onChange={handleChange} />
-        <input name="contactMobile" placeholder="Mobile" value={forms.hotel.contactMobile} onChange={handleChange} />
+        <input
+          name="contactPerson"
+          placeholder="Name"
+          value={forms.hotel.contactPerson}
+          onChange={handleChange}
+        />
+        <input
+          name="contactMobile"
+          placeholder="Mobile"
+          value={forms.hotel.contactMobile}
+          onChange={handleChange}
+        />
       </label>
 
       <label>
@@ -137,27 +166,50 @@ const ServiceProviders = () => {
 
       <label>
         Number of Rooms Available
-        <input name="roomsAvailable" value={forms.hotel.roomsAvailable} onChange={handleChange} />
+        <input
+          name="roomsAvailable"
+          value={forms.hotel.roomsAvailable}
+          onChange={handleChange}
+        />
       </label>
 
       <label>
         Room Categories (e.g., Standard ₹, Deluxe ₹)
-        <input name="roomCategories" value={forms.hotel.roomCategories} onChange={handleChange} />
+        <input
+          name="roomCategories"
+          value={forms.hotel.roomCategories}
+          onChange={handleChange}
+        />
       </label>
 
       <label>
         Facilities Provided
-        <input name="facilities" placeholder="Wi‑Fi, Parking..." value={forms.hotel.facilities} onChange={handleChange} />
+        <input
+          name="facilities"
+          placeholder="Wi‑Fi, Parking..."
+          value={forms.hotel.facilities}
+          onChange={handleChange}
+        />
       </label>
 
       <label>
         Meal Options
-        <input name="meals" placeholder="Breakfast, Lunch, Dinner" value={forms.hotel.meals} onChange={handleChange} />
+        <input
+          name="meals"
+          placeholder="Breakfast, Lunch, Dinner"
+          value={forms.hotel.meals}
+          onChange={handleChange}
+        />
       </label>
 
       <label>
         Any Online Link
-        <input name="onlineLink" placeholder="Website / Google listing" value={forms.hotel.onlineLink} onChange={handleChange} />
+        <input
+          name="onlineLink"
+          placeholder="Website / Google listing"
+          value={forms.hotel.onlineLink}
+          onChange={handleChange}
+        />
       </label>
     </>
   );
@@ -166,38 +218,74 @@ const ServiceProviders = () => {
     <>
       <label>
         Company
-        <input name="company" value={forms.cab.company} onChange={handleChange} />
+        <input
+          name="company"
+          value={forms.cab.company}
+          onChange={handleChange}
+        />
       </label>
 
       <label>
         Base Location City
-        <input name="baseCity" value={forms.cab.baseCity} onChange={handleChange} />
+        <input
+          name="baseCity"
+          value={forms.cab.baseCity}
+          onChange={handleChange}
+        />
       </label>
 
       <label>
         Base Location Address
-        <textarea name="baseAddress" value={forms.cab.baseAddress} onChange={handleChange} />
+        <textarea
+          name="baseAddress"
+          value={forms.cab.baseAddress}
+          onChange={handleChange}
+        />
       </label>
 
       <label>
         Contact Person Name &amp; Mobile
-        <input name="contactPerson" placeholder="Name" value={forms.cab.contactPerson} onChange={handleChange} />
-        <input name="contactMobile" placeholder="Mobile" value={forms.cab.contactMobile} onChange={handleChange} />
+        <input
+          name="contactPerson"
+          placeholder="Name"
+          value={forms.cab.contactPerson}
+          onChange={handleChange}
+        />
+        <input
+          name="contactMobile"
+          placeholder="Mobile"
+          value={forms.cab.contactMobile}
+          onChange={handleChange}
+        />
       </label>
 
       <label>
         Vehicle Types Offered
-        <input name="vehicleTypes" placeholder="Sedan, SUV..." value={forms.cab.vehicleTypes} onChange={handleChange} />
+        <input
+          name="vehicleTypes"
+          placeholder="Sedan, SUV..."
+          value={forms.cab.vehicleTypes}
+          onChange={handleChange}
+        />
       </label>
 
       <label>
         Intercity / Local
-        <input name="intercityLocal" placeholder="Intercity / Local" value={forms.cab.intercityLocal} onChange={handleChange} />
+        <input
+          name="intercityLocal"
+          placeholder="Intercity / Local"
+          value={forms.cab.intercityLocal}
+          onChange={handleChange}
+        />
       </label>
 
       <label>
         Intercity Coverage
-        <input name="intercityCoverage" value={forms.cab.intercityCoverage} onChange={handleChange} />
+        <input
+          name="intercityCoverage"
+          value={forms.cab.intercityCoverage}
+          onChange={handleChange}
+        />
       </label>
     </>
   );
@@ -206,23 +294,46 @@ const ServiceProviders = () => {
     <>
       <label>
         Agency Name
-        <input name="agencyName" value={forms.adventure.agencyName} onChange={handleChange} />
+        <input
+          name="agencyName"
+          value={forms.adventure.agencyName}
+          onChange={handleChange}
+        />
       </label>
 
       <label>
         Contact Person Name &amp; Mobile
-        <input name="contactPerson" placeholder="Name" value={forms.adventure.contactPerson} onChange={handleChange} />
-        <input name="contactMobile" placeholder="Mobile" value={forms.adventure.contactMobile} onChange={handleChange} />
+        <input
+          name="contactPerson"
+          placeholder="Name"
+          value={forms.adventure.contactPerson}
+          onChange={handleChange}
+        />
+        <input
+          name="contactMobile"
+          placeholder="Mobile"
+          value={forms.adventure.contactMobile}
+          onChange={handleChange}
+        />
       </label>
 
       <label>
         Location
-        <input name="location" value={forms.adventure.location} onChange={handleChange} />
+        <input
+          name="location"
+          value={forms.adventure.location}
+          onChange={handleChange}
+        />
       </label>
 
       <label>
         Types of Activities Offered
-        <input name="activityTypes" placeholder="Paragliding, Rafting..." value={forms.adventure.activityTypes} onChange={handleChange} />
+        <input
+          name="activityTypes"
+          placeholder="Paragliding, Rafting..."
+          value={forms.adventure.activityTypes}
+          onChange={handleChange}
+        />
       </label>
     </>
   );
@@ -231,38 +342,74 @@ const ServiceProviders = () => {
     <>
       <label>
         Company Name
-        <input name="companyName" value={forms.bus.companyName} onChange={handleChange} />
+        <input
+          name="companyName"
+          value={forms.bus.companyName}
+          onChange={handleChange}
+        />
       </label>
 
       <label>
         Base Location City
-        <input name="baseCity" value={forms.bus.baseCity} onChange={handleChange} />
+        <input
+          name="baseCity"
+          value={forms.bus.baseCity}
+          onChange={handleChange}
+        />
       </label>
 
       <label>
         Base Location Address
-        <textarea name="baseAddress" value={forms.bus.baseAddress} onChange={handleChange} />
+        <textarea
+          name="baseAddress"
+          value={forms.bus.baseAddress}
+          onChange={handleChange}
+        />
       </label>
 
       <label>
         Contact Person Name &amp; Mobile
-        <input name="contactPerson" placeholder="Name" value={forms.bus.contactPerson} onChange={handleChange} />
-        <input name="contactMobile" placeholder="Mobile" value={forms.bus.contactMobile} onChange={handleChange} />
+        <input
+          name="contactPerson"
+          placeholder="Name"
+          value={forms.bus.contactPerson}
+          onChange={handleChange}
+        />
+        <input
+          name="contactMobile"
+          placeholder="Mobile"
+          value={forms.bus.contactMobile}
+          onChange={handleChange}
+        />
       </label>
 
       <label>
         Route(s) Covered
-        <input name="routesCovered" placeholder="Delhi–Manali, ..." value={forms.bus.routesCovered} onChange={handleChange} />
+        <input
+          name="routesCovered"
+          placeholder="Delhi–Manali, ..."
+          value={forms.bus.routesCovered}
+          onChange={handleChange}
+        />
       </label>
 
       <label>
         Bus Type
-        <input name="busType" placeholder="Volvo, AC, Sleeper..." value={forms.bus.busType} onChange={handleChange} />
+        <input
+          name="busType"
+          placeholder="Volvo, AC, Sleeper..."
+          value={forms.bus.busType}
+          onChange={handleChange}
+        />
       </label>
 
       <label>
         Emergency Contact Number
-        <input name="emergencyContact" value={forms.bus.emergencyContact} onChange={handleChange} />
+        <input
+          name="emergencyContact"
+          value={forms.bus.emergencyContact}
+          onChange={handleChange}
+        />
       </label>
     </>
   );
@@ -281,19 +428,20 @@ const ServiceProviders = () => {
         return null;
     }
   };
+  
 
-  return (
+
+
+return (
   <>
     <header className={styles.customHeader}>
-  <div className={styles.headerContent}>
-    <h4 className={styles.headerTitle}>Partner With Us</h4>
-    {/* <p className={styles.headerSubtitle}>We're here to help you plan your perfect trip!</p> */}
-  </div>
-</header>
-
+      <div className={styles.headerContent}>
+        <h4 className={styles.headerTitle}>Partner With Us</h4>
+      </div>
+    </header>
 
     <div className={styles.container}>
-      <h1 className={styles.heading}></h1>
+      
 
       <label className={styles.dropdownLabel}>
         Select provider type&nbsp;
@@ -321,6 +469,15 @@ const ServiceProviders = () => {
         </button>
       </form>
     </div>
+{successMessage && (
+  <div className={styles.centerPopup}>{successMessage}</div>
+)}
+
+{errorMessage && (
+  <div className={styles.popupError}>{errorMessage}</div>
+)}
+
+
   </>
 );
 
