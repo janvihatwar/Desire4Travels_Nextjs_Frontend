@@ -6,7 +6,7 @@ const UpcomingTrip = () => {
   const [trips, setTrips] = useState([]);
   const router = useRouter();
 
-  useEffect(() => {
+ useEffect(() => {
   const fetchData = async () => {
     try {
       const [tripRes, packageRes] = await Promise.all([
@@ -14,13 +14,23 @@ const UpcomingTrip = () => {
         fetch("https://desire4travels-1.onrender.com/api/packages"),
       ]);
 
+      console.log("Trip Response Status:", tripRes.status);
+      console.log("Package Response Status:", packageRes.status);
+
       const tripData = await tripRes.json();
       const packageData = await packageRes.json();
 
-      const enrichedTrips = (tripData.trips || []).map((trip) => {
+      console.log("Raw Trip Data:", tripData);
+      console.log("Raw Package Data:", packageData);
+
+      // Normalize helper to match trip name and package name safely
+      const normalize = (str) => decodeHtml(str).trim().toLowerCase();
+
+      const rawTrips = Array.isArray(tripData) ? tripData : tripData.trips || [];
+
+      const enrichedTrips = rawTrips.map((trip) => {
         const matchedPackage = packageData.find(
-          (pkg) =>
-            decodeHtml(pkg.packageName) === decodeHtml(trip.tripName)
+          (pkg) => normalize(pkg.packageName) === normalize(trip.tripName)
         );
         return {
           ...trip,
@@ -28,6 +38,7 @@ const UpcomingTrip = () => {
         };
       });
 
+      console.log("Enriched Trips:", enrichedTrips);
       setTrips(enrichedTrips);
     } catch (error) {
       console.error("Failed to fetch data:", error);
@@ -36,6 +47,7 @@ const UpcomingTrip = () => {
 
   fetchData();
 }, []);
+
 
 
   function decodeHtml(html) {
