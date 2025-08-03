@@ -428,7 +428,7 @@
 // export default PackageDetails;
 import React, { useState, useRef, useEffect } from "react";
 import { Autoplay } from "swiper/modules";
-import axios from "axios";
+import axios from "axios";import Head from "next/head";
 import { Swiper, SwiperSlide } from "swiper/react";
 import Image from "next/image";
 import "swiper/css";
@@ -444,8 +444,16 @@ const generateSlug = (packageName) => {
     .trim('-'); // Remove leading/trailing hyphens
 };
 
+function getFirstTwoSentences(text) {
+  if (!text) return "";
+  const cleanText = text.replace(/<[^>]*>/g, ""); // remove HTML tags
+  const sentences = cleanText.split(/[.?!]\s/);
+  return sentences.slice(0, 2).join(". ") + ".";
+}
+
 const PackageDetails = ({ packageData, error }) => {
   const [showQuoteForm, setShowQuoteForm] = useState(false);
+
   const [formData, setFormData] = useState({
     name: "",
     mobile: "",
@@ -462,16 +470,23 @@ const PackageDetails = ({ packageData, error }) => {
   if (error) return <div>{error}</div>;
   if (!packageData) return <div>Package not found</div>;
 
-  const {
-    packageName,
-    duration,
-    price,
-    photo,
-    description,
-    inclusions = "",
-    itinerary = "",
-    destinations = [],
-  } = packageData;
+const {
+  packageName,
+  duration,
+  price,
+  photo,
+  description,
+  inclusions = "",
+  itinerary = "",
+  destinations = [],
+  metaKeywords = "", // ✅ add this line
+} = packageData;
+
+
+useEffect(() => {
+    console.log("Full packageData in browser:", packageData);
+  }, [packageData]);
+
 
   const inclusionsArray =
     typeof inclusions === "string"
@@ -590,11 +605,30 @@ const PackageDetails = ({ packageData, error }) => {
       </div>
     </section>
   );
+console.log("Meta Keywords:", packageData.metaKeywords);
+
 
   return (
+    
     <div className="package-details-container">
       <div className="mobile-slider mobile-only">
+        
         <div className="relative package-main-image-wrapper w-full h-[200px] overflow-hidden">
+          
+
+<Head>
+  <title>{packageName} | Desire4Travels</title>
+  <meta name="description" content={getFirstTwoSentences(description)} />
+  <meta name="keywords" content={packageData.metaKeywords} />
+  <meta name="author" content="Desire4Travels" />
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content={packageName} />
+  <meta property="og:description" content={getFirstTwoSentences(description)} />
+</Head>
+
+
+
+
           {/* Swiper for images only */}
           <Swiper
             modules={[Autoplay]}
@@ -866,6 +900,7 @@ export async function getServerSideProps(context) {
     if (!response.data) {
       return { notFound: true };
     }
+    console.log("API Response:", response.data);
 
     return {
       props: {
@@ -881,6 +916,7 @@ export async function getServerSideProps(context) {
       },
     };
   }
+  
 }
 
 export default PackageDetails;

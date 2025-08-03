@@ -237,7 +237,7 @@ export default function Package({ packages, totalPages, currentPage }) {
         <title>Travel Deals for Couples, Families & Groups | Desire4Travels</title>
         <meta
           name="description"
-          content="Browse our travel packages for every style and budget. From romantic getaways to adventure tours, Desire4Travels offers custom itineraries and great deals."
+          content=" Browse our travel packages for every style and budget. From romantic getaways to adventure tours, Desire4Travels offers custom itineraries and great deals."
         />
         <meta
           name="keywords"
