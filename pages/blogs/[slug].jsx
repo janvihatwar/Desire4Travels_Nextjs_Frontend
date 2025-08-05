@@ -687,6 +687,16 @@ if (typeof window !== 'undefined') {
 
 const API_BASE_URL = "https://desire4travels-1.onrender.com/blogs";
 
+
+function getFirstTwoSentences(text) {
+  if (!text) return '';
+  const sentences = text.match(/[^.!?]+[.!?]+/g);
+  if (!sentences) return text;
+  return sentences.slice(0, 2).join(' ').trim();
+}
+
+
+
 export async function getServerSideProps(context) {
   const { slug } = context.params;
 
@@ -838,12 +848,25 @@ const BlogPost = ({ blog, similarBlogs = [], error }) => {
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
       <Head>
-        <title>{blog.title} | Desire4Travels</title>
-        <meta name="description" content={blog.excerpt?.replace(/<[^>]+>/g, '') || 'Travel blog post'} />
-        <meta property="og:title" content={blog.title} />
-        <meta property="og:description" content={blog.excerpt?.replace(/<[^>]+>/g, '') || 'Travel blog post'} />
-        {heroImage && <meta property="og:image" content={heroImage} />}
-      </Head>
+  <title>{blog.title} | Desire4Travelss</title>
+
+  <meta
+    name="description"
+    content={getFirstTwoSentences(blog.excerpt?.replace(/<[^>]+>/g, '') || '')}
+/>
+
+  <meta name="keywords" content={blog.metaKeywords || blog.category || blog.title} />
+  <meta name="author" content={blog.author || 'Desire4Travels'} />
+
+  <meta property="og:type" content="article" />
+  <meta property="og:title" content={blog.title} />
+  <meta
+    property="og:description"
+    content={getFirstTwoSentences(blog.excerpt?.replace(/<[^>]+>/g, '') || '')}
+/>
+  {heroImage && <meta property="og:image" content={heroImage} />}
+</Head>
+
 
       <div className="flex flex-col lg:flex-row gap-8">
         {/* Main Blog Content */}

@@ -208,28 +208,41 @@
 // }
 
 
-import React, { useRef } from "react";
+import React, { useRef, useState, useEffect } from "react";
+
 import PackageCard from "../components/PackageCard";
 import Head from "next/head";
 import { useRouter } from "next/router";
 
 export default function Package({ packages, totalPages, currentPage }) {
-  const router = useRouter();
+    const router = useRouter();
+ 
   const heroRef = useRef(null);
 
-  const goToPage = (page) => {
-    router.push(`/package?page=${page}`).then(() => {
-      // Use setTimeout to ensure DOM is fully updated
-      setTimeout(() => {
-        if (heroRef.current) {
-          heroRef.current.scrollIntoView({ 
-            behavior: "smooth", 
-            block: "start" 
-          });
-        }
-      }, 0);
-    });
-  };
+  const [jumpPage, setJumpPage] = useState("");
+const [isLoading, setIsLoading] = useState(false);
+const [showError, setShowError] = useState(false);
+
+
+ const goToPage = (page) => {
+  setIsLoading(true); // Start loading
+  router.push(`/package?page=${page}`).then(() => {
+    setTimeout(() => {
+      setIsLoading(false); // Stop loading
+      if (heroRef.current) {
+        heroRef.current.scrollIntoView({
+          behavior: "smooth",
+          block: "start",
+        });
+      }
+    }, 0);
+  });
+};
+
+useEffect(() => {
+  setIsLoading(false);
+}, [router.query.page]);
+
 
   return (
     <div className="package-container">
@@ -279,41 +292,81 @@ export default function Package({ packages, totalPages, currentPage }) {
         )}
       </div>
 
-      {/* Pagination Controls */}
-      <div className="flex justify-center items-center gap-4 pb-10">
-        <button
-          onClick={() => goToPage(currentPage - 1)}
-          disabled={currentPage <= 1}
-          className="px-4 py-2 bg-blue-400 rounded hover:bg-gray-300 disabled:opacity-50"
-        >
-          Prev
-        </button>
+      
+<div className="flex justify-center items-center gap-4 pb-10 flex-wrap">
+  {/* Prev Button */}
 
-        {[...Array(totalPages)].map((_, index) => {
-          const pageNum = index + 1;
-          return (
-            <button
-              key={pageNum}
-              onClick={() => goToPage(pageNum)}
-              className={`px-3 py-1 rounded ${
-                pageNum === currentPage
-                  ? "bg-blue-600 text-white"
-                  : "bg-gray-100 hover:bg-gray-200"
-              }`}
-            >
-              {pageNum}
-            </button>
-          );
-        })}
+   {/* Page Info */}
+      <p className="text-sm text-gray-700">
+        Page {currentPage} of {totalPages}
+      </p>
 
-        <button
-          onClick={() => goToPage(currentPage + 1)}
-          disabled={currentPage >= totalPages}
-          className="px-4 py-2 bg-blue-400 rounded hover:bg-gray-300 disabled:opacity-50"
-        >
-          Next
-        </button>
-      </div>
+  <button
+    onClick={() => goToPage(currentPage - 1)}
+    disabled={currentPage <= 1}
+    className="px-4 py-2 bg-blue-400 rounded hover:bg-gray-300 disabled:opacity-50"
+  >
+    Prev
+  </button>
+
+  {/* Jump to Page + Go */}
+   <div className="flex flex-col items-start gap-1">
+
+    <label htmlFor="jumpPage" className="text-sm font-medium text-gray-700">
+      Jump to page:
+    </label>
+    <input
+      type="number"
+      id="jumpPage"
+      min="1"
+      max={totalPages}
+      value={jumpPage}
+      onChange={(e) => setJumpPage(e.target.value)}
+      className="w-20 px-2 py-1 border border-gray-300 rounded"
+    />
+    <button
+      onClick={() => {
+        const page = parseInt(jumpPage);
+        if (page >= 1 && page <= totalPages) {
+          goToPage(page);
+          setJumpPage("");
+          setShowError(false);
+        } else {
+          setShowError(true);
+          setTimeout(() => setShowError(false), 3000);
+        }
+      }}
+      className="px-3 py-1 bg-blue-400 text-white rounded hover:bg-green-600"
+    >
+      Go
+    </button>
+  </div>
+
+  {/* Next Button */}
+  <button
+    onClick={() => goToPage(currentPage + 1)}
+    disabled={currentPage >= totalPages}
+    className="px-4 py-2 bg-blue-400 rounded hover:bg-gray-300 disabled:opacity-50"
+  >
+    Next
+  </button>
+</div>
+
+{showError && (
+  <p className="text-red-600 text-sm mt-1">
+    Please enter a valid page number (1 - {totalPages})
+  </p>
+)}
+
+
+
+{isLoading && (
+  <div className="fixed top-0 left-0 w-full h-full bg-black bg-opacity-30 flex justify-center items-center z-50">
+    <div className="w-12 h-12 border-4 border-white border-t-transparent rounded-full animate-spin"></div>
+  </div>
+)}
+
+
     </div>
   );
 }
