@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import PackageCard from '../../components/PackageCard';
+import Head from 'next/head';
+
 
 function normalizeDestination(dest) {
   if (!dest) return '';
@@ -81,6 +83,49 @@ const DestinationDetail = ({ destinationInfo, packages }) => {
 
   return (
     <div className="destination-detail-page">
+
+      <Head>
+  <title>{destinationInfo.name} | Desire4Travels</title>
+
+  <meta
+    name="description"
+    content={
+      destinationInfo.description?.replace(/<[^>]+>/g, '').slice(0, 160) ||
+      `Explore amazing travel packages for ${destinationInfo.name}`
+    }
+  />
+  
+  <meta
+    name="keywords"
+    content={
+      destinationInfo.name
+        ?.toLowerCase()
+        .split(/[\s,-]+/)
+        .filter(Boolean)
+        .join(', ')
+    }
+  />
+
+  <meta name="author" content="Desire4Travels" />
+
+  {/* Open Graph tags for social sharing */}
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content={destinationInfo.name} />
+  <meta
+    property="og:description"
+    content={
+      destinationInfo.description?.replace(/<[^>]+>/g, '').slice(0, 160) ||
+      `Explore amazing travel packages for ${destinationInfo.name}`
+    }
+  />
+  {destinationInfo.image && (
+    <meta property="og:image" content={destinationInfo.image} />
+  )}
+
+
+</Head>
+
+
       <div className="destination-info">
         <img
           src={destinationInfo.image}
