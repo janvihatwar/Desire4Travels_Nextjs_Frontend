@@ -294,13 +294,12 @@ useEffect(() => {
 
       
 <div className="flex justify-center items-center gap-4 pb-10 flex-wrap">
+  {/* Page Info */}
+  <p className="text-sm text-gray-700">
+    Page {currentPage}/{totalPages}
+  </p>
+
   {/* Prev Button */}
-
-   {/* Page Info */}
-      <p className="text-sm text-gray-700">
-        Page {currentPage} of {totalPages}
-      </p>
-
   <button
     onClick={() => goToPage(currentPage - 1)}
     disabled={currentPage <= 1}
@@ -309,9 +308,8 @@ useEffect(() => {
     Prev
   </button>
 
-  {/* Jump to Page + Go */}
-   <div className="flex flex-col items-start gap-1">
-
+  {/* Jump to Page + Go (Horizontal) */}
+  <div className="flex items-center gap-2">
     <label htmlFor="jumpPage" className="text-sm font-medium text-gray-700">
       Jump to page:
     </label>
@@ -351,6 +349,7 @@ useEffect(() => {
     Next
   </button>
 </div>
+
 
 {showError && (
   <p className="text-red-600 text-sm mt-1">

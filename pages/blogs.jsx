@@ -1,8 +1,8 @@
 // app/blog/page.jsx (or pages/blog/index.jsx for Pages Router)
-import { useState, useEffect } from 'react';
-import Link from 'next/link';
-import axios from 'axios';
-import Head from 'next/head';
+import { useState, useEffect } from "react";
+import Link from "next/link";
+import axios from "axios";
+import Head from "next/head";
 
 const API_BASE_URL = "https://desire4travels-1.onrender.com/blogs";
 const API_FEEDBACK_URL = "https://desire4travels-1.onrender.com/blog-feedback";
@@ -12,22 +12,24 @@ export default function BlogList() {
   const [filteredBlogs, setFilteredBlogs] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const [searchTerm, setSearchTerm] = useState('');
-  const [selectedCategory, setSelectedCategory] = useState('all');
+  const [searchTerm, setSearchTerm] = useState("");
+  const [selectedCategory, setSelectedCategory] = useState("all");
   const [currentPage, setCurrentPage] = useState(1);
   const [blogsPerPage] = useState(12);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [formData, setFormData] = useState({
-    name: '',
-    number: '',
-    feedback: '',
-    yourStory: ''
+    name: "",
+    number: "",
+    feedback: "",
+    yourStory: "",
   });
   const [submitted, setSubmitted] = useState(false);
 
   const ensureAbsoluteUrl = (url) => {
-    if (!url) return '';
-    return url.startsWith('http') ? url : `${API_BASE_URL.replace('/blogs', '')}${url}`;
+    if (!url) return "";
+    return url.startsWith("http")
+      ? url
+      : `${API_BASE_URL.replace("/blogs", "")}${url}`;
   };
 
   useEffect(() => {
@@ -36,19 +38,22 @@ export default function BlogList() {
         const response = await axios.get(API_BASE_URL);
         const data = response.data;
 
-        const blogsWithAbsoluteUrls = data.map(blog => ({
+        const blogsWithAbsoluteUrls = data.map((blog) => ({
           ...blog,
-          image: ensureAbsoluteUrl(blog.image)
+          image: ensureAbsoluteUrl(blog.image),
         }));
 
         setBlogs(blogsWithAbsoluteUrls);
         setFilteredBlogs(blogsWithAbsoluteUrls);
       } catch (err) {
-        setError(err.response?.data?.message || err.message || 'Failed to fetch blogs');
+        setError(
+          err.response?.data?.message || err.message || "Failed to fetch blogs"
+        );
       } finally {
         setLoading(false);
       }
     };
+
 
     const timer = setTimeout(() => {
       fetchBlogs();
@@ -60,18 +65,19 @@ export default function BlogList() {
   useEffect(() => {
     let result = blogs;
 
-    if (selectedCategory !== 'all') {
-      result = result.filter(blog =>
-        blog.category.toLowerCase() === selectedCategory.toLowerCase()
+    if (selectedCategory !== "all") {
+      result = result.filter(
+        (blog) => blog.category.toLowerCase() === selectedCategory.toLowerCase()
       );
     }
 
     if (searchTerm) {
       const term = searchTerm.toLowerCase();
-      result = result.filter(blog =>
-        blog.title.toLowerCase().includes(term) ||
-        blog.author.toLowerCase().includes(term) ||
-        blog.excerpt.toLowerCase().includes(term)
+      result = result.filter(
+        (blog) =>
+          blog.title.toLowerCase().includes(term) ||
+          blog.author.toLowerCase().includes(term) ||
+          blog.excerpt.toLowerCase().includes(term)
       );
     }
 
@@ -85,67 +91,88 @@ export default function BlogList() {
   const currentBlogs = filteredBlogs.slice(indexOfFirstBlog, indexOfLastBlog);
   const totalPages = Math.ceil(filteredBlogs.length / blogsPerPage);
 
-  const categories = ['all', ...new Set(blogs.map(blog => blog.category.toLowerCase()))];
+  const [jumpPage, setJumpPage] = useState('');
+const [showError, setShowError] = useState(false);
+
+
+  const categories = [
+    "all",
+    ...new Set(blogs.map((blog) => blog.category.toLowerCase())),
+  ];
 
   const handleChange = (e) => {
-    setFormData(prev => ({
+    setFormData((prev) => ({
       ...prev,
-      [e.target.name]: e.target.value
+      [e.target.name]: e.target.value,
     }));
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setError('');
+    setError("");
     try {
       await axios.post(API_FEEDBACK_URL, formData);
       setSubmitted(true);
     } catch (err) {
       console.error(err);
-      setError('Something went wrong. Please try again.');
+      setError("Something went wrong. Please try again.");
     }
   };
 
-  if (loading) return (
-    <div className="flex flex-col items-center justify-center min-h-[60vh] text-center">
-      <div className="w-12 h-12 border-4 border-blue-100 border-t-blue-500 rounded-full animate-spin mb-4"></div>
-      <p className="text-gray-600">Loading blogs...</p>
-    </div>
-  );
+  if (loading)
+    return (
+      <div className="flex flex-col items-center justify-center min-h-[60vh] text-center">
+        <div className="w-12 h-12 border-4 border-blue-100 border-t-blue-500 rounded-full animate-spin mb-4"></div>
+        <p className="text-gray-600">Loading blogs...</p>
+      </div>
+    );
 
-  if (error) return (
-    <div className="flex flex-col items-center justify-center min-h-[60vh] text-center">
-      <div className="text-4xl mb-4">⚠️</div>
-      <p className="text-gray-700 mb-4">Error: {error}</p>
-      <button
-        onClick={() => window.location.reload()}
-        className="px-6 py-3 bg-blue-500 text-white rounded-md hover:bg-blue-600 transition-all"
-      >
-        Retry
-      </button>
-    </div>
-  );
+  if (error)
+    return (
+      <div className="flex flex-col items-center justify-center min-h-[60vh] text-center">
+        <div className="text-4xl mb-4">⚠️</div>
+        <p className="text-gray-700 mb-4">Error: {error}</p>
+        <button
+          onClick={() => window.location.reload()}
+          className="px-6 py-3 bg-blue-500 text-white rounded-md hover:bg-blue-600 transition-all"
+        >
+          Retry
+        </button>
+      </div>
+    );
 
   return (
     <div className="max-w-full mx-auto p-0 font-sans bg-gray-50 text-gray-800">
       <Head>
         <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <title>Travel Blogs & Stories – Tips, Guides & Inspiration | Desire4Travels</title>
-        <meta name="description" content="Explore the Desire4Travels blog for expert travel tips, destination guides, inspiring stories, and practical advice to plan your perfect journey." />
-        <meta name="keywords" content="travel blogs, travel stories, travel guides, travel tips, vacation ideas, destination blogs, travel experiences, D4T blogs, travel articles, trip planning advice, adventure travel blogs, travel inspiration, Desire4Travels blog, solo travel blogs, family travel tips" />
+        <title>
+          Travel Blogs & Stories – Tips, Guides & Inspiration | Desire4Travels
+        </title>
+        <meta
+          name="description"
+          content="Explore the Desire4Travels blog for expert travel tips, destination guides, inspiring stories, and practical advice to plan your perfect journey."
+        />
+        <meta
+          name="keywords"
+          content="travel blogs, travel stories, travel guides, travel tips, vacation ideas, destination blogs, travel experiences, D4T blogs, travel articles, trip planning advice, adventure travel blogs, travel inspiration, Desire4Travels blog, solo travel blogs, family travel tips"
+        />
       </Head>
 
       {/* Hero Section */}
       <header
         className="w-full h-80 bg-cover bg-center flex items-center justify-center text-center text-white mb-8"
         style={{
-          backgroundImage: "linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('https://images.unsplash.com/photo-1506929562872-bb421503ef21?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80')"
+          backgroundImage:
+            "linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('https://images.unsplash.com/photo-1506929562872-bb421503ef21?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80')",
         }}
       >
         <div className="max-w-4xl px-5">
-          <h1 className="text-4xl font-semibold mb-4 text-shadow-md">Desire4Travels Stories</h1>
+          <h1 className="text-4xl font-semibold mb-4 text-shadow-md">
+            Desire4Travels Stories
+          </h1>
           <p className="text-xl mb-8 text-shadow-sm">
-            Discover inspiring travel stories, expert tips, and breathtaking destinations from around the globe.
+            Discover inspiring travel stories, expert tips, and breathtaking
+            destinations from around the globe.
           </p>
           <button
             onClick={() => setIsModalOpen(true)}
@@ -173,11 +200,16 @@ export default function BlogList() {
               stroke="currentColor"
               viewBox="0 0 24 24"
             >
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth="2"
+                d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
+              />
             </svg>
             {searchTerm && (
               <button
-                onClick={() => setSearchTerm('')}
+                onClick={() => setSearchTerm("")}
                 className="absolute right-4 top-1/2 transform -translate-y-1/2 text-gray-500 hover:text-blue-500 transition-all"
                 aria-label="Clear search"
               >
@@ -192,7 +224,9 @@ export default function BlogList() {
               onChange={(e) => setSelectedCategory(e.target.value)}
               className="w-full px-5 py-4 pr-10 border-2 border-gray-200 rounded-full text-base bg-white appearance-none shadow-sm focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-all"
             >
-              <option value="" disabled>Select a category</option>
+              <option value="" disabled>
+                Select a category
+              </option>
               <option value="all">All Categories</option>
               <option value="Mountain">Mountain</option>
               <option value="Beach">Beach</option>
@@ -203,7 +237,9 @@ export default function BlogList() {
               <option value="Cityscape">Cityscape</option>
               <option value="Other">Other</option>
             </select>
-            <div className="absolute right-4 top-1/2 transform -translate-y-1/2 pointer-events-none text-gray-500">▼</div>
+            <div className="absolute right-4 top-1/2 transform -translate-y-1/2 pointer-events-none text-gray-500">
+              ▼
+            </div>
           </div>
         </div>
 
@@ -237,46 +273,98 @@ export default function BlogList() {
                 alt="No results"
                 className="max-w-[200px] mx-auto mb-6 opacity-70"
               />
-              <h3 className="text-xl font-semibold text-gray-800 mb-2">No matching posts found</h3>
-              <p className="text-gray-600">Try adjusting your search or filter criteria</p>
+              <h3 className="text-xl font-semibold text-gray-800 mb-2">
+                No matching posts found
+              </h3>
+              <p className="text-gray-600">
+                Try adjusting your search or filter criteria
+              </p>
             </div>
           )}
         </div>
 
-
         {/* Pagination */}
-        {totalPages > 0 && (
-          <div className="flex justify-center items-center gap-2 my-12">
-            <button
-              onClick={() => setCurrentPage(prev => Math.max(prev - 1, 1))}
-              disabled={currentPage === 1}
-              className="px-4 py-2 border border-gray-300 bg-white text-gray-700 rounded-md hover:bg-gray-50 transition-all disabled:opacity-50 disabled:cursor-not-allowed"
-            >
-              Previous
-            </button>
+        {totalPages > 1 && (
+  <div className="flex justify-center items-center flex-wrap gap-4 my-10">
+    
+    {/* Page Info */}
+    <span className="text-base text-gray-800 font-medium">
+      Page {currentPage} of {totalPages}
+    </span>
 
-            {Array.from({ length: totalPages }, (_, i) => i + 1).map(number => (
-              <button
-                key={number}
-                onClick={() => setCurrentPage(number)}
-                className={`px-4 py-2 border rounded-md transition-all ${currentPage === number
-                  ? 'bg-red-400 border-red-400 text-white'
-                  : 'border-gray-300 bg-white text-gray-700 hover:bg-gray-50'
-                  }`}
-              >
-                {number}
-              </button>
-            ))}
+    {/* Prev Button */}
+    <button
+      onClick={() => setCurrentPage(prev => Math.max(prev - 1, 1))}
+      disabled={currentPage === 1}
+      className={`px-4 py-2 rounded-md ${
+        currentPage === 1
+          ? "bg-gray-300 cursor-not-allowed text-gray-600"
+          : "bg-blue-600 text-white hover:bg-blue-700"
+      }`}
+    >
+      Prev
+    </button>
 
-            <button
-              onClick={() => setCurrentPage(prev => Math.min(prev + 1, totalPages))}
-              disabled={currentPage === totalPages}
-              className="px-4 py-2 border border-gray-300 bg-white text-gray-700 rounded-md hover:bg-gray-50 transition-all disabled:opacity-50 disabled:cursor-not-allowed"
-            >
-              Next
-            </button>
-          </div>
-        )}
+ 
+
+    {/* Jump to Page */}
+    <div className="flex items-center gap-2">
+      <label
+        htmlFor="jumpPage"
+        className="text-sm font-medium text-gray-700 whitespace-nowrap"
+      >
+        Jump to page:
+      </label>
+      <input
+        type="number"
+        id="jumpPage"
+        min="1"
+        max={totalPages}
+        value={jumpPage}
+        onChange={(e) => setJumpPage(e.target.value)}
+        className="w-20 px-2 py-1 border border-gray-300 rounded"
+      />
+      <button
+        onClick={() => {
+          const page = parseInt(jumpPage);
+          if (page >= 1 && page <= totalPages) {
+            setCurrentPage(page);
+            setJumpPage("");
+            setShowError(false);
+
+            const heroSection = document.querySelector(".destination-hero");
+            if (heroSection) {
+              heroSection.scrollIntoView({
+                behavior: "smooth",
+                block: "start",
+              });
+            }
+          } else {
+            setShowError(true);
+            setTimeout(() => setShowError(false), 3000);
+          }
+        }}
+        className="px-3 py-1 bg-blue-600 text-white rounded hover:bg-green-600"
+      >
+        Go
+      </button>
+    </div>
+
+    {/* Next Button */}
+    <button
+      onClick={() => setCurrentPage(prev => Math.min(prev + 1, totalPages))}
+      disabled={currentPage === totalPages}
+      className={`px-4 py-2 rounded-md ${
+        currentPage === totalPages
+          ? "bg-gray-300 cursor-not-allowed text-gray-600"
+          : "bg-blue-600 text-white hover:bg-blue-700"
+      }`}
+    >
+      Next
+    </button>
+  </div>
+)}
+
       </div>
 
       {/* Sticky Contact Buttons */}
@@ -294,7 +382,8 @@ export default function BlogList() {
           rel="noopener noreferrer"
         >
           <span>WhatsApp</span>
-        </a>      </div>
+        </a>{" "}
+      </div>
 
       {/* Modal */}
       {isModalOpen && (
@@ -312,15 +401,32 @@ export default function BlogList() {
             >
               ×
             </button>
-            <h2 className="text-xl font-semibold mb-6 text-center">Share Your Story</h2>
+            <h2 className="text-xl font-semibold mb-6 text-center">
+              Share Your Story
+            </h2>
 
             {submitted ? (
               <div className="text-center">
-                <svg className="w-16 h-16 mx-auto stroke-green-500" viewBox="0 0 52 52">
-                  <circle className="stroke-2 stroke-dasharray-166 stroke-dashoffset-166 animate-stroke" cx="26" cy="26" r="25" fill="none" />
-                  <path className="stroke-2 stroke-dasharray-48 stroke-dashoffset-48 animate-stroke-check" fill="none" d="M14 27l8 8 16-16" />
+                <svg
+                  className="w-16 h-16 mx-auto stroke-green-500"
+                  viewBox="0 0 52 52"
+                >
+                  <circle
+                    className="stroke-2 stroke-dasharray-166 stroke-dashoffset-166 animate-stroke"
+                    cx="26"
+                    cy="26"
+                    r="25"
+                    fill="none"
+                  />
+                  <path
+                    className="stroke-2 stroke-dasharray-48 stroke-dashoffset-48 animate-stroke-check"
+                    fill="none"
+                    d="M14 27l8 8 16-16"
+                  />
                 </svg>
-                <p className="text-green-600 text-lg mt-4">Thank you for your story!</p>
+                <p className="text-green-600 text-lg mt-4">
+                  Thank you for your story!
+                </p>
               </div>
             ) : (
               <form onSubmit={handleSubmit} className="space-y-4">
@@ -394,7 +500,7 @@ function BlogCard({ blog, index }) {
             loading="lazy"
             onError={(e) => {
               e.target.onerror = null;
-              e.target.src = '/placeholder-image.jpg';
+              e.target.src = "/placeholder-image.jpg";
             }}
           />
           <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-transparent"></div>
@@ -405,7 +511,9 @@ function BlogCard({ blog, index }) {
 
         {/* Content Section */}
         <div className="p-4 flex flex-col flex-grow items-center text-center">
-          <h3 className="text-lg font-semibold text-gray-800 mb-2 line-clamp-2">{blog.title}</h3>
+          <h3 className="text-lg font-semibold text-gray-800 mb-2 line-clamp-2">
+            {blog.title}
+          </h3>
 
           {/* Wrap the paragraph in a div to break it out of center alignment */}
           <div className="w-full">
@@ -417,19 +525,39 @@ function BlogCard({ blog, index }) {
           {/* Author & Date */}
           <div className="flex justify-center items-center gap-6 text-xs text-gray-500 mt-2">
             <span className="flex items-center">
-              <svg className="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+              <svg
+                className="w-4 h-4 mr-1"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="2"
+                  d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"
+                />
               </svg>
               {blog.author}
             </span>
             <span className="flex items-center">
-              <svg className="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+              <svg
+                className="w-4 h-4 mr-1"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="2"
+                  d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"
+                />
               </svg>
-              {new Date(blog.date).toLocaleDateString('en-US', {
-                year: 'numeric',
-                month: 'short',
-                day: 'numeric'
+              {new Date(blog.date).toLocaleDateString("en-US", {
+                year: "numeric",
+                month: "short",
+                day: "numeric",
               })}
             </span>
           </div>

@@ -88,7 +88,6 @@
 //     }
 //   };
 
-
 //   return (
 //     <div className="destination-page">
 //       <Head>
@@ -143,7 +142,6 @@
 //               ))}
 //             </select>
 //           </div>
-
 
 //         </div>
 //       </header>
@@ -238,43 +236,63 @@
 //   }
 // }
 
-
-
-import React, { useState, useEffect } from 'react';
-import Head from 'next/head';
-import { useRouter } from 'next/router';
-import DestinationCard from '../components/DestinationCard';
+import React, { useState, useEffect } from "react";
+import Head from "next/head";
+import { useRouter } from "next/router";
+import DestinationCard from "../components/DestinationCard";
 
 const ITEMS_PER_PAGE = 12;
-const tripTypes = ['All', 'Mountain', 'Beach', 'Religious', 'Treks', 'Offbeat', 'Desert', 'Cityscape', 'Other'];
+const tripTypes = [
+  "All",
+  "Mountain",
+  "Beach",
+  "Religious",
+  "Treks",
+  "Offbeat",
+  "Desert",
+  "Cityscape",
+  "Other",
+];
 
-export default function Destination({ initialDestinations, initialFilteredType }) {
+export default function Destination({
+  initialDestinations,
+  initialFilteredType,
+}) {
   const router = useRouter();
   const { triptype } = router.query;
 
   const [destinations, setDestinations] = useState(initialDestinations);
-  const [filteredType, setFilteredType] = useState(initialFilteredType || 'All');
+  const [filteredType, setFilteredType] = useState(
+    initialFilteredType || "All"
+  );
   const [currentPage, setCurrentPage] = useState(1);
-  const [searchQuery, setSearchQuery] = useState('');
+  const [searchQuery, setSearchQuery] = useState("");
+
+
+  const [jumpPage, setJumpPage] = useState("");
+const [showError, setShowError] = useState(false);
 
   const filteredDestinations = React.useMemo(() => {
     let result = destinations;
 
-    if (filteredType !== 'All') {
+    if (filteredType !== "All") {
       const normalizedType = filteredType.toLowerCase();
-      result = result.filter(dest => {
+      result = result.filter((dest) => {
         if (Array.isArray(dest.type)) {
-          return dest.type.some(t => t.trim().toLowerCase() === normalizedType);
+          return dest.type.some(
+            (t) => t.trim().toLowerCase() === normalizedType
+          );
         }
         return dest.type?.trim().toLowerCase() === normalizedType;
       });
     }
 
-    if (searchQuery.trim() !== '') {
+    if (searchQuery.trim() !== "") {
       const query = searchQuery.toLowerCase();
-      result = result.filter(dest =>
-        dest.name?.toLowerCase().includes(query) ||
-        dest.state?.toLowerCase().includes(query)
+      result = result.filter(
+        (dest) =>
+          dest.name?.toLowerCase().includes(query) ||
+          dest.state?.toLowerCase().includes(query)
       );
     }
 
@@ -289,10 +307,12 @@ export default function Destination({ initialDestinations, initialFilteredType }
 
   useEffect(() => {
     if (!triptype) {
-      setFilteredType('All');
+      setFilteredType("All");
       setCurrentPage(1);
     } else {
-      const matchedType = tripTypes.find(t => t.toLowerCase() === triptype.toLowerCase()) || 'All';
+      const matchedType =
+        tripTypes.find((t) => t.toLowerCase() === triptype.toLowerCase()) ||
+        "All";
       setFilteredType(matchedType);
       setCurrentPage(1);
     }
@@ -301,10 +321,14 @@ export default function Destination({ initialDestinations, initialFilteredType }
   const handleTypeChange = (e) => {
     const selected = e.target.value;
     setCurrentPage(1);
-    if (selected === 'All') {
-      router.push('/destination', undefined, { shallow: true });
+    if (selected === "All") {
+      router.push("/destination", undefined, { shallow: true });
     } else {
-      router.push(`/destination?triptype=${selected.toLowerCase()}`, undefined, { shallow: true });
+      router.push(
+        `/destination?triptype=${selected.toLowerCase()}`,
+        undefined,
+        { shallow: true }
+      );
     }
   };
 
@@ -312,9 +336,9 @@ export default function Destination({ initialDestinations, initialFilteredType }
     if (currentPage < totalPages) {
       setCurrentPage(currentPage + 1);
       // Scroll to the destination-hero section
-      const heroSection = document.querySelector('.destination-hero');
+      const heroSection = document.querySelector(".destination-hero");
       if (heroSection) {
-        heroSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        heroSection.scrollIntoView({ behavior: "smooth", block: "start" });
       }
     }
   };
@@ -323,9 +347,9 @@ export default function Destination({ initialDestinations, initialFilteredType }
     if (currentPage > 1) {
       setCurrentPage(currentPage - 1);
       // Scroll to the destination-hero section
-      const heroSection = document.querySelector('.destination-hero');
+      const heroSection = document.querySelector(".destination-hero");
       if (heroSection) {
-        heroSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        heroSection.scrollIntoView({ behavior: "smooth", block: "start" });
       }
     }
   };
@@ -343,57 +367,63 @@ export default function Destination({ initialDestinations, initialFilteredType }
           content="travel destinations, top places to visit, destination guides, travel spots, international travel, exotic destinations, Indian destinations, adventure travel locations, tropical vacations, best cities to visit, travel planning, cultural destinations, bucket list places, best places to visit"
         />
         <meta name="author" content="Desire4Travels" />
-        <meta property="og:title" content="Best Places to Visit – Travel Guides & Tips | Desire4Travels" />
+        <meta
+          property="og:title"
+          content="Best Places to Visit – Travel Guides & Tips | Desire4Travels"
+        />
         <meta
           property="og:description"
           content="Discover stunning travel destinations across continents with Desire4Travels. Browse curated guides, local insights, and inspiration for your next trip."
         />
       </Head>
 
-<header className="destination-hero px-4 sm:px-8 py-8">
-  <div className="destination-hero-content max-w-5xl mx-auto">
-    <h1 className="destination-title text-3xl sm:text-4xl font-bold text-center mb-6"   style={{ marginBottom: '1rem' }} // equals mb-10 (40px)
->
-      Destinations
-    </h1>
+      <header className="destination-hero px-4 sm:px-8 py-8">
+        <div className="destination-hero-content max-w-5xl mx-auto">
+          <h1
+            className="destination-title text-3xl sm:text-4xl font-bold text-center mb-6"
+            style={{ marginBottom: "1rem" }} // equals mb-10 (40px)
+          >
+            Destinations
+          </h1>
 
-    {/* Horizontal Flex Row for Search + Dropdown */}
-    <div className="w-full flex flex-col sm:flex-row sm:items-center sm:justify-center gap-3">
-      
-      {/* Search Input */}
-      <input
-        type="text"
-        placeholder="Search destination..."
-        value={searchQuery}
-        onChange={(e) => setSearchQuery(e.target.value)}
-        className="w-full sm:w-[45%] px-4 py-2.5 border border-gray-300 rounded-md text-base text-black focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none"
-      />
+          {/* Horizontal Flex Row for Search + Dropdown */}
+          <div className="w-full flex flex-col sm:flex-row sm:items-center sm:justify-center gap-3">
+            {/* Search Input */}
+            <input
+              type="text"
+              placeholder="Search destination..."
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              className="w-full sm:w-[45%] px-4 py-2.5 border border-gray-300 rounded-md text-base text-black focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none"
+            />
 
-      {/* Search Button */}
-      <button
-        onClick={() => setCurrentPage(1)}
-        className="w-full sm:w-auto px-4 py-2.5 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition text-sm font-medium whitespace-nowrap"
-      >
-        Search
-      </button>
+            {/* Search Button */}
+            <button
+              onClick={() => setCurrentPage(1)}
+              className="w-full sm:w-auto px-4 py-2.5 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition text-sm font-medium whitespace-nowrap"
+            >
+              Search
+            </button>
 
-      {/* Dropdown */}
-      <select
-        value={filteredType}
-        onChange={handleTypeChange}
-        className="w-full sm:w-[25%] px-4 py-2.5 border border-gray-300 rounded-md text-base text-black focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none bg-white"
-      >
-        {tripTypes.map(type => (
-          <option key={type} value={type}>{type}</option>
-        ))}
-      </select>
-    </div>
-  </div>
-</header>
+            {/* Dropdown */}
+            <select
+              value={filteredType}
+              onChange={handleTypeChange}
+              className="w-full sm:w-[25%] px-4 py-2.5 border border-gray-300 rounded-md text-base text-black focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none bg-white"
+            >
+              {tripTypes.map((type) => (
+                <option key={type} value={type}>
+                  {type}
+                </option>
+              ))}
+            </select>
+          </div>
+        </div>
+      </header>
 
       <div className="cards-container px-4 sm:px-8 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
         {paginatedDestinations.length > 0 ? (
-          paginatedDestinations.map(dest => (
+          paginatedDestinations.map((dest) => (
             <DestinationCard
               key={dest.id}
               imgSrc={dest.image}
@@ -405,24 +435,89 @@ export default function Destination({ initialDestinations, initialFilteredType }
             />
           ))
         ) : (
-          <p className="col-span-full text-center text-gray-600">No destinations available.</p>
+          <p className="col-span-full text-center text-gray-600">
+            No destinations available.
+          </p>
         )}
       </div>
 
       {totalPages > 1 && (
-        <div className="text-center my-8">
+        <div className="flex justify-center items-center flex-wrap gap-4 my-10">
+          {/* Prev Button */}
+
+           {/* Page Info */}
+          <span className="text-base text-gray-800 font-medium">
+            Page {currentPage} of {totalPages}
+          </span>
+          
           <button
             onClick={goToPrevPage}
             disabled={currentPage === 1}
-            className={`px-4 py-2 rounded-md mr-4 ${currentPage === 1 ? 'bg-gray-300 cursor-not-allowed' : 'bg-blue-600 text-white hover:bg-blue-700'}`}
+            className={`px-4 py-2 rounded-md ${
+              currentPage === 1
+                ? "bg-gray-300 cursor-not-allowed text-gray-600"
+                : "bg-blue-600 text-white hover:bg-blue-700"
+            }`}
           >
-            Previous
+            Prev
           </button>
-          <span className="text-lg">Page {currentPage} of {totalPages}</span>
+
+         
+
+          {/* Jump to Page */}
+          <div className="flex items-center gap-2">
+            <label
+              htmlFor="jumpPage"
+              className="text-sm font-medium text-gray-700 whitespace-nowrap"
+            >
+              Jump to page:
+            </label>
+            <input
+              type="number"
+              id="jumpPage"
+              min="1"
+              max={totalPages}
+              value={jumpPage}
+              onChange={(e) => setJumpPage(e.target.value)}
+              className="w-20 px-2 py-1 border border-gray-300 rounded"
+            />
+            <button
+              onClick={() => {
+                const page = parseInt(jumpPage);
+                if (page >= 1 && page <= totalPages) {
+                  setCurrentPage(page);
+                  setJumpPage("");
+                  setShowError(false);
+
+                  // Scroll to top or hero
+                  const heroSection =
+                    document.querySelector(".destination-hero");
+                  if (heroSection) {
+                    heroSection.scrollIntoView({
+                      behavior: "smooth",
+                      block: "start",
+                    });
+                  }
+                } else {
+                  setShowError(true);
+                  setTimeout(() => setShowError(false), 3000);
+                }
+              }}
+              className="px-3 py-1 bg-blue-600 text-white rounded hover:bg-green-600"
+            >
+              Go
+            </button>
+          </div>
+
+          {/* Next Button */}
           <button
             onClick={goToNextPage}
             disabled={currentPage === totalPages}
-            className={`px-4 py-2 rounded-md ml-4 ${currentPage === totalPages ? 'bg-gray-300 cursor-not-allowed' : 'bg-blue-600 text-white hover:bg-blue-700'}`}
+            className={`px-4 py-2 rounded-md ${
+              currentPage === totalPages
+                ? "bg-gray-300 cursor-not-allowed text-gray-600"
+                : "bg-blue-600 text-white hover:bg-blue-700"
+            }`}
           >
             Next
           </button>
@@ -436,27 +531,33 @@ export async function getServerSideProps(context) {
   const { triptype } = context.query || {};
 
   try {
-    const res = await fetch('https://desire4travels-1.onrender.com/api/destinations');
+    const res = await fetch(
+      "https://desire4travels-1.onrender.com/api/destinations"
+    );
     if (!res.ok) {
-      throw new Error('Failed to fetch destinations');
+      throw new Error("Failed to fetch destinations");
     }
     const data = await res.json();
     const allDestinations = data.destinations || [];
 
-    const normalizeType = (type) => (typeof type === 'string' ? type.trim().toLowerCase() : '');
-    let filteredType = 'All';
+    const normalizeType = (type) =>
+      typeof type === "string" ? type.trim().toLowerCase() : "";
+    let filteredType = "All";
     let filteredDestinations = allDestinations;
 
     if (triptype) {
       const normalizedParam = triptype.toLowerCase();
-      const validTypes = tripTypes.map(t => t.toLowerCase());
+      const validTypes = tripTypes.map((t) => t.toLowerCase());
 
       if (validTypes.includes(normalizedParam)) {
-        filteredType = triptype.charAt(0).toUpperCase() + triptype.slice(1).toLowerCase();
-        if (normalizedParam !== 'all') {
-          filteredDestinations = allDestinations.filter(dest => {
+        filteredType =
+          triptype.charAt(0).toUpperCase() + triptype.slice(1).toLowerCase();
+        if (normalizedParam !== "all") {
+          filteredDestinations = allDestinations.filter((dest) => {
             if (Array.isArray(dest.type)) {
-              return dest.type.some(t => normalizeType(t) === normalizedParam);
+              return dest.type.some(
+                (t) => normalizeType(t) === normalizedParam
+              );
             }
             return normalizeType(dest.type) === normalizedParam;
           });
@@ -471,11 +572,11 @@ export async function getServerSideProps(context) {
       },
     };
   } catch (error) {
-    console.error('Error fetching destinations:', error);
+    console.error("Error fetching destinations:", error);
     return {
       props: {
         initialDestinations: [],
-        initialFilteredType: 'All',
+        initialFilteredType: "All",
       },
     };
   }
