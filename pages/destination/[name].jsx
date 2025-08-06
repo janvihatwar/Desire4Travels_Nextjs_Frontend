@@ -1,23 +1,23 @@
-import React, { useState } from 'react';
-import PackageCard from '../../components/PackageCard';
-import Head from 'next/head';
-
+import React, { useState } from "react";
+import PackageCard from "../../components/PackageCard";
+import Head from "next/head";
 
 function normalizeDestination(dest) {
-  if (!dest) return '';
-  const parts = dest.split('-').map(p => p.trim());
+  if (!dest) return "";
+  const parts = dest.split("-").map((p) => p.trim());
   while (
     parts.length > 1 &&
-    parts[parts.length - 1].toLowerCase() === parts[parts.length - 2].toLowerCase()
+    parts[parts.length - 1].toLowerCase() ===
+      parts[parts.length - 2].toLowerCase()
   ) {
     parts.pop();
   }
-  return parts.join(' - ');
+  return parts.join(" - ");
 }
 
 function stripState(dest) {
-  if (!dest) return '';
-  return dest.split('-')[0].trim();
+  if (!dest) return "";
+  return dest.split("-")[0].trim();
 }
 
 function isLongDescription(desc) {
@@ -28,31 +28,39 @@ export async function getServerSideProps(context) {
   const { name } = context.params;
 
   try {
-    const destRes = await fetch('https://desire4travels-1.onrender.com/api/admin/destinations');
+    const destRes = await fetch(
+      "https://desire4travels-1.onrender.com/api/admin/destinations"
+    );
     if (!destRes.ok) {
-      throw new Error('Failed to fetch destination details');
+      throw new Error("Failed to fetch destination details");
     }
     const allDestinations = await destRes.json();
 
     const normalizedName = normalizeDestination(name).toLowerCase();
 
-    const destinationInfo = allDestinations.find(dest => {
-      if (!dest.name) return false;
-      return normalizeDestination(dest.name).toLowerCase() === normalizedName;
-    }) || null;
+    const destinationInfo =
+      allDestinations.find((dest) => {
+        if (!dest.name) return false;
+        return normalizeDestination(dest.name).toLowerCase() === normalizedName;
+      }) || null;
 
-    const pkgRes = await fetch('https://desire4travels-1.onrender.com/api/packages');
+    const pkgRes = await fetch(
+      "https://desire4travels-1.onrender.com/api/packages"
+    );
     if (!pkgRes.ok) {
-      throw new Error('Failed to fetch packages');
+      throw new Error("Failed to fetch packages");
     }
     const allPackages = await pkgRes.json();
 
-    const packages = allPackages.filter(pkg => {
+    const packages = allPackages.filter((pkg) => {
       if (!Array.isArray(pkg.destinations)) return false;
 
-      return pkg.destinations.some(dest => {
+      return pkg.destinations.some((dest) => {
         const normalizedDest = normalizeDestination(dest).toLowerCase();
-        return normalizedDest.includes(normalizedName) || normalizedName.includes(normalizedDest);
+        return (
+          normalizedDest.includes(normalizedName) ||
+          normalizedName.includes(normalizedDest)
+        );
       });
     });
 
@@ -79,71 +87,90 @@ export async function getServerSideProps(context) {
 const DestinationDetail = ({ destinationInfo, packages }) => {
   const [isExpanded, setIsExpanded] = useState(false);
 
-  const destinationName = stripState(normalizeDestination(destinationInfo.name));
+  const destinationName = stripState(
+    normalizeDestination(destinationInfo.name)
+  );
 
   return (
     <div className="destination-detail-page">
-
       <Head>
-  <title>{destinationInfo.name} | Desire4Travels</title>
+        <title>{destinationInfo.name} | Desire4Travels</title>
 
-  <meta
-    name="description"
-    content={
-      destinationInfo.description?.replace(/<[^>]+>/g, '').slice(0, 160) ||
-      `Explore amazing travel packages for ${destinationInfo.name}`
-    }
-  />
-  
-  <meta
-    name="keywords"
-    content={
-      destinationInfo.name
-        ?.toLowerCase()
-        .split(/[\s,-]+/)
-        .filter(Boolean)
-        .join(', ')
-    }
-  />
+        <meta
+          name="description"
+          content={
+            destinationInfo.description
+              ?.replace(/<[^>]+>/g, "")
+              .slice(0, 160) ||
+            `Explore amazing travel packages for ${destinationInfo.name}`
+          }
+        />
 
-  <meta name="author" content="Desire4Travels" />
-
-  {/* Open Graph tags for social sharing */}
-  <meta property="og:type" content="website" />
-  <meta property="og:title" content={destinationInfo.name} />
-  <meta
-    property="og:description"
-    content={
-      destinationInfo.description?.replace(/<[^>]+>/g, '').slice(0, 160) ||
-      `Explore amazing travel packages for ${destinationInfo.name}`
-    }
-  />
-  {destinationInfo.image && (
-    <meta property="og:image" content={destinationInfo.image} />
-  )}
+        <meta
+  name="keywords"
+  content={
+    destinationInfo.metaKeywords ||
+    destinationInfo.name
+      ?.toLowerCase()
+      .split(/[\s,-]+/)
+      .filter(Boolean)
+      .join(", ")
+  }
+/>
 
 
-</Head>
+        <meta name="author" content="Desire4Travels" />
 
+        {/* Open Graph tags for social sharing */}
+        <meta property="og:type" content="website" />
+        <meta property="og:title" content={destinationInfo.name} />
+        <meta
+          property="og:description"
+          content={
+            destinationInfo.description
+              ?.replace(/<[^>]+>/g, "")
+              .slice(0, 160) ||
+            `Explore amazing travel packages for ${destinationInfo.name}`
+          }
+        />
+        {destinationInfo.image && (
+          <meta property="og:image" content={destinationInfo.image} />
+        )}
+      </Head>
 
       <div className="destination-info">
         <img
           src={destinationInfo.image}
           alt={destinationInfo.name}
           className="destination-image destination-image-desktop"
-          style={{ height: '360px', marginBottom: '0' }}
+          style={{ height: "360px", marginBottom: "0" }}
         />
         <div className="destination-description">
-          <h1 style={{ fontSize: '36px', fontWeight: 'bold', marginBottom: '5px', marginTop: '-15px' }}>{destinationInfo.name}</h1>
+          <h1
+            style={{
+              fontSize: "36px",
+              fontWeight: "bold",
+              marginBottom: "5px",
+              marginTop: "-15px",
+            }}
+          >
+            {destinationInfo.name}
+          </h1>
           <div
-            className={`destination-description-text ${isExpanded ? 'expanded' : 'collapsed'}`}
+            className={`destination-description-text ${
+              isExpanded ? "expanded" : "collapsed"
+            }`}
             dangerouslySetInnerHTML={{
-              __html: destinationInfo.description || 'No description available.',
+              __html:
+                destinationInfo.description || "No description available.",
             }}
           />
           {isLongDescription(destinationInfo.description) && (
-            <button className="read-more-btn" onClick={() => setIsExpanded(!isExpanded)}>
-              {isExpanded ? 'Read Less' : 'Read More'}
+            <button
+              className="read-more-btn"
+              onClick={() => setIsExpanded(!isExpanded)}
+            >
+              {isExpanded ? "Read Less" : "Read More"}
             </button>
           )}
         </div>
@@ -153,7 +180,7 @@ const DestinationDetail = ({ destinationInfo, packages }) => {
 
       <div className="package-grid">
         {packages.length > 0 ? (
-          packages.map(pkg => (
+          packages.map((pkg) => (
             <PackageCard
               key={pkg.id}
               id={pkg.id}
