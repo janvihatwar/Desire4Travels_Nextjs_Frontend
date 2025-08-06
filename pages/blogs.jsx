@@ -288,8 +288,8 @@ const [showError, setShowError] = useState(false);
   <div className="flex justify-center items-center flex-wrap gap-4 my-10">
     
     {/* Page Info */}
-    <span className="text-base text-gray-800 font-medium">
-      Page {currentPage} of {totalPages}
+    <span className="text-base text-gray-800 font-bold">
+      Page {currentPage}/{totalPages}
     </span>
 
     {/* Prev Button */}

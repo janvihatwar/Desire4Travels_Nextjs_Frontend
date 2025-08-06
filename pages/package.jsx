@@ -295,7 +295,7 @@ useEffect(() => {
       
 <div className="flex justify-center items-center gap-4 pb-10 flex-wrap">
   {/* Page Info */}
-  <p className="text-sm text-gray-700">
+  <p className="text-sm text-gray-700 font-bold">
     Page {currentPage}/{totalPages}
   </p>
 

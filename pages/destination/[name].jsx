@@ -91,33 +91,55 @@ const DestinationDetail = ({ destinationInfo, packages }) => {
     normalizeDestination(destinationInfo.name)
   );
 
+  console.log(
+    "Meta description preview:",
+    (() => {
+      const plainText =
+        destinationInfo.description?.replace(/<[^>]+>/g, "") || "";
+      const sentences = plainText.match(/[^.!?]+[.!?]+/g);
+      return (sentences?.[0] + (sentences?.[1] || "")).trim();
+    })()
+  );
+
   return (
     <div className="destination-detail-page">
       <Head>
-        <title>{destinationInfo.name} | Desire4Travels</title>
+        <title>
+  {destinationInfo.name}
+  {destinationInfo.state ? `, ${destinationInfo.state.trim()}` : ""}
+  {Array.isArray(destinationInfo.type) && destinationInfo.type.length > 0
+    ? ` - ${destinationInfo.type.join(", ")}`
+    : ""}{" "}
+  | Desire4Travels
+</title>
+
 
         <meta
           name="description"
-          content={
-            destinationInfo.description
-              ?.replace(/<[^>]+>/g, "")
-              .slice(0, 160) ||
-            `Explore amazing travel packages for ${destinationInfo.name}`
-          }
+          content={(() => {
+            const plainText =
+              destinationInfo.description?.replace(/<[^>]+>/g, "") || "";
+
+            const sentences = plainText.match(/[^.!?]+[.!?]+/g);
+            if (sentences && sentences.length > 0) {
+              return (sentences[0] + (sentences[1] || "")).trim();
+            }
+
+            return `Explore amazing travel packages for ${destinationInfo.name}`;
+          })()}
         />
 
         <meta
-  name="keywords"
-  content={
-    destinationInfo.metaKeywords ||
-    destinationInfo.name
-      ?.toLowerCase()
-      .split(/[\s,-]+/)
-      .filter(Boolean)
-      .join(", ")
-  }
-/>
-
+          name="keywords"
+          content={
+            destinationInfo.metaKeywords ||
+            destinationInfo.name
+              ?.toLowerCase()
+              .split(/[\s,-]+/)
+              .filter(Boolean)
+              .join(", ")
+          }
+        />
 
         <meta name="author" content="Desire4Travels" />
 
@@ -126,12 +148,17 @@ const DestinationDetail = ({ destinationInfo, packages }) => {
         <meta property="og:title" content={destinationInfo.name} />
         <meta
           property="og:description"
-          content={
-            destinationInfo.description
-              ?.replace(/<[^>]+>/g, "")
-              .slice(0, 160) ||
-            `Explore amazing travel packages for ${destinationInfo.name}`
-          }
+          content={(() => {
+            const plainText =
+              destinationInfo.description?.replace(/<[^>]+>/g, "") || "";
+
+            const sentences = plainText.match(/[^.!?]+[.!?]+/g);
+            if (sentences && sentences.length > 0) {
+              return (sentences[0] + (sentences[1] || "")).trim();
+            }
+
+            return `Explore amazing travel packages for ${destinationInfo.name}`;
+          })()}
         />
         {destinationInfo.image && (
           <meta property="og:image" content={destinationInfo.image} />

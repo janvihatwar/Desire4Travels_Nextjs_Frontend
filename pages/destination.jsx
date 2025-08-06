@@ -446,8 +446,8 @@ const [showError, setShowError] = useState(false);
           {/* Prev Button */}
 
            {/* Page Info */}
-          <span className="text-base text-gray-800 font-medium">
-            Page {currentPage} of {totalPages}
+          <span className="text-base text-gray-800 font-bold">
+            Page {currentPage}/{totalPages}
           </span>
           
           <button
